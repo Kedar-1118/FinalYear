@@ -95,21 +95,24 @@ def welford_update_scalar(mean: float, m2: float, count: int, x: float):
 def serfling_bound(variance: float, n_sampled: int, N_total: int, delta: float) -> float:
     """Computes Serfling / Bardenet-Maillard finite-population empirical Bernstein bound.
     
-    When sampling n_sampled from N_total without replacement, uncertainty shrinks with:
-    finite_pop_factor = max(0.0, 1.0 - (n_sampled - 1.0) / N_total)
+    When sampling n_sampled from N_total without replacement:
+    - If n_sampled >= N_total, all samples have been observed without replacement -> uncertainty is 0.0.
+    - Otherwise, uncertainty shrinks with finite population correction factor.
     """
     if n_sampled <= 1:
         return 1.0
+    if n_sampled >= N_total:
+        return 0.0
     
     # Finite population correction factor
     fp_factor = max(0.0, 1.0 - (n_sampled - 1.0) / float(N_total))
     if fp_factor <= 1e-9:
-        return 0.0  # Sampled the entire node population: 0 uncertainty!
+        return 0.0
 
     log_term = math.log(3.0 / max(delta, 1e-12))
     v = max(variance, 1e-7)
     term1 = math.sqrt(2.0 * v * fp_factor * log_term / float(n_sampled))
-    term2 = 3.0 * log_term / float(n_sampled)
+    term2 = 3.0 * log_term * fp_factor / float(n_sampled)
     return term1 + term2
 
 @njit(fastmath=True, nogil=True)
