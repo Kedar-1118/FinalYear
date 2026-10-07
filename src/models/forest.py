@@ -5,11 +5,29 @@ from joblib import Parallel, delayed
 from typing import Optional, Union, List
 
 from .tree import MABDecisionTreeClassifier
+from ..data.prebinning import FastBinner
 
-def _fit_single_tree(tree_estimator: MABDecisionTreeClassifier, X, y, sample_indices, seed):
-    """Worker function to train a single tree on a bootstrap sample."""
+def _fit_single_tree(
+    tree_estimator: MABDecisionTreeClassifier,
+    X,
+    y,
+    sample_indices,
+    seed,
+    X_binned_fine,
+    fine_binner,
+    X_binned_coarse,
+    coarse_binner
+):
+    """Worker function to train a single tree on a bootstrap sample using precomputed binned memory."""
     tree_estimator.random_state = seed
-    tree_estimator.fit(X[sample_indices], y[sample_indices])
+    tree_estimator.fit(
+        X=X[sample_indices],
+        y=y[sample_indices],
+        X_binned_fine=X_binned_fine[sample_indices],
+        fine_binner=fine_binner,
+        X_binned_coarse=X_binned_coarse[sample_indices] if X_binned_coarse is not None else None,
+        coarse_binner=coarse_binner
+    )
     return tree_estimator
 
 class MABRandomForestClassifier(BaseEstimator, ClassifierMixin):
@@ -70,6 +88,17 @@ class MABRandomForestClassifier(BaseEstimator, ClassifierMixin):
         self.n_classes_ = len(self.classes_)
         n_samples, self.n_features_in_ = X.shape
 
+        # 1. Pre-quantize features ONCE across the entire forest
+        self.fine_binner_ = FastBinner(n_bins=self.n_bins, random_state=self.random_state)
+        X_binned_fine = self.fine_binner_.fit_transform(X)
+
+        if self.use_coarse_to_fine:
+            self.coarse_binner_ = FastBinner(n_bins=self.b_coarse, random_state=self.random_state)
+            X_binned_coarse = self.coarse_binner_.fit_transform(X)
+        else:
+            self.coarse_binner_ = None
+            X_binned_coarse = None
+
         rng = np.random.RandomState(self.random_state)
         seeds = rng.randint(0, 1000000, size=self.n_estimators)
 
@@ -107,7 +136,15 @@ class MABRandomForestClassifier(BaseEstimator, ClassifierMixin):
         # Parallel tree fitting across available CPU cores
         self.estimators_ = Parallel(n_jobs=self.n_jobs, prefer="threads")(
             delayed(_fit_single_tree)(
-                tree_templates[i], X, y, bootstrap_indices[i], seeds[i]
+                tree_templates[i],
+                X,
+                y,
+                bootstrap_indices[i],
+                seeds[i],
+                X_binned_fine,
+                self.fine_binner_,
+                X_binned_coarse,
+                self.coarse_binner_
             )
             for i in range(self.n_estimators)
         )

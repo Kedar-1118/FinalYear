@@ -64,7 +64,7 @@ class MABDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
         self.use_serfling = use_serfling
         self.random_state = random_state
 
-    def fit(self, X, y):
+    def fit(self, X, y, X_binned_fine=None, fine_binner=None, X_binned_coarse=None, coarse_binner=None):
         """Builds decision tree using MAB-accelerated node splitting."""
         X = np.asarray(X, dtype=np.float32)
         y = np.asarray(y, dtype=np.int32)
@@ -75,14 +75,20 @@ class MABDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
 
         self.rng_ = np.random.RandomState(self.random_state)
 
-        # 1. Fit Fine Binner (B=256)
-        self.fine_binner_ = FastBinner(n_bins=self.n_bins, random_state=self.random_state)
-        X_binned_fine = self.fine_binner_.fit_transform(X)
+        # 1. Fit or use provided Fine Binner (B=256)
+        if X_binned_fine is not None and fine_binner is not None:
+            self.fine_binner_ = fine_binner
+        else:
+            self.fine_binner_ = FastBinner(n_bins=self.n_bins, random_state=self.random_state)
+            X_binned_fine = self.fine_binner_.fit_transform(X)
 
         # 2. Optionally Fit Coarse Binner (B=16) if coarse-to-fine enabled
         if self.use_coarse_to_fine:
-            self.coarse_binner_ = FastBinner(n_bins=self.b_coarse, random_state=self.random_state)
-            X_binned_coarse = self.coarse_binner_.fit_transform(X)
+            if X_binned_coarse is not None and coarse_binner is not None:
+                self.coarse_binner_ = coarse_binner
+            else:
+                self.coarse_binner_ = FastBinner(n_bins=self.b_coarse, random_state=self.random_state)
+                X_binned_coarse = self.coarse_binner_.fit_transform(X)
             actual_coarse_bins = self.coarse_binner_.actual_bins_per_feat_
         else:
             self.coarse_binner_ = None

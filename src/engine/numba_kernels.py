@@ -169,3 +169,176 @@ def exact_best_split_vectorized(
                 best_bin = b
 
     return best_feat, best_bin, max(best_gain, 0.0)
+
+@njit(fastmath=True, nogil=True)
+def mab_find_best_split_numba(
+    X_binned: np.ndarray,             # (N, F) uint8
+    y: np.ndarray,                    # (N,) int32
+    shuffled_indices: np.ndarray,     # (N_node,) int32
+    candidate_features: np.ndarray,   # (F_cand,) int32
+    actual_bins_per_feat: np.ndarray, # (F,) int32
+    n_classes: int,
+    m0: int,
+    m_min: int,
+    alpha: float,
+    delta: float,
+    use_serfling: bool,
+    use_adaptive_batch: bool,
+    # Buffers:
+    hist_buf: np.ndarray,             # (F, 256, n_classes) int32
+    mean_buf: np.ndarray,             # (F, 256) float64
+    m2_buf: np.ndarray,               # (F, 256) float64
+    count_buf: np.ndarray,            # (F, 256) int32
+    active_arms: np.ndarray,          # (F, 256) bool
+    active_features_mask: np.ndarray, # (F,) bool
+    lcb_buf: np.ndarray,              # (F, 256) float64
+    ucb_buf: np.ndarray,              # (F, 256) float64
+    gains_buf: np.ndarray,            # (F, 256) float32
+    batch_class_counts: np.ndarray    # (n_classes,) int32
+):
+    N_node = len(shuffled_indices)
+    if N_node <= 1 or len(candidate_features) == 0:
+        return -1, -1, 0.0, 0
+
+    # Reset buffers
+    mean_buf.fill(0.0)
+    m2_buf.fill(0.0)
+    count_buf.fill(0)
+    active_arms.fill(False)
+    active_features_mask.fill(False)
+
+    total_arms = 0
+    for idx_f in range(len(candidate_features)):
+        f = candidate_features[idx_f]
+        active_features_mask[f] = True
+        n_b = actual_bins_per_feat[f] - 1
+        if n_b > 0:
+            active_arms[f, :n_b] = True
+            total_arms += n_b
+
+    if total_arms == 0:
+        return -1, -1, 0.0, 0
+
+    cursor = 0
+    cumulative_sampled = 0
+    active_count = total_arms
+
+    while active_count > 1 and cursor < N_node:
+        # 1. Compute dynamic batch size
+        remaining = N_node - cursor
+        if not use_adaptive_batch:
+            batch_size = m0 if m0 < remaining else remaining
+        else:
+            ratio = float(max(1, active_count)) / float(total_arms)
+            calc_m = int(max(float(m_min), math.floor(float(m0) * (ratio ** alpha))))
+            batch_size = calc_m if calc_m < remaining else remaining
+
+        if batch_size <= 0:
+            break
+
+        start_idx = cursor
+        end_idx = cursor + batch_size
+        cursor = end_idx
+        cumulative_sampled += batch_size
+
+        # 2. Accumulate histogram on batch
+        batch_class_counts.fill(0)
+        for idx_f in range(len(candidate_features)):
+            f = candidate_features[idx_f]
+            if active_features_mask[f]:
+                hist_buf[f, :, :].fill(0)
+
+        for i in range(start_idx, end_idx):
+            row = shuffled_indices[i]
+            lbl = y[row]
+            batch_class_counts[lbl] += 1
+            for idx_f in range(len(candidate_features)):
+                f = candidate_features[idx_f]
+                if active_features_mask[f]:
+                    b = X_binned[row, f]
+                    hist_buf[f, b, lbl] += 1
+
+        # 3. Evaluate Gini gains and update online Welford bounds
+        best_lcb = -1e9
+
+        for idx_f in range(len(candidate_features)):
+            f = candidate_features[idx_f]
+            if not active_features_mask[f]:
+                continue
+            n_b = actual_bins_per_feat[f] - 1
+            evaluate_gini_reduction_bins(
+                hist_buf[f],
+                actual_bins_per_feat[f],
+                batch_class_counts,
+                batch_size,
+                gains_buf[f]
+            )
+
+            for b in range(n_b):
+                if not active_arms[f, b]:
+                    continue
+                obs_gain = gains_buf[f, b]
+                if obs_gain < 0.0:
+                    obs_gain = 0.0
+
+                m, m2, cnt = welford_update_scalar(
+                    mean_buf[f, b],
+                    m2_buf[f, b],
+                    count_buf[f, b],
+                    obs_gain
+                )
+                mean_buf[f, b] = m
+                m2_buf[f, b] = m2
+                count_buf[f, b] = cnt
+
+                var = (m2 / float(cnt - 1)) if cnt > 1 else 0.25
+
+                if use_serfling:
+                    bound = serfling_bound(var, cumulative_sampled, N_node, delta)
+                else:
+                    bound = hoeffding_bound(cumulative_sampled, delta)
+
+                lcb = m - bound
+                ucb = m + bound
+                lcb_buf[f, b] = lcb
+                ucb_buf[f, b] = ucb
+
+                if lcb > best_lcb:
+                    best_lcb = lcb
+
+        # 4. Arm elimination
+        new_active = 0
+        for idx_f in range(len(candidate_features)):
+            f = candidate_features[idx_f]
+            if not active_features_mask[f]:
+                continue
+            n_b = actual_bins_per_feat[f] - 1
+            feat_active = False
+            for b in range(n_b):
+                if active_arms[f, b]:
+                    if ucb_buf[f, b] < best_lcb:
+                        active_arms[f, b] = False
+                    else:
+                        new_active += 1
+                        feat_active = True
+            active_features_mask[f] = feat_active
+
+        active_count = new_active
+        if cursor >= N_node:
+            break
+
+    # Pick best arm
+    best_f = -1
+    best_b = -1
+    max_mean = -1.0
+    for idx_f in range(len(candidate_features)):
+        f = candidate_features[idx_f]
+        n_b = actual_bins_per_feat[f] - 1
+        for b in range(n_b):
+            g = mean_buf[f, b]
+            if g > max_mean:
+                max_mean = g
+                best_f = f
+                best_b = b
+
+    return best_f, best_b, max(max_mean, 0.0), cumulative_sampled
