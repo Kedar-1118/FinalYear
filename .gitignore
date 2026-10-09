@@ -10,8 +10,8 @@ __pycache__/
 *.dll
 
 # Datasets & archives
-datasets/
-/datasets/
+datasets/*
+!datasets/README.md
 *.zip
 *.tar.gz
 *.gz
