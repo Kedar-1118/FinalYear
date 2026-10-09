@@ -156,7 +156,7 @@ python experiments/ablation_study.py --samples 25000
 python experiments/generate_plots.py
 ```
 
-### 3. Build & Run Bare-Metal C++ Engine
+### 3. Build & Run Bare-Metal C++ Engine 
 
 ```bash
 # Compile with MinGW GCC (C++17 with static linking)
