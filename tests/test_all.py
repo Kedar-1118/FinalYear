@@ -5,6 +5,13 @@ from sklearn.metrics import accuracy_score
 from sklearn.datasets import make_classification
 
 from src.data.prebinning import FastBinner
+from src.data.dataset_loader import (
+    load_adult,
+    load_covertype,
+    load_higgs,
+    generate_synthetic_dataset,
+    list_available_datasets
+)
 from src.engine.numba_kernels import (
     welford_update_scalar,
     serfling_bound,
@@ -122,3 +129,33 @@ def test_ablation_configurations():
     clf_c2f = MABDecisionTreeClassifier(max_depth=4, use_coarse_to_fine=True, random_state=42)
     clf_c2f.fit(X, y)
     assert accuracy_score(y, clf_c2f.predict(X)) > 0.75
+
+def test_dataset_loaders():
+    info = list_available_datasets()
+    assert info["synthetic"]["status"] == "Ready"
+
+    # Test synthetic generator
+    X_syn, y_syn = generate_synthetic_dataset(n_samples=200, n_features=10, n_classes=2)
+    assert X_syn.shape == (200, 10)
+    assert y_syn.shape == (200,)
+
+    # Test Adult loader if present
+    if info["adult"]["status"] == "Ready":
+        X_ad, y_ad = load_adult(subsample=100)
+        assert X_ad.shape == (100, 14)
+        assert y_ad.shape == (100,)
+        assert np.isin(y_ad, [0, 1]).all()
+
+    # Test Covertype loader if present
+    if info["covertype"]["status"] == "Ready":
+        X_cov, y_cov = load_covertype(subsample=100)
+        assert X_cov.shape == (100, 54)
+        assert y_cov.shape == (100,)
+
+    # Test Higgs loader if present
+    if info["higgs"]["status"] == "Ready":
+        X_h, y_h = load_higgs(subsample=100)
+        assert X_h.shape == (100, 28)
+        assert y_h.shape == (100,)
+        assert np.isin(y_h, [0, 1]).all()
+

@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassif
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score
 
-from src.data.dataset_loader import load_adult, load_covertype, generate_synthetic_dataset
+from src.data.dataset_loader import load_adult, load_covertype, load_higgs, generate_synthetic_dataset
 from src.models.tree import MABDecisionTreeClassifier
 from src.models.forest import MABRandomForestClassifier
 
@@ -39,6 +39,8 @@ def run_benchmark(dataset_name: str = "synthetic", subsample: int = 50000, n_tre
         X, y = load_adult(subsample=subsample)
     elif dataset_name.lower() == "covertype":
         X, y = load_covertype(subsample=subsample)
+    elif dataset_name.lower() == "higgs":
+        X, y = load_higgs(subsample=subsample)
     else:
         X, y = generate_synthetic_dataset(n_samples=subsample, n_features=25, n_classes=2)
 
@@ -162,7 +164,7 @@ def run_benchmark(dataset_name: str = "synthetic", subsample: int = 50000, n_tre
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="MABSplit Comprehensive Benchmark Suite")
-    parser.add_argument("--dataset", type=str, default="synthetic", choices=["synthetic", "adult", "covertype"])
+    parser.add_argument("--dataset", type=str, default="synthetic", choices=["synthetic", "adult", "covertype", "higgs"])
     parser.add_argument("--subsample", type=int, default=30000)
     parser.add_argument("--trees", type=int, default=10)
     args = parser.parse_args()
