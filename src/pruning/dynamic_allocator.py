@@ -17,6 +17,10 @@ class DynamicMinibatchAllocator:
         alpha: float = 1.0,
         random_state: int = 42
     ):
+        assert m0 > 0, f"Initial minibatch size m0 must be positive, got {m0}"
+        assert m_min > 0, f"Minimum minibatch size m_min must be positive, got {m_min}"
+        assert alpha >= 0.0, f"Decay exponent alpha must be non-negative, got {alpha}"
+
         self.node_indices = np.array(node_indices, dtype=np.int32)
         self.N_node = len(self.node_indices)
         self.total_arms_K = max(1, total_arms_K)
