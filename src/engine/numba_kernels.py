@@ -83,12 +83,14 @@ def evaluate_gini_reduction_bins(
 
 @njit(fastmath=True, nogil=True)
 def welford_update_scalar(mean: float, m2: float, count: int, x: float):
-    """Updates mean and M2 using Welford's online algorithm."""
+    """Updates mean and M2 using Welford's online algorithm with numerical non-negativity guard."""
     new_count = count + 1
     delta = x - mean
     new_mean = mean + delta / new_count
     delta2 = x - new_mean
     new_m2 = m2 + delta * delta2
+    if new_m2 < 0.0:
+        new_m2 = 0.0
     return new_mean, new_m2, new_count
 
 @njit(fastmath=True, nogil=True)
