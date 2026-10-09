@@ -1,8 +1,19 @@
-/*.zip
-*.exe
+# Python caches
 __pycache__/
-*.pyc
+*.py[cod]
 .pytest_cache/
-*.csv
+
+# Executables & build artifacts
+*.exe
+*.o
+*.obj
+*.dll
+
+# Datasets & archives
+datasets/
+/datasets/
+*.zip
+*.tar.gz
 *.gz
-/datasets
+*.csv
+*.data
