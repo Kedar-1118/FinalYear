@@ -276,3 +276,13 @@ def list_available_datasets() -> Dict[str, Dict[str, Any]]:
             item["status"] = "Missing"
 
     return info
+
+
+def get_dataset_summary(dataset_name: str) -> Dict[str, Any]:
+    """Returns metadata summary dictionary for a specified dataset."""
+    available = list_available_datasets()
+    dataset_key = dataset_name.lower()
+    if dataset_key not in available:
+        raise ValueError(f"Dataset '{dataset_name}' not recognized. Available: {list(available.keys())}")
+    return available[dataset_key]
+
