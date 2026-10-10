@@ -1,0 +1,60 @@
+\section{Proposed Methodology}
+\label{sec:methodology}
+
+This section describes the four architectural pillars comprising the \textbf{MABSplit} engine: Columnar Pre-Binning, Hierarchical Arm Pruning (H-MAB), Adaptive Dynamic Minibatch Allocation (ADMA), and the Depth-Adaptive Hybrid Solver.
+
+\subsection{Columnar $\texttt{uint8}$ Quantization \& SIMD Memory Layout}
+To eliminate repeated floating-point comparisons during split evaluation, continuous features are quantized into $B \le 256$ bins prior to tree induction:
+\begin{equation}
+\tilde{x}_{i, j} = \text{Quantize}(x_{i, j}; B) \in \{0, 1, \dots, B-1\}
+\end{equation}
+The quantized feature matrix $\mathbf{\tilde{X}} \in \{0, \dots, B-1\}^{N \times D}$ is stored in Fortran-contiguous (column-major) order. This provides an $8\times$ memory reduction compared to 64-bit doubles and facilitates contiguous SIMD histogram aggregation across minibatches.
+
+\subsection{Hierarchical Coarse-to-Fine Arm Pruning (H-MAB)}
+Rather than evaluating all $D \times B_{\text{fine}}$ candidates simultaneously ($B_{\text{fine}} = 256$), H-MAB operates in two sequential stages:
+
+\begin{enumerate}
+    \item \textbf{Stage 1: Coarse Feature Screening ($B_{\text{coarse}} = 16$):} Candidate arms are initialized at coarse 16-bin quantization ($|\mathcal{A}_{\text{coarse}}| = 16 D$). Successive Elimination runs with confidence parameter $\delta_{\text{coarse}} = \frac{\delta}{3}$. Arms failing the condition:
+    \begin{equation}
+    \hat{\mu}_a + \text{Rad}_{\text{Serfling}}(n, N, \delta_{\text{coarse}}) < \max_{a' \in \mathcal{A}} \left[ \hat{\mu}_{a'} - \text{Rad}_{\text{Serfling}}(n, N, \delta_{\text{coarse}}) \right]
+    \end{equation}
+    are immediately discarded.
+    \item \textbf{Stage 2: Fine-Grained Expansion ($B_{\text{fine}} = 256$):} Features retaining at least one active coarse arm are expanded to full 256-bin precision. The fine-grained elimination loop executes with $\delta_{\text{fine}} = \frac{2\delta}{3}$ until a single $(\epsilon, \delta)$-optimal arm survives or sample budget $N$ is exhausted.
+\end{enumerate}
+
+\begin{algorithm}[t]
+\caption{MABSplit Node Splitting Algorithm}
+\label{alg:mabsplit}
+\begin{algorithmic}[1]
+\REQUIRE Node samples $\mathcal{D}$, candidate features $\mathcal{F}$, budget $N$, tolerance $\epsilon$, error rate $\delta$, base batch size $M_0$, hybrid threshold $N_{\text{thresh}}$.
+\ENSURE Optimal split arm $\hat{a} = (j^*, \theta^*)$.
+\IF{$|\mathcal{D}| < N_{\text{thresh}}$}
+    \RETURN $\text{ExactGreedySplit}(\mathcal{D}, \mathcal{F})$ \COMMENT{Depth-Adaptive Fast Path}
+\ENDIF
+\STATE $\mathcal{A}_{\text{coarse}} \leftarrow \text{GenerateCoarseArms}(\mathcal{F}, B=16)$
+\STATE $\mathcal{A}_{\text{surv}} \leftarrow \text{SuccessiveElimination}(\mathcal{D}, \mathcal{A}_{\text{coarse}}, \delta/3, M_0)$
+\STATE $\mathcal{A}_{\text{fine}} \leftarrow \text{ExpandArmsToFineResolution}(\mathcal{A}_{\text{surv}}, B=256)$
+\STATE $\hat{a} \leftarrow \text{SuccessiveElimination}(\mathcal{D}, \mathcal{A}_{\text{fine}}, 2\delta/3, M_0)$
+\RETURN $\hat{a}$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Adaptive Dynamic Minibatch Allocation (ADMA)}
+Standard Successive Elimination uses a constant minibatch step size $M_0$. When the active candidate pool $|\mathcal{A}_t|$ shrinks significantly, maintaining large batch increments results in redundant sample processing. ADMA dynamically adapts the step size $M_t$ at iteration $t$ via the scaling relation:
+\begin{equation}
+M_t = \max\left( M_{\min}, \left\lfloor M_0 \cdot \left( \frac{|\mathcal{A}_t|}{K} \right)^\alpha \right\rfloor \right)
+\label{eq:adma}
+\end{equation}
+where $K$ is the initial arm count, $M_{\min}$ is the lower bound constraint (default: 64), and $\alpha \in [0.3, 0.7]$ is the sub-linear scaling exponent (default: $\alpha = 0.5$). When only contending arms remain, $M_t$ scales down gracefully, terminating the elimination loop at the exact boundary of statistical separation.
+
+\subsection{Depth-Adaptive Hybrid Solver}
+Near the bottom of decision trees, sub-tree leaf partitions contain relatively few training instances ($N \ll 500$). Running MAB bookkeeping, dynamic allocation, and random permutation generation on small nodes incurs non-trivial computational overhead.
+
+The Depth-Adaptive Hybrid Solver computes an empirical dispatch rule:
+\begin{equation}
+\text{Engine}(\mathcal{D}) = \begin{cases} 
+\text{SIMD Exact Greedy Split}, & \text{if } |\mathcal{D}| < N_{\text{thresh}} \\
+\text{MABSplit Arm Elimination}, & \text{if } |\mathcal{D}| \ge N_{\text{thresh}}
+\end{cases}
+\end{equation}
+We empirically establish that setting $N_{\text{thresh}} \in [256, 512]$ achieves the optimal trade-off, accelerating shallow sub-tree convergence without sacrificing global tree fidelity.

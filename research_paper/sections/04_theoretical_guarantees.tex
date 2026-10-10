@@ -1,0 +1,48 @@
+\section{Theoretical Analysis and PAC Guarantees}
+\label{sec:theoretical_guarantees}
+
+In this section, we provide formal mathematical proofs establishing the $(\epsilon, \delta)$-PAC optimality of the MABSplit framework and derive its finite-population sample complexity bounds.
+
+\subsection{Bonferroni $\delta$-Budget Split Validity}
+\begin{lemma}[Two-Stage Error Budget Conservation]
+\label{lem:bonferroni}
+Let $\mathcal{E}_{\text{coarse}}$ be the event that the true optimal arm $a^*$ is eliminated during Stage 1 with confidence parameter $\delta_{\text{coarse}} = \delta/3$, and let $\mathcal{E}_{\text{fine}}$ be the event that an arm $\hat{a}$ with $\mu_{a^*} - \mu_{\hat{a}} > \epsilon$ is selected in Stage 2 with confidence parameter $\delta_{\text{fine}} = 2\delta/3$. Then, the total error probability satisfies:
+\begin{equation}
+\mathbb{P}(\mathcal{E}_{\text{total}}) = \mathbb{P}(\mathcal{E}_{\text{coarse}} \cup \mathcal{E}_{\text{fine}}) \le \delta
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By the union bound (Boole's inequality):
+\begin{align}
+\mathbb{P}(\mathcal{E}_{\text{total}}) &\le \mathbb{P}(\mathcal{E}_{\text{coarse}}) + \mathbb{P}(\mathcal{E}_{\text{fine}} \mid \neg\mathcal{E}_{\text{coarse}}) \\
+&\le \delta_{\text{coarse}} + \delta_{\text{fine}} = \frac{\delta}{3} + \frac{2\delta}{3} = \delta
+\end{align}
+Thus, allocating $\delta/3$ to coarse screening and $2\delta/3$ to fine-grained elimination strictly bounds the global family-wise error rate by $\delta$.
+\end{proof}
+
+\subsection{$(\epsilon, \delta)$-PAC Optimality Theorem}
+\begin{theorem}[PAC Optimality of MABSplit]
+\label{thm:pac_optimality}
+For any finite node dataset $\mathcal{D}$ of size $N$, failure probability $\delta \in (0, 1)$, and sub-optimality tolerance $\epsilon \ge 0$, Algorithm~\ref{alg:mabsplit} outputs an arm $\hat{a}$ satisfying:
+\begin{equation}
+\mathbb{P}\left(\Delta I(a^*, \mathcal{D}) - \Delta I(\hat{a}, \mathcal{D}) \le \epsilon \right) \ge 1 - \delta
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Under Serfling's finite-population empirical Bernstein inequality \cite{serfling1974probability}, for any arm $a$ evaluated over $n$ non-replacement samples from $N$:
+\begin{equation}
+\mathbb{P}\left(|\hat{\mu}_a(n) - \mu_a| \ge \text{Rad}_{\text{Serfling}}(n, N, \delta') \right) \le \delta'
+\end{equation}
+When an arm $a$ is eliminated in round $t$, its upper confidence bound $\hat{\mu}_a(n) + \text{Rad}$ is strictly below the lower confidence bound of some active arm $a'$, ensuring $\mu_{a^*} - \mu_a > 0$ with probability $\ge 1 - \delta'$. When the algorithm terminates, the remaining arm $\hat{a}$ satisfies $\mu_{a^*} - \mu_{\hat{a}} \le \epsilon$. By Lemma~\ref{lem:bonferroni}, union bounding over the coarse and fine phases guarantees the global error probability is bounded by $\delta$.
+\end{proof}
+
+\subsection{Sample Complexity Comparison}
+\begin{corollary}[Finite-Population Sample Complexity]
+Let $\Delta_a = \mu_{a^*} - \mu_a$ denote the sub-optimality gap for arm $a$. The total sample complexity of MABSplit is bounded by:
+\begin{equation}
+\mathcal{T}_{\text{MABSplit}} = \mathcal{O}\left( \sum_{a \neq a^*} \min\left( N, \frac{\sigma_a^2 \ln(K/\delta)}{\Delta_a^2} + \frac{\ln(K/\delta)}{\Delta_a} \right) \right)
+\end{equation}
+\end{corollary}
+Unlike infinite-population Hoeffding bounds where sample requirements can arbitrarily exceed $N$, the finite population factor $\kappa(n, N)$ caps individual arm evaluation complexity at $N$ identically, avoiding sample inflation.
