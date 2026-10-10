@@ -237,3 +237,24 @@ class MABDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
         proba = self.predict_proba(X)
         best_indices = np.argmax(proba, axis=1)
         return self.classes_[best_indices]
+
+    @property
+    def feature_importances_(self) -> np.ndarray:
+        """Computes normalized feature importances based on split feature occurrences."""
+        check_is_fitted(self, ['root_', 'n_features_'])
+        importances = np.zeros(self.n_features_, dtype=np.float64)
+
+        def _traverse(node):
+            if node is None or node.is_leaf:
+                return
+            if node.feature >= 0 and node.feature < self.n_features_:
+                importances[node.feature] += 1.0
+            _traverse(node.left)
+            _traverse(node.right)
+
+        _traverse(self.root_)
+        total = np.sum(importances)
+        if total > 0:
+            importances /= total
+        return importances
+

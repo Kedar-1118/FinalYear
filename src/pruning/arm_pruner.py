@@ -15,11 +15,14 @@ class HierarchicalArmPruner:
         b_fine: int = 256,
         delta: float = 0.05
     ):
+        assert 0.0 < delta < 1.0, f"Confidence delta must be in (0, 1), got {delta}"
+        assert b_coarse < b_fine, f"Coarse bin resolution ({b_coarse}) must be less than fine resolution ({b_fine})"
+        
         self.b_coarse = b_coarse
         self.b_fine = b_fine
         self.delta = delta
         
-        # Formal delta budget allocation
+        # Formal delta budget allocation: delta_coarse + delta_fine <= delta
         self.delta_coarse = delta / 3.0
         self.delta_fine = (2.0 * delta) / 3.0
 

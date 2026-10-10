@@ -19,6 +19,10 @@ class FastBinner:
     def fit(self, X: np.ndarray):
         """Computes bin thresholds from X using quantiles."""
         X = np.asarray(X, dtype=np.float32)
+        if X.ndim != 2:
+            raise ValueError(f"Input feature matrix X must be 2D array, got shape {X.shape}")
+        if np.isnan(X).any() or np.isinf(X).any():
+            raise ValueError("Input feature matrix X contains NaN or Inf values.")
         n_samples, n_features = X.shape
         rng = np.random.RandomState(self.random_state)
 
