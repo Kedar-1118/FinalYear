@@ -1,0 +1,6 @@
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+In this paper, we introduced \textbf{MABSplit}, an accelerated decision tree and random forest training framework founded on Multi-Armed Bandit Best Arm Identification with finite-population bounds. By incorporating Serfling empirical Bernstein bounds, Hierarchical Coarse-to-Fine Arm Pruning (H-MAB), Adaptive Dynamic Minibatch Allocation (ADMA), and a Depth-Adaptive Hybrid Solver, MABSplit overcomes key theoretical and practical bottlenecks in existing bandit-based tree splitters. Empirical evaluations demonstrate up to an $11.8\times$ training speedup over exact Scikit-Learn CART while maintaining $>99.2\%$ split fidelity and full generalization accuracy.
+
+Future research directions include extending MABSplit to GPU-accelerated tensor architectures, investigating second-order gradient boosting formulations (MAB-XGBoost), and extending finite-population bounds to regression and survival analysis objectives.

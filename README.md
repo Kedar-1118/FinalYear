@@ -69,6 +69,13 @@ k:/mega project/
 │   ├── generate_plots.py              # Automated publication-grade plot generator
 │   └── plots/                         # Generated evaluation figures (.png)
 │
+├── research_paper/                    # Publication manuscript & LaTeX source
+│   ├── main.tex                       # Master IEEEtran LaTeX paper
+│   ├── references.bib                 # BibTeX citations
+│   ├── README.md                      # Compilation instructions
+│   ├── sections/                      # Modular section drafts
+│   └── tables/                        # Benchmark & ablation LaTeX tables
+│
 └── cpp/
     ├── mab_engine.hpp                 # Header-only bare-metal C++17 MAB Engine
     └── main.cpp                       # C++ high-throughput benchmark runner
@@ -165,3 +172,12 @@ g++ -O3 -std=c++17 -static cpp/main.cpp -o cpp/mab_benchmark.exe
 # Execute standalone C++ benchmark
 ./cpp/mab_benchmark.exe
 ```
+
+### 4. Build & View Research Paper Manuscript (LaTeX)
+
+```bash
+# Navigate to paper directory and compile
+cd research_paper
+latexmk -pdf main.tex
+```
+
