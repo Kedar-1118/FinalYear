@@ -55,10 +55,14 @@ class MABRandomForestClassifier(BaseEstimator, ClassifierMixin):
         use_coarse_to_fine: bool = False,
         use_adaptive_batch: bool = True,
         use_serfling: bool = True,
-        bootstrap: bool = True,
+        oob_score: bool = False,
         n_jobs: int = -1,
         random_state: int = 42
     ):
+        assert n_estimators > 0, f"n_estimators must be positive, got {n_estimators}"
+        assert 2 <= n_bins <= 256, f"n_bins must be between 2 and 256, got {n_bins}"
+        assert 0.0 < delta < 1.0, f"Confidence delta must be in (0, 1), got {delta}"
+
         self.n_estimators = n_estimators
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
@@ -76,6 +80,7 @@ class MABRandomForestClassifier(BaseEstimator, ClassifierMixin):
         self.use_adaptive_batch = use_adaptive_batch
         self.use_serfling = use_serfling
         self.bootstrap = bootstrap
+        self.oob_score = oob_score
         self.n_jobs = n_jobs
         self.random_state = random_state
 
