@@ -8,6 +8,7 @@
 #include <numeric>
 #include <random>
 #include <iostream>
+#include "serfling_bounds.hpp"
 
 struct SplitResult {
     int best_feature;
