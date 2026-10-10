@@ -206,7 +206,7 @@ def run_split_fidelity(
                 f"  [{cfg['name'][:40]:40s}] "
                 f"Split Match={agreement['exact_match_rate']:.1%}  "
                 f"Feat Match={agreement['feature_agreement_rate']:.1%}  "
-                f"Acc Δ={mab_acc - exact_acc:+.3f}"
+                f"Acc Diff={mab_acc - exact_acc:+.3f}"
             )
 
     # Aggregate results
