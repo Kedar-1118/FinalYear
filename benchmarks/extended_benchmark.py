@@ -266,7 +266,7 @@ def run_extended_benchmark(
                 params['random_state'] = seed
             model = type(model_template)(**params)
 
-            print(f"  → {name:45s} ", end="", flush=True)
+            print(f"  -> {name:45s} ", end="", flush=True)
 
             result = run_single_benchmark(
                 model, name, X_train, y_train, X_test, y_test,
@@ -341,11 +341,11 @@ def run_extended_benchmark(
         if len(model_accs) == len(exact_accs_per_seed):
             sig = statistical_significance_test(exact_accs_per_seed, model_accs, model_name)
             sig_results.append(sig)
-            status = "⚠ SIGNIFICANT" if sig["significant_at_005"] else "✓ Not Significant"
+            status = "!! SIGNIFICANT" if sig["significant_at_005"] else "OK Not Significant"
             print(
                 f"  {model_name:45s} | "
                 f"p={sig['p_value_ttest']:.6f} | "
-                f"Δ={sig['mean_diff']:+.5f} | "
+                f"Diff={sig['mean_diff']:+.5f} | "
                 f"{status}"
             )
 
