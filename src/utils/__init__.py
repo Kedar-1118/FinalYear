@@ -7,6 +7,7 @@ from .statistical_tests import (
     compute_cohens_d,
     BenchmarkSignificanceEvaluator
 )
+from .profiler import MABProfiler, ProfileSnapshot
 
 __all__ = [
     "MABKFoldEvaluator",
@@ -17,5 +18,7 @@ __all__ = [
     "compute_paired_ttest",
     "compute_wilcoxon_signed_rank",
     "compute_cohens_d",
-    "BenchmarkSignificanceEvaluator"
+    "BenchmarkSignificanceEvaluator",
+    "MABProfiler",
+    "ProfileSnapshot"
 ]
