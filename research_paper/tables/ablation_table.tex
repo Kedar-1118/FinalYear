@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Ablation Study of MABSplit Components on Covertype Dataset ($N=581\text{k}, D=54$)}
+\label{tab:ablation}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Configuration} & \textbf{Fit Time (s)} & \textbf{Speedup} & \textbf{Samples Queried} & \textbf{Accuracy (\%)} \\
+\midrule
+Exact Baseline & 38.64 & 1.00$\times$ & 100.0\% & 91.24\% \\
+Naive MAB (Hoeffding) & 12.80 & 3.02$\times$ & 41.5\% & 90.95\% \\
++ Serfling Bounds & 9.45 & 4.09$\times$ & 32.8\% & 91.20\% \\
++ H-MAB Coarse Screening & 6.20 & 6.23$\times$ & 22.4\% & 91.28\% \\
++ ADMA Dynamic Minibatch & 5.10 & 7.58$\times$ & 16.9\% & 91.31\% \\
+\textbf{Full MABSplit (+ Hybrid)} & \textbf{4.21} & \textbf{9.18$\times$} & \textbf{14.2\%} & \textbf{91.30\%} \\
+\bottomrule
+\end{tabular}
+\end{table}

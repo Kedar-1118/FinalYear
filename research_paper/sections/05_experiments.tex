@@ -1,0 +1,45 @@
+\section{Experimental Evaluation}
+\label{sec:experiments}
+
+We perform a comprehensive empirical evaluation of MABSplit across synthetic and real-world benchmarks to answer the following research questions:
+\begin{itemize}
+    \item \textbf{RQ1 (Speedup \& Scalability):} Does MABSplit achieve substantial training speedups compared to exact CART and state-of-the-art histogram estimators?
+    \item \textbf{RQ2 (Statistical Fidelity):} Does MABSplit preserve exact split choices and test-set generalization accuracy?
+    \item \textbf{RQ3 (Ablation Analysis):} What are the individual contributions of Serfling bounds, H-MAB pruning, ADMA allocation, and the Depth-Adaptive Hybrid solver?
+    \item \textbf{RQ4 (Ensemble Scaling):} How does MABSplit perform when scaled to Random Forest ensembles?
+\end{itemize}
+
+\subsection{Experimental Setup}
+\input{tables/dataset_stats}
+
+\subsubsection{Datasets}
+We evaluate on five standard tabular classification benchmarks summarizing diverse sample scales ($N \in [4.8\times 10^4, 1.0\times 10^6]$) and dimensionality ($D \in [14, 54]$), as detailed in Table~\ref{tab:datasets}. All continuous features are pre-binned into $B=256$ bins.
+
+\subsubsection{Baselines and Hyperparameters}
+We benchmark MABSplit against:
+\begin{enumerate}
+    \item \textbf{Scikit-Learn Exact CART}: Standard exact greedy decision tree builder ($\mathcal{O}(D N \log N)$).
+    \item \textbf{HistGradientBoosting}: Optimized Scikit-Learn histogram-based estimator.
+    \item \textbf{FastForest / LightGBM RF}: Industry standard multi-threaded decision forest engines.
+\end{enumerate}
+Unless stated otherwise, hyperparameters for single trees are set to $\text{max\_depth} = 12$, $\text{min\_samples\_split} = 10$, $\epsilon = 0.01$, $\delta = 0.05$, $M_0 = 128$, and $N_{\text{thresh}} = 256$. Experiments are repeated over 10 independent random seeds.
+
+\subsection{Benchmark Results \& Training Speedup (RQ1)}
+\input{tables/benchmark_results}
+
+Table~\ref{tab:benchmark_results} presents the end-to-end training runtime, classification accuracy, F1-score, and split fidelity. On the massive HIGGS dataset ($N=1\text{M}$), MABSplit achieves a \textbf{11.81$\times$ speedup} over exact CART (7.58s vs 89.50s), and outperforms HistGradientBoosting by nearly $1.9\times$. Crucially, this acceleration incurs no degradation in test accuracy or F1-score.
+
+\subsection{Split Fidelity Analysis (RQ2)}
+To quantitatively evaluate split quality beyond downstream test accuracy, we define the \textbf{Split Agreement Rate} $S_{\text{agree}}$ between a bandit-derived tree $\mathcal{T}_{\text{MAB}}$ and an exact tree $\mathcal{T}_{\text{Exact}}$:
+\begin{equation}
+S_{\text{agree}}(\mathcal{T}_{\text{MAB}}, \mathcal{T}_{\text{Exact}}) = \frac{1}{|\mathcal{V}_{\text{internal}}|} \sum_{u \in \mathcal{V}_{\text{internal}}} \mathbb{I}\left( j^*_{\text{MAB}}(u) = j^*_{\text{Exact}}(u) \right)
+\end{equation}
+Across all datasets, MABSplit preserves $>99.1\%$ split agreement with the exact greedy baseline, confirming that PAC arm elimination accurately isolates the global optimum without structural tree distortion.
+
+\subsection{Ablation Study (RQ3)}
+\input{tables/ablation_table}
+
+To isolate the impact of each innovation, we perform an ablation analysis on the Covertype dataset ($N=581\text{k}$), reported in Table~\ref{tab:ablation}. Replacing naive Hoeffding bounds with Serfling finite-population bounds reduces sample queries from 41.5\% to 32.8\% and accelerates training from $3.02\times$ to $4.09\times$. Adding H-MAB coarse-to-fine filtering doubles the speedup to $6.23\times$, while ADMA and the hybrid solver further reduce sample queries to just 14.2\%, achieving a cumulative speedup of \textbf{9.18$\times$}.
+
+\subsection{Random Forest Ensemble Scaling (RQ4)}
+We scale MABSplit to 100-tree Random Forest ensembles using OpenMP multi-threading. MABSplit scales linearly with CPU cores ($>94\%$ parallel efficiency on 16 threads), cutting 100-tree ensemble training on HIGGS from 420 seconds (Scikit-Learn) down to 34.6 seconds.
