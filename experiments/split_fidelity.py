@@ -232,9 +232,9 @@ def run_split_fidelity(
     for _, row in summary.iterrows():
         print(
             f"  {row['config']:45s} | "
-            f"Split Match: {row['exact_match_mean']:.1%} ± {row['exact_match_std']:.1%} | "
-            f"Feat Match: {row['feat_agree_mean']:.1%} ± {row['feat_agree_std']:.1%} | "
-            f"Acc Δ: {row['acc_diff_mean']:+.4f} ± {row['acc_diff_std']:.4f}"
+            f"Split Match: {row['exact_match_mean']:.1%} +/- {row['exact_match_std']:.1%} | "
+            f"Feat Match: {row['feat_agree_mean']:.1%} +/- {row['feat_agree_std']:.1%} | "
+            f"Acc Diff: {row['acc_diff_mean']:+.4f} +/- {row['acc_diff_std']:.4f}"
         )
     print("=" * 90)
 

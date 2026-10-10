@@ -102,7 +102,7 @@ def run_pareto_sweep(
             all_results.append({
                 "seed": seed,
                 "delta": delta,
-                "model": f"MABSplit++ (δ={delta})",
+                "model": f"MABSplit++ (d={delta})",
                 "train_time": round(mab_time, 6),
                 "accuracy": round(mab_acc, 5),
                 "f1_score": round(mab_f1, 5),
@@ -112,7 +112,7 @@ def run_pareto_sweep(
             })
 
             print(
-                f"  δ={delta:<6}  Time={mab_time:.4f}s  "
+                f"  d={delta:<6}  Time={mab_time:.4f}s  "
                 f"Speedup={speedup:.2f}x  Acc={mab_acc:.4f}  "
                 f"Samples={clf.total_samples_evaluated_:,}"
             )
@@ -121,7 +121,7 @@ def run_pareto_sweep(
     df = pd.DataFrame(all_results)
 
     print("\n" + "=" * 90)
-    print(" PARETO FRONTIER SUMMARY (Mean ± Std over Seeds)")
+    print(" PARETO FRONTIER SUMMARY (Mean +/- Std over Seeds)")
     print("=" * 90)
 
     mab_only = df[df["delta"] > 0]
@@ -144,9 +144,9 @@ def run_pareto_sweep(
 
     for _, row in summary.iterrows():
         print(
-            f"  δ={row['delta']:<6.3f} | "
-            f"Speedup: {row['speedup_mean']:.2f}x ± {row['speedup_std']:.2f} | "
-            f"Acc: {row['acc_mean']:.4f} ± {row['acc_std']:.4f} | "
+            f"  d={row['delta']:<6.3f} | "
+            f"Speedup: {row['speedup_mean']:.2f}x +/- {row['speedup_std']:.2f} | "
+            f"Acc: {row['acc_mean']:.4f} +/- {row['acc_std']:.4f} | "
             f"Samples: {row['samples_mean']:,.0f}"
         )
     print("=" * 90)

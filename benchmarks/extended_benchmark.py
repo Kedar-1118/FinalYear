@@ -321,8 +321,8 @@ def run_extended_benchmark(
     for _, row in summary.iterrows():
         print(
             f"  {row['model']:45s} | "
-            f"Time: {row['time_mean']:.4f}±{row['time_std']:.4f}s | "
-            f"Acc: {row['acc_mean']:.4f}±{row['acc_std']:.4f} | "
+            f"Time: {row['time_mean']:.4f}+/-{row['time_std']:.4f}s | "
+            f"Acc: {row['acc_mean']:.4f}+/-{row['acc_std']:.4f} | "
             f"Speedup: {row['speedup_mean']:.2f}x"
         )
 
