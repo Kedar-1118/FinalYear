@@ -1,0 +1,82 @@
+\documentclass[10pt,conference]{IEEEtran}
+
+% Packages
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue
+}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+
+\begin{document}
+
+\title{MABSplit: Accelerated Decision Tree and Random Forest Training via Multi-Armed Bandits with Finite-Population Bounds}
+
+\author{
+    \IEEEauthorblockN{Aditya Pansare}
+    \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
+    \textit{Pune Institute of Computer Technology}\\
+    Pune, India \\
+    pansareaditya281@gmail.com}
+    \and
+    \IEEEauthorblockN{Kedar Dhotre}
+    \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
+    \textit{Pune Institute of Computer Technology}\\
+    Pune, India \\
+    kedardhotre6@gmail.com}
+    \and
+    \IEEEauthorblockN{Dhanashree Maid}
+    \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
+    \textit{Pune Institute of Computer Technology}\\
+    Pune, India \\
+    dhanashreemaid9@gmail.com}
+    \and
+    \IEEEauthorblockN{Onkar Rane}
+    \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
+    \textit{Pune Institute of Computer Technology}\\
+    Pune, India \\
+    onkarrane60@gmail.com}
+}
+
+\maketitle
+
+\begin{abstract}
+Training Decision Trees and Random Forests on large-scale datasets is predominantly bottlenecked by the computational cost of evaluating split criteria across millions of candidate (feature, threshold) pairs. While recent Multi-Armed Bandit (MAB) active arm elimination methods reduce query complexity by subsampling nodes, existing formulations rely on naive i.i.d. Hoeffding bounds that violate sampling-without-replacement assumptions and suffer from sub-optimal batch scheduling. In this paper, we propose \textbf{MABSplit}, an enhanced PAC-optimal framework for tree and ensemble acceleration. MABSplit introduces four key algorithmic innovations: (1) \textbf{Serfling finite-population empirical Bernstein bounds} that correctly model without-replacement subsampling and collapse uncertainty to zero upon full node observation; (2) \textbf{Hierarchical Coarse-to-Fine Arm Pruning (H-MAB)} with a formal Bonferroni $\delta$-budget allocation across quantization levels; (3) \textbf{Adaptive Dynamic Minibatch Allocation (ADMA)} that dynamically scales batch sizes as unpromising arms are eliminated; and (4) a \textbf{Depth-Adaptive Hybrid Solver} eliminating bandit bookkeeping on shallow leaf sub-trees. Theoretical analysis confirms $(\epsilon, \delta)$-PAC optimality with tight sample complexity bounds. Extensive empirical benchmarks across standard large-scale tabular datasets demonstrate a \textbf{3.2$\times$--11.8$\times$ training speedup} over exact Scikit-Learn CART and competitive throughput against histogram-based gradient boosters while preserving over 99.2\% split fidelity and baseline generalization accuracy.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Decision Trees, Random Forests, Multi-Armed Bandits, Best Arm Identification, Finite-Population Bounds, PAC Learning, Machine Learning Acceleration.
+\end{IEEEkeywords}
+
+\input{sections/01_introduction}
+\input{sections/02_background}
+\input{sections/03_methodology}
+\input{sections/04_theoretical_guarantees}
+\input{sections/05_experiments}
+\input{sections/06_conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
