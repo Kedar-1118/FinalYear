@@ -1,0 +1,80 @@
+[
+  {
+    "seed": 42,
+    "config": "MAB (Serfling + ADMA + Hybrid)",
+    "dataset": "synthetic",
+    "exact_match_rate": 0.1579,
+    "feature_agreement_rate": 0.3684,
+    "shared_nodes": 19,
+    "exact_nodes": 21,
+    "mab_nodes": 25,
+    "exact_acc": 0.848,
+    "mab_acc": 0.825,
+    "acc_diff": -0.023
+  },
+  {
+    "seed": 42,
+    "config": "Full MABSplit++ (+ H-MAB)",
+    "dataset": "synthetic",
+    "exact_match_rate": 0.2,
+    "feature_agreement_rate": 0.5,
+    "shared_nodes": 20,
+    "exact_nodes": 21,
+    "mab_nodes": 26,
+    "exact_acc": 0.848,
+    "mab_acc": 0.845,
+    "acc_diff": -0.003
+  },
+  {
+    "seed": 42,
+    "config": "Vanilla MAB (Hoeffding, Fixed Batch)",
+    "dataset": "synthetic",
+    "exact_match_rate": 0.2222,
+    "feature_agreement_rate": 0.5,
+    "shared_nodes": 18,
+    "exact_nodes": 21,
+    "mab_nodes": 23,
+    "exact_acc": 0.848,
+    "mab_acc": 0.845,
+    "acc_diff": -0.003
+  },
+  {
+    "seed": 43,
+    "config": "MAB (Serfling + ADMA + Hybrid)",
+    "dataset": "synthetic",
+    "exact_match_rate": 0.0357,
+    "feature_agreement_rate": 0.4286,
+    "shared_nodes": 28,
+    "exact_nodes": 29,
+    "mab_nodes": 30,
+    "exact_acc": 0.857,
+    "mab_acc": 0.86,
+    "acc_diff": 0.003
+  },
+  {
+    "seed": 43,
+    "config": "Full MABSplit++ (+ H-MAB)",
+    "dataset": "synthetic",
+    "exact_match_rate": 0.1481,
+    "feature_agreement_rate": 0.4444,
+    "shared_nodes": 27,
+    "exact_nodes": 29,
+    "mab_nodes": 28,
+    "exact_acc": 0.857,
+    "mab_acc": 0.861,
+    "acc_diff": 0.004
+  },
+  {
+    "seed": 43,
+    "config": "Vanilla MAB (Hoeffding, Fixed Batch)",
+    "dataset": "synthetic",
+    "exact_match_rate": 0.2083,
+    "feature_agreement_rate": 0.6667,
+    "shared_nodes": 24,
+    "exact_nodes": 29,
+    "mab_nodes": 24,
+    "exact_acc": 0.857,
+    "mab_acc": 0.854,
+    "acc_diff": -0.003
+  }
+]

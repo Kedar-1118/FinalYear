@@ -300,7 +300,7 @@ def run_extended_benchmark(
 
     # Summary table
     print("\n" + "=" * 100)
-    print(" BENCHMARK RESULTS SUMMARY (Mean ± Std over Seeds)")
+    print(" BENCHMARK RESULTS SUMMARY (Mean +/- Std over Seeds)")
     print("=" * 100)
 
     summary = (
