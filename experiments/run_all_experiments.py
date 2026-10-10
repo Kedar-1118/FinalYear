@@ -34,9 +34,9 @@ def run_phase_1(args):
         datasets.append("covertype")
 
     for ds in datasets:
-        print(f"\n{'═' * 100}")
-        print(f" PHASE 1: Extended Benchmark — {ds.upper()}")
-        print(f"{'═' * 100}")
+        print(f"\n{'=' * 100}")
+        print(f" PHASE 1: Extended Benchmark -- {ds.upper()}")
+        print(f"{'=' * 100}")
         run_extended_benchmark(
             dataset_name=ds,
             subsample=args.subsample,
@@ -52,9 +52,9 @@ def run_phase_2(args):
     from experiments.ablation_study import run_ablation
     from experiments.split_fidelity import run_split_fidelity
 
-    print(f"\n{'═' * 100}")
+    print(f"\n{'=' * 100}")
     print(f" PHASE 2a: Ablation Study")
-    print(f"{'═' * 100}")
+    print(f"{'=' * 100}")
     ablation_df = run_ablation(n_samples=args.subsample)
 
     # Save ablation results as CSV for plot generation
@@ -64,9 +64,9 @@ def run_phase_2(args):
     ablation_df.to_csv(ablation_csv, index=False)
     print(f"Ablation results saved to: {ablation_csv}")
 
-    print(f"\n{'═' * 100}")
+    print(f"\n{'=' * 100}")
     print(f" PHASE 2b: Split Fidelity Analysis")
-    print(f"{'═' * 100}")
+    print(f"{'=' * 100}")
     run_split_fidelity(
         n_samples=args.subsample,
         n_features=20,
@@ -80,9 +80,9 @@ def run_phase_3(args):
     """Phase 3: Pareto frontier sweep."""
     from experiments.pareto_frontier import run_pareto_sweep
 
-    print(f"\n{'═' * 100}")
+    print(f"\n{'=' * 100}")
     print(f" PHASE 3: Pareto Frontier Sweep")
-    print(f"{'═' * 100}")
+    print(f"{'=' * 100}")
     run_pareto_sweep(
         n_samples=args.subsample,
         n_features=20,
@@ -96,9 +96,9 @@ def run_phase_4(args):
     """Phase 4: Generate all plots from experimental data."""
     from experiments.generate_plots_v2 import generate_all_plots
 
-    print(f"\n{'═' * 100}")
+    print(f"\n{'=' * 100}")
     print(f" PHASE 4: Publication Plot Generation")
-    print(f"{'═' * 100}")
+    print(f"{'=' * 100}")
     generate_all_plots()
 
 
@@ -140,9 +140,9 @@ def main():
         return
 
     total = time.perf_counter() - overall_start
-    print(f"\n{'═' * 100}")
-    print(f" ALL PHASES COMPLETE — Total time: {total:.1f}s ({total/60:.1f} min)")
-    print(f"{'═' * 100}")
+    print(f"\n{'=' * 100}")
+    print(f" ALL PHASES COMPLETE -- Total time: {total:.1f}s ({total/60:.1f} min)")
+    print(f"{'=' * 100}")
 
 
 if __name__ == "__main__":

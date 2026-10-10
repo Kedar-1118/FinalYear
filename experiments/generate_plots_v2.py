@@ -50,9 +50,9 @@ def setup_publication_style():
     })
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 # FIGURE 1: Extended Benchmark Comparison Bar Chart
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 
 def plot_benchmark_comparison(results_dir, output_dir):
     """Plots training time comparison across all baselines from extended benchmark data."""
@@ -116,13 +116,13 @@ def plot_benchmark_comparison(results_dir, output_dir):
     path = os.path.join(output_dir, "benchmark_comparison.png")
     plt.savefig(path, dpi=300)
     plt.close()
-    print(f"  [✓] Benchmark comparison: {os.path.basename(path)}")
+    print(f"  [[OK]] Benchmark comparison: {os.path.basename(path)}")
     return path
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 # FIGURE 2: Ablation Progression (reads from ablation results or uses runner)
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 
 def plot_ablation_from_data(results_dir, output_dir):
     """Plots ablation study results from saved CSV data."""
@@ -173,13 +173,13 @@ def plot_ablation_from_data(results_dir, output_dir):
     path = os.path.join(output_dir, "ablation_progression.png")
     plt.savefig(path, dpi=300)
     plt.close()
-    print(f"  [✓] Ablation progression: {os.path.basename(path)}")
+    print(f"  [[OK]] Ablation progression: {os.path.basename(path)}")
     return path
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# FIGURE 3: Pareto Frontier (δ vs. Speedup vs. Accuracy)
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
+# FIGURE 3: Pareto Frontier (d vs. Speedup vs. Accuracy)
+# ===============================================================================
 
 def plot_pareto_from_data(results_dir, output_dir):
     """Plots Pareto frontier from actual experimental data."""
@@ -234,13 +234,13 @@ def plot_pareto_from_data(results_dir, output_dir):
     path = os.path.join(output_dir, "pareto_frontier.png")
     plt.savefig(path, dpi=300)
     plt.close()
-    print(f"  [✓] Pareto frontier: {os.path.basename(path)}")
+    print(f"  [[OK]] Pareto frontier: {os.path.basename(path)}")
     return path
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 # FIGURE 4: Split Agreement Rate Analysis
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 
 def plot_split_fidelity(results_dir, output_dir):
     """Plots split agreement rate results from split_fidelity experiment."""
@@ -299,7 +299,7 @@ def plot_split_fidelity(results_dir, output_dir):
             edgecolor='none', capsize=4)
     ax2.axhline(0, color='#95a5a6', linestyle='--', linewidth=1.0)
     ax2.set_ylabel('Accuracy Difference (%)')
-    ax2.set_title('Accuracy Δ (MAB − Exact)')
+    ax2.set_title('Accuracy D (MAB - Exact)')
     ax2.set_xticks(x)
     ax2.set_xticklabels(short_names, rotation=15, ha='right', fontsize=8.5)
 
@@ -307,13 +307,13 @@ def plot_split_fidelity(results_dir, output_dir):
     path = os.path.join(output_dir, "split_fidelity.png")
     plt.savefig(path, dpi=300)
     plt.close()
-    print(f"  [✓] Split fidelity: {os.path.basename(path)}")
+    print(f"  [[OK]] Split fidelity: {os.path.basename(path)}")
     return path
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 # FIGURE 5: Sample Complexity Scaling
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 
 def plot_sample_scaling(output_dir):
     """Plots theoretical+empirical sample scaling curve (Exact O(N) vs MAB O(K log N))."""
@@ -349,13 +349,13 @@ def plot_sample_scaling(output_dir):
     path = os.path.join(output_dir, "sample_complexity_scaling.png")
     plt.savefig(path, dpi=300)
     plt.close()
-    print(f"  [✓] Sample complexity scaling: {os.path.basename(path)}")
+    print(f"  [[OK]] Sample complexity scaling: {os.path.basename(path)}")
     return path
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 # FIGURE 6: Statistical Significance Box Plot
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 
 def plot_significance_boxplot(results_dir, output_dir):
     """Plots accuracy distributions across seeds as box plots with p-values."""
@@ -400,13 +400,13 @@ def plot_significance_boxplot(results_dir, output_dir):
     path = os.path.join(output_dir, "significance_boxplot.png")
     plt.savefig(path, dpi=300)
     plt.close()
-    print(f"  [✓] Significance boxplot: {os.path.basename(path)}")
+    print(f"  [[OK]] Significance boxplot: {os.path.basename(path)}")
     return path
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 # MASTER GENERATOR
-# ═══════════════════════════════════════════════════════════════════════════════
+# ===============================================================================
 
 def generate_all_plots(
     results_dir="experiments/results",

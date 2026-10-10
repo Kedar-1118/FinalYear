@@ -140,8 +140,6 @@ def build_model_suite(max_depth=10, n_trees=10):
                 colsample_bynode=0.8,
                 random_state=42,
                 verbosity=0,
-                use_label_encoder=False,
-                eval_metric='logloss'
             ),
             "forest"
         ))
@@ -209,11 +207,11 @@ def statistical_significance_test(accs_exact, accs_mab, model_name):
 
     return {
         "model": model_name,
-        "t_statistic": round(t_stat, 4) if t_stat is not None else None,
-        "p_value_ttest": round(p_val_t, 6) if p_val_t is not None else None,
-        "p_value_wilcoxon": round(p_val_w, 6) if p_val_w is not None else None,
-        "significant_at_005": (p_val_t is not None and p_val_t < 0.05),
-        "mean_diff": round(np.mean(accs_mab) - np.mean(accs_exact), 5),
+        "t_statistic": round(float(t_stat), 4) if t_stat is not None else None,
+        "p_value_ttest": round(float(p_val_t), 6) if p_val_t is not None else None,
+        "p_value_wilcoxon": round(float(p_val_w), 6) if p_val_w is not None else None,
+        "significant_at_005": bool(p_val_t is not None and p_val_t < 0.05),
+        "mean_diff": round(float(np.mean(accs_mab) - np.mean(accs_exact)), 5),
     }
 
 
@@ -239,9 +237,9 @@ def run_extended_benchmark(
 
     for seed_idx in range(n_seeds):
         seed = 42 + seed_idx
-        print(f"\n{'─' * 80}")
+        print(f"\n{'-' * 80}")
         print(f" Seed {seed_idx + 1}/{n_seeds} (random_state={seed})")
-        print(f"{'─' * 80}")
+        print(f"{'-' * 80}")
 
         # Load data
         if dataset_name.lower() == "adult":

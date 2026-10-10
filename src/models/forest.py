@@ -55,6 +55,7 @@ class MABRandomForestClassifier(BaseEstimator, ClassifierMixin):
         use_coarse_to_fine: bool = False,
         use_adaptive_batch: bool = True,
         use_serfling: bool = True,
+        bootstrap: bool = True,
         oob_score: bool = False,
         n_jobs: int = -1,
         random_state: int = 42

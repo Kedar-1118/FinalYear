@@ -1,0 +1,233 @@
+[
+  {
+    "model": "Sklearn Exact DecisionTree",
+    "train_time": 0.04371589999936987,
+    "accuracy": 0.851,
+    "f1_score": 0.850985247214913,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 42,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "Sklearn HistGradientBoosting",
+    "train_time": 1.3675585000019055,
+    "accuracy": 0.9,
+    "f1_score": 0.8999159340923284,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 42,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "LightGBM RF Mode",
+    "train_time": 0.013943800000561168,
+    "accuracy": 0.86,
+    "f1_score": 0.859988798879888,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 42,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "XGBoost RF Mode",
+    "train_time": 0.10525719999714056,
+    "accuracy": 0.872,
+    "f1_score": 0.8719846384638463,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 42,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "Sklearn RandomForest",
+    "train_time": 0.035226100000727456,
+    "accuracy": 0.876,
+    "f1_score": 0.8759722185548368,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 42,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "MABSplit++ DecisionTree (Ours)",
+    "train_time": 0.033428800001274794,
+    "accuracy": 0.838,
+    "f1_score": 0.8379286914765907,
+    "sample_evaluations": 23318,
+    "peak_memory_mb": null,
+    "seed": 42,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "MABSplit++ RandomForest (Ours)",
+    "train_time": 0.8594660999988264,
+    "accuracy": 0.88,
+    "f1_score": 0.8799990399846397,
+    "sample_evaluations": 115772,
+    "peak_memory_mb": null,
+    "seed": 42,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "Sklearn Exact DecisionTree",
+    "train_time": 0.04328170000007958,
+    "accuracy": 0.843,
+    "f1_score": 0.8429740891700633,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 43,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "Sklearn HistGradientBoosting",
+    "train_time": 0.0732532000001811,
+    "accuracy": 0.921,
+    "f1_score": 0.9209964449111228,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 43,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "LightGBM RF Mode",
+    "train_time": 0.010941299999103649,
+    "accuracy": 0.861,
+    "f1_score": 0.8609392248499458,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 43,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "XGBoost RF Mode",
+    "train_time": 0.02239679999911459,
+    "accuracy": 0.884,
+    "f1_score": 0.8839962877624168,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 43,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "Sklearn RandomForest",
+    "train_time": 0.03539440000167815,
+    "accuracy": 0.867,
+    "f1_score": 0.866903493838318,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 43,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "MABSplit++ DecisionTree (Ours)",
+    "train_time": 0.036513600000034785,
+    "accuracy": 0.861,
+    "f1_score": 0.8608991619762351,
+    "sample_evaluations": 23640,
+    "peak_memory_mb": null,
+    "seed": 43,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "MABSplit++ RandomForest (Ours)",
+    "train_time": 0.05571319999944535,
+    "accuracy": 0.864,
+    "f1_score": 0.863998367941246,
+    "sample_evaluations": 117576,
+    "peak_memory_mb": null,
+    "seed": 43,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "Sklearn Exact DecisionTree",
+    "train_time": 0.04423519999909331,
+    "accuracy": 0.871,
+    "f1_score": 0.8708989193121786,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 44,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "Sklearn HistGradientBoosting",
+    "train_time": 0.07888470000034431,
+    "accuracy": 0.929,
+    "f1_score": 0.9289955266376576,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 44,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "LightGBM RF Mode",
+    "train_time": 0.010623100002703723,
+    "accuracy": 0.886,
+    "f1_score": 0.886,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 44,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "XGBoost RF Mode",
+    "train_time": 0.023116300002584467,
+    "accuracy": 0.896,
+    "f1_score": 0.8959950078202814,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 44,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "Sklearn RandomForest",
+    "train_time": 0.03500799999892479,
+    "accuracy": 0.886,
+    "f1_score": 0.8859908794162826,
+    "sample_evaluations": null,
+    "peak_memory_mb": null,
+    "seed": 44,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  },
+  {
+    "model": "MABSplit++ DecisionTree (Ours)",
+    "train_time": 0.037565700000413926,
+    "accuracy": 0.875,
+    "f1_score": 0.8749501029954211,
+    "sample_evaluations": 23675,
+    "peak_memory_mb": null,
+    "seed": 44,
+    "dataset": "synthetic",
+    "model_type": "tree"
+  },
+  {
+    "model": "MABSplit++ RandomForest (Ours)",
+    "train_time": 0.05616139999983716,
+    "accuracy": 0.884,
+    "f1_score": 0.8839489395758303,
+    "sample_evaluations": 117462,
+    "peak_memory_mb": null,
+    "seed": 44,
+    "dataset": "synthetic",
+    "model_type": "forest"
+  }
+]

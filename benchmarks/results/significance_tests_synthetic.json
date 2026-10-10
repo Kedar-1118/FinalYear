@@ -1,0 +1,50 @@
+[
+  {
+    "model": "Sklearn HistGradientBoosting",
+    "t_statistic": -7.1957,
+    "p_value_ttest": 0.018771,
+    "p_value_wilcoxon": 0.25,
+    "significant_at_005": true,
+    "mean_diff": 0.06167
+  },
+  {
+    "model": "LightGBM RF Mode",
+    "t_statistic": -5.2915,
+    "p_value_ttest": 0.033908,
+    "p_value_wilcoxon": 0.25,
+    "significant_at_005": true,
+    "mean_diff": 0.014
+  },
+  {
+    "model": "XGBoost RF Mode",
+    "t_statistic": -4.7462,
+    "p_value_ttest": 0.041639,
+    "p_value_wilcoxon": 0.25,
+    "significant_at_005": true,
+    "mean_diff": 0.029
+  },
+  {
+    "model": "Sklearn RandomForest",
+    "t_statistic": -6.709,
+    "p_value_ttest": 0.021503,
+    "p_value_wilcoxon": 0.25,
+    "significant_at_005": true,
+    "mean_diff": 0.02133
+  },
+  {
+    "model": "MABSplit++ DecisionTree (Ours)",
+    "t_statistic": -0.3347,
+    "p_value_ttest": 0.769685,
+    "p_value_wilcoxon": 0.75,
+    "significant_at_005": false,
+    "mean_diff": 0.003
+  },
+  {
+    "model": "MABSplit++ RandomForest (Ours)",
+    "t_statistic": -4.5466,
+    "p_value_ttest": 0.045126,
+    "p_value_wilcoxon": 0.25,
+    "significant_at_005": true,
+    "mean_diff": 0.021
+  }
+]
