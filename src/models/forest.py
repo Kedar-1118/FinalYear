@@ -158,6 +158,29 @@ class MABRandomForestClassifier(BaseEstimator, ClassifierMixin):
             t.total_samples_evaluated_ for t in self.estimators_
         )
 
+        # Compute Out-of-Bag (OOB) score if requested
+        if self.oob_score and self.bootstrap:
+            oob_pred_counts = np.zeros((n_samples, self.n_classes_), dtype=np.float64)
+            oob_eval_counts = np.zeros(n_samples, dtype=np.int32)
+
+            for i in range(self.n_estimators):
+                in_bag = set(bootstrap_indices[i])
+                oob_idx = [idx for idx in range(n_samples) if idx not in in_bag]
+                if len(oob_idx) > 0:
+                    tree_preds = self.estimators_[i].predict_proba(X[oob_idx])
+                    oob_pred_counts[oob_idx] += tree_preds
+                    oob_eval_counts[oob_idx] += 1
+
+            valid_oob = oob_eval_counts > 0
+            if np.any(valid_oob):
+                oob_decision = np.zeros((n_samples, self.n_classes_), dtype=np.float64)
+                oob_decision[valid_oob] = oob_pred_counts[valid_oob] / oob_eval_counts[valid_oob, None]
+                self.oob_decision_function_ = oob_decision
+                oob_preds = np.argmax(oob_decision[valid_oob], axis=1)
+                self.oob_score_ = float(np.mean(y[valid_oob] == self.classes_[oob_preds]))
+            else:
+                self.oob_score_ = 0.0
+
         return self
 
     def predict_proba(self, X) -> np.ndarray:
@@ -174,3 +197,15 @@ class MABRandomForestClassifier(BaseEstimator, ClassifierMixin):
         proba = self.predict_proba(X)
         best_indices = np.argmax(proba, axis=1)
         return self.classes_[best_indices]
+
+    @property
+    def feature_importances_(self) -> np.ndarray:
+        """Computes feature importances by averaging impurity gains across all trees in the forest."""
+        check_is_fitted(self, ['estimators_', 'n_features_in_'])
+        all_importances = [t.feature_importances_ for t in self.estimators_]
+        mean_imp = np.mean(all_importances, axis=0)
+        total = np.sum(mean_imp)
+        if total > 0:
+            mean_imp /= total
+        return mean_imp
+
