@@ -6,12 +6,13 @@ MABSplit performance and split fidelity differences against baselines (e.g. Scik
 are statistically significant.
 """
 
+import math
 from typing import Dict, List, Optional, Tuple, Union
 import numpy as np
 
 
 def compute_cohens_d(x: np.ndarray, y: np.ndarray) -> float:
-    """Compute Cohen's d effect size for paired samples.
+    """Compute Cohen's d effect size.
 
     Args:
         x: Sample metrics array from model 1.
@@ -22,11 +23,21 @@ def compute_cohens_d(x: np.ndarray, y: np.ndarray) -> float:
     """
     x = np.asarray(x, dtype=np.float64)
     y = np.asarray(y, dtype=np.float64)
-    diff = x - y
-    std_diff = np.std(diff, ddof=1)
-    if std_diff == 0.0:
+    n1, n2 = len(x), len(y)
+    if n1 == 0 or n2 == 0:
         return 0.0
-    return float(np.mean(diff) / std_diff)
+
+    mean_diff = float(np.mean(x) - np.mean(y))
+    var1 = float(np.var(x, ddof=1)) if n1 > 1 else 0.0
+    var2 = float(np.var(y, ddof=1)) if n2 > 1 else 0.0
+
+    # Pooled standard deviation
+    if n1 + n2 <= 2:
+        return 0.0
+    s_pooled = math.sqrt(((n1 - 1) * var1 + (n2 - 1) * var2) / (n1 + n2 - 2))
+    if s_pooled == 0.0:
+        return 0.0 if mean_diff == 0.0 else (1.0 if mean_diff > 0 else -1.0)
+    return float(mean_diff / s_pooled)
 
 
 def compute_paired_ttest(
@@ -53,18 +64,15 @@ def compute_paired_ttest(
     diff = a - b
     mean_d = float(np.mean(diff))
     var_d = float(np.var(diff, ddof=1))
-    se_d = np.sqrt(var_d / n)
+    se_d = math.sqrt(var_d / n)
 
     if se_d == 0.0:
         t_stat = 0.0
-        p_val = 1.0
+        p_val = 1.0 if mean_d == 0.0 else 0.0
     else:
         t_stat = float(mean_d / se_d)
-        # Approximate two-tailed p-value using standard normal / t-distribution approximation
-        # For small n, using an asymptotic normal approximation or standard erf
         z = abs(t_stat)
-        # Numerical survival function approximation
-        p_val = float(2.0 * (1.0 - 0.5 * (1.0 + np.math.erf(z / np.sqrt(2.0)))))
+        p_val = float(2.0 * (1.0 - 0.5 * (1.0 + math.erf(z / math.sqrt(2.0)))))
 
     d = compute_cohens_d(a, b)
 
@@ -109,9 +117,9 @@ def compute_wilcoxon_signed_rank(
 
     # Large-sample normal approximation for W
     mean_w = n * (n + 1) / 4.0
-    std_w = np.sqrt(n * (n + 1) * (2 * n + 1) / 24.0)
+    std_w = math.sqrt(n * (n + 1) * (2 * n + 1) / 24.0)
     z = (w_stat - mean_w) / (std_w if std_w > 0 else 1.0)
-    p_approx = float(2.0 * (1.0 - 0.5 * (1.0 + np.math.erf(abs(z) / np.sqrt(2.0)))))
+    p_approx = float(2.0 * (1.0 - 0.5 * (1.0 + math.erf(abs(z) / math.sqrt(2.0)))))
 
     return {
         "w_stat": float(w_stat),
