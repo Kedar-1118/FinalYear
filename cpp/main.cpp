@@ -4,15 +4,26 @@
 #include <vector>
 #include <random>
 
-int main() {
+int main(int argc, char* argv[]) {
     std::cout << "==========================================================" << std::endl;
     std::cout << " MABSplit C++ High-Performance Engine Benchmark" << std::endl;
     std::cout << "==========================================================" << std::endl;
 
-    const int N = 100000; // 100k samples
-    const int F = 20;     // 20 features
-    const int C = 2;      // 2 classes
-    const int B = 128;    // 128 bins
+    int N = 100000; // Default 100k samples
+    int F = 20;     // Default 20 features
+    int C = 2;      // Default 2 classes
+    int B = 128;    // Default 128 bins
+
+    for (int i = 1; i < argc; ++i) {
+        std::string arg = argv[i];
+        if (arg == "--samples" && i + 1 < argc) {
+            N = std::stoi(argv[++i]);
+        } else if (arg == "--features" && i + 1 < argc) {
+            F = std::stoi(argv[++i]);
+        } else if (arg == "--bins" && i + 1 < argc) {
+            B = std::stoi(argv[++i]);
+        }
+    }
 
     std::cout << "Generating synthetic binned dataset: " << N << " samples, " << F << " features..." << std::endl;
 

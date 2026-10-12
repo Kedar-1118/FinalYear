@@ -21,6 +21,8 @@ from src.engine.numba_kernels import (
 from src.pruning.dynamic_allocator import DynamicMinibatchAllocator
 from src.models.tree import MABDecisionTreeClassifier
 from src.models.forest import MABRandomForestClassifier
+from src.utils.cross_validation import MABKFoldEvaluator, MABGridSearchCV
+from src.utils.serialization import export_graphviz, save_model_json, load_model_json
 
 def test_fast_binner():
     X = np.random.randn(500, 5).astype(np.float32)
@@ -158,4 +160,40 @@ def test_dataset_loaders():
         assert X_h.shape == (100, 28)
         assert y_h.shape == (100,)
         assert np.isin(y_h, [0, 1]).all()
+
+
+def test_utils_cross_validation():
+    X, y = make_classification(n_samples=300, n_features=8, random_state=42)
+    tree = MABDecisionTreeClassifier(max_depth=4, random_state=42)
+    evaluator = MABKFoldEvaluator(estimator=tree, n_splits=3, random_state=42)
+    res = evaluator.evaluate(X, y)
+    assert "mean_accuracy" in res
+    assert res["mean_accuracy"] > 0.70
+
+
+def test_utils_serialization(tmp_path):
+    X, y = make_classification(n_samples=200, n_features=6, random_state=42)
+    clf = MABDecisionTreeClassifier(max_depth=4, random_state=42)
+    clf.fit(X, y)
+
+    dot_str = export_graphviz(clf)
+    assert "digraph MABDecisionTree" in dot_str
+
+    json_path = str(tmp_path / "model.json")
+    save_model_json(clf, json_path)
+    loaded_clf = load_model_json(json_path, MABDecisionTreeClassifier)
+    assert loaded_clf.n_features_ == clf.n_features_
+    assert np.allclose(loaded_clf.predict_proba(X), clf.predict_proba(X))
+
+
+def test_forest_oob_and_importances():
+    X, y = make_classification(n_samples=400, n_features=8, random_state=42)
+    rf = MABRandomForestClassifier(n_estimators=10, max_depth=4, oob_score=True, random_state=42)
+    rf.fit(X, y)
+    assert hasattr(rf, 'oob_score_')
+    assert rf.oob_score_ >= 0.0
+    importances = rf.feature_importances_
+    assert len(importances) == 8
+    assert math.isclose(np.sum(importances), 1.0, rel_tol=1e-3)
+
 
