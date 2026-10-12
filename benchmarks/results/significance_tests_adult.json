@@ -33,18 +33,18 @@
   },
   {
     "model": "MABSplit++ DecisionTree (Ours)",
-    "t_statistic": -2.422,
-    "p_value_ttest": 0.072607,
-    "p_value_wilcoxon": 0.125,
+    "t_statistic": -2.2385,
+    "p_value_ttest": 0.088773,
+    "p_value_wilcoxon": 0.1875,
     "significant_at_005": false,
-    "mean_diff": 0.00424
+    "mean_diff": 0.00304
   },
   {
     "model": "MABSplit++ RandomForest (Ours)",
-    "t_statistic": -4.391,
-    "p_value_ttest": 0.011774,
+    "t_statistic": -4.7187,
+    "p_value_ttest": 0.00918,
     "p_value_wilcoxon": 0.0625,
     "significant_at_005": true,
-    "mean_diff": 0.0066
+    "mean_diff": 0.00878
   }
 ]
