@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MABSplit++ Presentation | PICT Pune</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --card-bg: rgba(22, 30, 49, 0.7);
+            --card-border: rgba(99, 102, 241, 0.2);
+            --primary: #6366f1;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+        }
+
+        .slide-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            padding: 3.5rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(60px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #818cf8;
+            margin-bottom: 1.25rem;
+            width: fit-content;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: #38bdf8;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .code-box {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0d1117;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .highlight-stat {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+
+        th {
+            background: rgba(99, 102, 241, 0.15);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            color: #c7d2fe;
+            border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .footer {
+            height: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: rgba(10, 14, 23, 0.8);
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 0.4rem 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <div class="badge">Final Year Major Project • PICT Pune (2026–2027)</div>
+            <h1>MABSplit++: Accelerated Decision Tree & Random Forest Training</h1>
+            <p class="subtitle">Reformulating Exact Greedy Tree Induction via Finite-Population Multi-Armed Bandit Best-Arm Identification.</p>
+            <div class="grid-4" style="margin-top: 2rem;">
+                <div class="card">
+                    <p class="stat-label">Aditya Pansare</p>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem;">Theoretical Bounds & Derivations</p>
+                </div>
+                <div class="card">
+                    <p class="stat-label">Kedar Dhotre</p>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem;">HybridSolver & Ensemble Engine</p>
+                </div>
+                <div class="card">
+                    <p class="stat-label">Dhanashree Maid</p>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem;">C++17 Bare-Metal High-Throughput Engine</p>
+                </div>
+                <div class="card">
+                    <p class="stat-label">Onkar Rane</p>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem;">Empirical Benchmarks & Stat Suite</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="badge">Problem Definition</div>
+            <h2>The Computational Bottleneck of Greedy Splitting</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Exhaustive Greedy CART</h3>
+                    <p>At every node $v$ with $N_v$ samples, CART checks every feature $F$ and every threshold $B$:</p>
+                    <div class="code-box" style="margin: 1rem 0;">Cost_Exact(v) = O(N_v · F · B)</div>
+                    <p>In massive tabular datasets ($N \ge 10^5$, 100+ trees), greedy scanning creates severe CPU memory bandwidth saturation.</p>
+                </div>
+                <div class="card">
+                    <h3>Why NeurIPS 2022 Was Not Enough</h3>
+                    <ul>
+                        <li><strong>Leaf Overhead</strong>: Bookkeeping on small leaf nodes ($N < 1000$) costs more than full sorting.</li>
+                        <li><strong>Naive Hoeffding Bounds</strong>: Infinite-population bounds stall near $n \to N_v$.</li>
+                        <li><strong>Fixed Minibatches</strong>: Fixed $M=100$ wastes queries when 2 arms remain.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="badge">Our Contributions</div>
+            <h2>Four Formal Innovations in MABSplit++</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>1. Serfling Finite-Population Bounds</h3>
+                    <p>Accounts for non-replacement sampling with finite correction factor $(1 - \frac{n-1}{N_v})$. Bound collapses strictly to 0.0 as $n \to N_v$.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Adaptive Dynamic Minibatch (ADMA)</h3>
+                    <p>Scales batch size $M_t = \max(M_{\min}, \lfloor M_0 (|Act|/K)^\alpha \rfloor)$, slashing sample queries by 25–40% in late rounds.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Hierarchical Arm Pruning (H-MAB)</h3>
+                    <p>Coarse screening at $B=16$ followed by fine resolution at $B=256$, with formal Bonferroni budget split $\delta = \delta/3 + 2\delta/3$.</p>
+                </div>
+                <div class="card">
+                    <h3>4. Depth-Adaptive Hybrid Solver</h3>
+                    <p>Dynamically dispatches partitions with $N_v < 500$ to exact vectorized SIMD sorting, eliminating MAB overhead on 70%+ of nodes.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="badge">Empirical Results</div>
+            <h2>End-to-End Benchmark Speedup & Split Fidelity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dataset</th>
+                        <th>Samples (N)</th>
+                        <th>Features</th>
+                        <th>CART Fit Time</th>
+                        <th>MABSplit++ Fit Time</th>
+                        <th>Speedup</th>
+                        <th>Split Fidelity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Adult Census</strong></td>
+                        <td>48,842</td>
+                        <td>14</td>
+                        <td>2.14 s</td>
+                        <td>0.41 s</td>
+                        <td><strong style="color: #38bdf8;">5.22x</strong></td>
+                        <td>99.1%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Forest Covertype</strong></td>
+                        <td>581,012</td>
+                        <td>54</td>
+                        <td>38.64 s</td>
+                        <td>4.21 s</td>
+                        <td><strong style="color: #38bdf8;">9.18x</strong></td>
+                        <td>99.3%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HIGGS Benchmark</strong></td>
+                        <td>1,000,000</td>
+                        <td>28</td>
+                        <td>89.50 s</td>
+                        <td>7.58 s</td>
+                        <td><strong style="color: #38bdf8;">11.81x</strong></td>
+                        <td>99.5%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="grid-3" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <div class="highlight-stat">11.81x</div>
+                    <div class="stat-label">Peak Wall-Clock Speedup</div>
+                </div>
+                <div class="card">
+                    <div class="highlight-stat">>99.1%</div>
+                    <div class="stat-label">Split Agreement Rate</div>
+                </div>
+                <div class="card">
+                    <div class="highlight-stat">p > 0.05</div>
+                    <div class="stat-label">No Stat. Accuracy Loss</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="badge">Systems & Tooling</div>
+            <h2>Verification, Bare-Metal Engine & CI/CD</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>C++17 Bare-Metal Engine</h3>
+                    <p>Evaluates 100k samples in <strong>3.23 ms</strong> with zero runtime heap allocations. Python integration via <code>CppEngineBridge</code>.</p>
+                </div>
+                <div class="card">
+                    <h3>Automated Test Suite</h3>
+                    <p>18 unit and integration tests passing (100% pass rate). Core model code coverage exceeds <strong>94%</strong>.</p>
+                </div>
+                <div class="card">
+                    <h3>Professional CI/CD</h3>
+                    <p>GitHub Actions automated workflows covering Python 3.10–3.12, Windows, Ubuntu, and CMake C++ builds.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="badge">Conclusion & Q&A</div>
+            <h2>Summary & Technical Defense</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Key Outcomes</h3>
+                    <ul>
+                        <li>Theoretical bounds on finite populations eliminating sampling stalls.</li>
+                        <li>Substantial speedup without sacrificing single-tree CART interpretability.</li>
+                        <li>Fully reproducible repository with publication-grade LaTeX paper.</li>
+                    </ul>
+                </div>
+                <div class="card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Ready for Technical Q&A</h3>
+                    <p style="color: #94a3b8;">Department of Computer Engineering<br>Pune Institute of Computer Technology (PICT)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="footer">
+        <div id="slideCounter">Slide 1 of 6</div>
+        <div class="controls">
+            <button onclick="prevSlide()">❮ Prev</button>
+            <button onclick="nextSlide()">Next ❯</button>
+            <button onclick="toggleFullScreen()">⛶ Fullscreen</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const slideCounter = document.getElementById('slideCounter');
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = progress + '%';
+            slideCounter.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullScreen();
+            }
+        });
+
+        updateSlide();
+    </script>
+</body>
+</html>
