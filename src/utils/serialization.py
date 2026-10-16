@@ -126,6 +126,7 @@ def load_model_json(filepath: str, model_class) -> Any:
 
     model = model_class(**data.get("params", {}))
     model.n_features_ = data.get("n_features", 0)
+    model.n_features_in_ = model.n_features_
     model.classes_ = np.array(data.get("classes", [0, 1]))
     model.n_classes_ = len(model.classes_)
     model.n_nodes_ = data.get("n_nodes", 0)

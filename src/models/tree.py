@@ -72,6 +72,7 @@ class MABDecisionTreeClassifier(BaseEstimator, ClassifierMixin):
         self.classes_, y_encoded = np.unique(y, return_inverse=True)
         self.n_classes_ = len(self.classes_)
         n_samples, self.n_features_in_ = X.shape
+        self.n_features_ = self.n_features_in_
 
         self.rng_ = np.random.RandomState(self.random_state)
 
