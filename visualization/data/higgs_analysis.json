@@ -1,0 +1,2625 @@
+{
+  "dataset_name": "HIGGS Boson Kinematics",
+  "n_samples": 20000,
+  "n_features": 28,
+  "n_classes": 2,
+  "class_names": [
+    "Background (0)",
+    "Signal (1)"
+  ],
+  "feature_names": [
+    "lepton_pT",
+    "lepton_eta",
+    "lepton_phi",
+    "missing_energy_magnitude",
+    "missing_energy_phi",
+    "jet_1_pt",
+    "jet_1_eta",
+    "jet_1_phi",
+    "jet_1_b-tag",
+    "jet_2_pt",
+    "jet_2_eta",
+    "jet_2_phi",
+    "jet_2_b-tag",
+    "jet_3_pt",
+    "jet_3_eta",
+    "jet_3_phi",
+    "jet_3_b-tag",
+    "jet_4_pt",
+    "jet_4_eta",
+    "jet_4_phi",
+    "jet_4_b-tag",
+    "m_jj",
+    "m_jjj",
+    "m_lv",
+    "m_jlv",
+    "m_bb",
+    "m_wbb",
+    "m_wwbb"
+  ],
+  "performance": {
+    "mab_fit_time_sec": 0.3258,
+    "std_dt_fit_time_sec": 0.8304,
+    "speedup_ratio": 2.55,
+    "total_nodes": 63,
+    "tree_depth": 5,
+    "splits_by_mode": {
+      "exact": 5,
+      "mab": 26
+    },
+    "samples_evaluated": 98847,
+    "theoretical_full_scan_samples": 620000,
+    "sample_evaluation_reduction_pct": 84.1
+  },
+  "top_features": {
+    "top_3": [
+      "m_bb",
+      "m_wwbb",
+      "m_jjj"
+    ],
+    "top_5": [
+      "m_bb",
+      "m_wwbb",
+      "m_jjj",
+      "jet_1_pt",
+      "m_jlv"
+    ],
+    "top_5_cumulative_pct": 58.52
+  },
+  "root_split": {
+    "node_id": 0,
+    "depth": 0,
+    "feature_name": "m_bb",
+    "threshold": 1.0613,
+    "samples": 20000,
+    "solver_mode": "mab",
+    "gini": 0.4985,
+    "gini_gain": 0.0215,
+    "left_samples": 14062,
+    "right_samples": 5938,
+    "left_pred": "Signal (1)",
+    "right_pred": "Background (0)"
+  },
+  "final_splits_count": 16,
+  "final_splits": [
+    {
+      "node_id": 21,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 0.9331,
+      "samples": 5817,
+      "solver_mode": "mab",
+      "gini": 0.3696,
+      "gini_gain": 0.0111,
+      "left_samples": 4290,
+      "right_samples": 1527,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 25,
+      "depth": 4,
+      "feature_name": "m_jlv",
+      "threshold": 1.036,
+      "samples": 1941,
+      "solver_mode": "mab",
+      "gini": 0.3489,
+      "gini_gain": 0.0111,
+      "left_samples": 1403,
+      "right_samples": 538,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 16,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 0.7485,
+      "samples": 1699,
+      "solver_mode": "mab",
+      "gini": 0.4672,
+      "gini_gain": 0.0088,
+      "left_samples": 854,
+      "right_samples": 845,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 20,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 1.0913,
+      "samples": 1432,
+      "solver_mode": "mab",
+      "gini": 0.4655,
+      "gini_gain": 0.0019,
+      "left_samples": 813,
+      "right_samples": 619,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 22,
+      "depth": 4,
+      "feature_name": "m_jjj",
+      "threshold": 1.1763,
+      "samples": 1270,
+      "solver_mode": "mab",
+      "gini": 0.4888,
+      "gini_gain": 0.0267,
+      "left_samples": 653,
+      "right_samples": 617,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 15,
+      "depth": 4,
+      "feature_name": "m_jjj",
+      "threshold": 0.9528,
+      "samples": 1220,
+      "solver_mode": "mab",
+      "gini": 0.4938,
+      "gini_gain": 0.0067,
+      "left_samples": 936,
+      "right_samples": 284,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 17,
+      "depth": 4,
+      "feature_name": "missing_energy_phi",
+      "threshold": 1.1694,
+      "samples": 1143,
+      "solver_mode": "mab",
+      "gini": 0.4639,
+      "gini_gain": -0.0,
+      "left_samples": 954,
+      "right_samples": 189,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 19,
+      "depth": 4,
+      "feature_name": "jet_1_pt",
+      "threshold": 0.7182,
+      "samples": 1081,
+      "solver_mode": "mab",
+      "gini": 0.4686,
+      "gini_gain": 0.0045,
+      "left_samples": 383,
+      "right_samples": 698,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 26,
+      "depth": 4,
+      "feature_name": "jet_4_pt",
+      "threshold": 1.301,
+      "samples": 917,
+      "solver_mode": "mab",
+      "gini": 0.4838,
+      "gini_gain": 0.0,
+      "left_samples": 691,
+      "right_samples": 226,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 27,
+      "depth": 4,
+      "feature_name": "jet_2_pt",
+      "threshold": 1.2785,
+      "samples": 802,
+      "solver_mode": "mab",
+      "gini": 0.4937,
+      "gini_gain": 0.0136,
+      "left_samples": 543,
+      "right_samples": 259,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 23,
+      "depth": 4,
+      "feature_name": "m_jjj",
+      "threshold": 0.9922,
+      "samples": 731,
+      "solver_mode": "mab",
+      "gini": 0.4411,
+      "gini_gain": 0.0053,
+      "left_samples": 617,
+      "right_samples": 114,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 28,
+      "depth": 4,
+      "feature_name": "lepton_pT",
+      "threshold": 2.0818,
+      "samples": 451,
+      "solver_mode": "exact",
+      "gini": 0.4993,
+      "gini_gain": 0.0139,
+      "left_samples": 433,
+      "right_samples": 18,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 29,
+      "depth": 4,
+      "feature_name": "jet_1_eta",
+      "threshold": -1.1477,
+      "samples": 445,
+      "solver_mode": "exact",
+      "gini": 0.485,
+      "gini_gain": 0.0143,
+      "left_samples": 47,
+      "right_samples": 398,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 24,
+      "depth": 4,
+      "feature_name": "jet_1_pt",
+      "threshold": 1.4677,
+      "samples": 439,
+      "solver_mode": "exact",
+      "gini": 0.4981,
+      "gini_gain": 0.0144,
+      "left_samples": 405,
+      "right_samples": 34,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 18,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 0.8182,
+      "samples": 400,
+      "solver_mode": "exact",
+      "gini": 0.4504,
+      "gini_gain": 0.0263,
+      "left_samples": 90,
+      "right_samples": 310,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 30,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 0.9949,
+      "samples": 212,
+      "solver_mode": "exact",
+      "gini": 0.2693,
+      "gini_gain": 0.0209,
+      "left_samples": 7,
+      "right_samples": 205,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    }
+  ],
+  "all_splits": [
+    {
+      "node_id": 0,
+      "depth": 0,
+      "feature_name": "m_bb",
+      "threshold": 1.0613,
+      "samples": 20000,
+      "solver_mode": "mab",
+      "gini": 0.4985,
+      "gini_gain": 0.0215,
+      "left_samples": 14062,
+      "right_samples": 5938,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 1,
+      "depth": 1,
+      "feature_name": "m_wbb",
+      "threshold": 0.8106,
+      "samples": 14062,
+      "solver_mode": "mab",
+      "gini": 0.482,
+      "gini_gain": 0.0178,
+      "left_samples": 4462,
+      "right_samples": 9600,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 2,
+      "depth": 1,
+      "feature_name": "m_jjj",
+      "threshold": 1.0633,
+      "samples": 5938,
+      "solver_mode": "mab",
+      "gini": 0.465,
+      "gini_gain": 0.0099,
+      "left_samples": 4028,
+      "right_samples": 1910,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 4,
+      "depth": 2,
+      "feature_name": "m_bb",
+      "threshold": 0.689,
+      "samples": 9600,
+      "solver_mode": "mab",
+      "gini": 0.4493,
+      "gini_gain": 0.023,
+      "left_samples": 2513,
+      "right_samples": 7087,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 3,
+      "depth": 2,
+      "feature_name": "jet_1_pt",
+      "threshold": 0.817,
+      "samples": 4462,
+      "solver_mode": "mab",
+      "gini": 0.4962,
+      "gini_gain": 0.0111,
+      "left_samples": 2919,
+      "right_samples": 1543,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 5,
+      "depth": 2,
+      "feature_name": "m_wwbb",
+      "threshold": 0.8511,
+      "samples": 4028,
+      "solver_mode": "mab",
+      "gini": 0.4347,
+      "gini_gain": 0.0059,
+      "left_samples": 1170,
+      "right_samples": 2858,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 6,
+      "depth": 2,
+      "feature_name": "m_bb",
+      "threshold": 1.6539,
+      "samples": 1910,
+      "solver_mode": "mab",
+      "gini": 0.4982,
+      "gini_gain": 0.02,
+      "left_samples": 1253,
+      "right_samples": 657,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 10,
+      "depth": 3,
+      "feature_name": "m_wwbb",
+      "threshold": 1.1417,
+      "samples": 7087,
+      "solver_mode": "mab",
+      "gini": 0.4005,
+      "gini_gain": 0.0095,
+      "left_samples": 5817,
+      "right_samples": 1270,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 7,
+      "depth": 3,
+      "feature_name": "m_wwbb",
+      "threshold": 0.6865,
+      "samples": 2919,
+      "solver_mode": "mab",
+      "gini": 0.4809,
+      "gini_gain": 0.0026,
+      "left_samples": 1220,
+      "right_samples": 1699,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 12,
+      "depth": 3,
+      "feature_name": "m_jlv",
+      "threshold": 1.2515,
+      "samples": 2858,
+      "solver_mode": "mab",
+      "gini": 0.4071,
+      "gini_gain": 0.0149,
+      "left_samples": 1941,
+      "right_samples": 917,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 9,
+      "depth": 3,
+      "feature_name": "m_wwbb",
+      "threshold": 0.881,
+      "samples": 2513,
+      "solver_mode": "mab",
+      "gini": 0.4991,
+      "gini_gain": 0.0323,
+      "left_samples": 1081,
+      "right_samples": 1432,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 8,
+      "depth": 3,
+      "feature_name": "m_wwbb",
+      "threshold": 0.7892,
+      "samples": 1543,
+      "solver_mode": "mab",
+      "gini": 0.4931,
+      "gini_gain": 0.0327,
+      "left_samples": 1143,
+      "right_samples": 400,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 13,
+      "depth": 3,
+      "feature_name": "m_jj",
+      "threshold": 1.4155,
+      "samples": 1253,
+      "solver_mode": "mab",
+      "gini": 0.4964,
+      "gini_gain": 0.0007,
+      "left_samples": 802,
+      "right_samples": 451,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 11,
+      "depth": 3,
+      "feature_name": "jet_1_pt",
+      "threshold": 0.9189,
+      "samples": 1170,
+      "solver_mode": "mab",
+      "gini": 0.4817,
+      "gini_gain": 0.0192,
+      "left_samples": 731,
+      "right_samples": 439,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 14,
+      "depth": 3,
+      "feature_name": "lepton_pT",
+      "threshold": 1.1687,
+      "samples": 657,
+      "solver_mode": "mab",
+      "gini": 0.4434,
+      "gini_gain": 0.028,
+      "left_samples": 445,
+      "right_samples": 212,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 21,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 0.9331,
+      "samples": 5817,
+      "solver_mode": "mab",
+      "gini": 0.3696,
+      "gini_gain": 0.0111,
+      "left_samples": 4290,
+      "right_samples": 1527,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 25,
+      "depth": 4,
+      "feature_name": "m_jlv",
+      "threshold": 1.036,
+      "samples": 1941,
+      "solver_mode": "mab",
+      "gini": 0.3489,
+      "gini_gain": 0.0111,
+      "left_samples": 1403,
+      "right_samples": 538,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 16,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 0.7485,
+      "samples": 1699,
+      "solver_mode": "mab",
+      "gini": 0.4672,
+      "gini_gain": 0.0088,
+      "left_samples": 854,
+      "right_samples": 845,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 20,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 1.0913,
+      "samples": 1432,
+      "solver_mode": "mab",
+      "gini": 0.4655,
+      "gini_gain": 0.0019,
+      "left_samples": 813,
+      "right_samples": 619,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 22,
+      "depth": 4,
+      "feature_name": "m_jjj",
+      "threshold": 1.1763,
+      "samples": 1270,
+      "solver_mode": "mab",
+      "gini": 0.4888,
+      "gini_gain": 0.0267,
+      "left_samples": 653,
+      "right_samples": 617,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 15,
+      "depth": 4,
+      "feature_name": "m_jjj",
+      "threshold": 0.9528,
+      "samples": 1220,
+      "solver_mode": "mab",
+      "gini": 0.4938,
+      "gini_gain": 0.0067,
+      "left_samples": 936,
+      "right_samples": 284,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 17,
+      "depth": 4,
+      "feature_name": "missing_energy_phi",
+      "threshold": 1.1694,
+      "samples": 1143,
+      "solver_mode": "mab",
+      "gini": 0.4639,
+      "gini_gain": -0.0,
+      "left_samples": 954,
+      "right_samples": 189,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 19,
+      "depth": 4,
+      "feature_name": "jet_1_pt",
+      "threshold": 0.7182,
+      "samples": 1081,
+      "solver_mode": "mab",
+      "gini": 0.4686,
+      "gini_gain": 0.0045,
+      "left_samples": 383,
+      "right_samples": 698,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 26,
+      "depth": 4,
+      "feature_name": "jet_4_pt",
+      "threshold": 1.301,
+      "samples": 917,
+      "solver_mode": "mab",
+      "gini": 0.4838,
+      "gini_gain": 0.0,
+      "left_samples": 691,
+      "right_samples": 226,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 27,
+      "depth": 4,
+      "feature_name": "jet_2_pt",
+      "threshold": 1.2785,
+      "samples": 802,
+      "solver_mode": "mab",
+      "gini": 0.4937,
+      "gini_gain": 0.0136,
+      "left_samples": 543,
+      "right_samples": 259,
+      "left_pred": "Background (0)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 23,
+      "depth": 4,
+      "feature_name": "m_jjj",
+      "threshold": 0.9922,
+      "samples": 731,
+      "solver_mode": "mab",
+      "gini": 0.4411,
+      "gini_gain": 0.0053,
+      "left_samples": 617,
+      "right_samples": 114,
+      "left_pred": "Background (0)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 28,
+      "depth": 4,
+      "feature_name": "lepton_pT",
+      "threshold": 2.0818,
+      "samples": 451,
+      "solver_mode": "exact",
+      "gini": 0.4993,
+      "gini_gain": 0.0139,
+      "left_samples": 433,
+      "right_samples": 18,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 29,
+      "depth": 4,
+      "feature_name": "jet_1_eta",
+      "threshold": -1.1477,
+      "samples": 445,
+      "solver_mode": "exact",
+      "gini": 0.485,
+      "gini_gain": 0.0143,
+      "left_samples": 47,
+      "right_samples": 398,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 24,
+      "depth": 4,
+      "feature_name": "jet_1_pt",
+      "threshold": 1.4677,
+      "samples": 439,
+      "solver_mode": "exact",
+      "gini": 0.4981,
+      "gini_gain": 0.0144,
+      "left_samples": 405,
+      "right_samples": 34,
+      "left_pred": "Signal (1)",
+      "right_pred": "Signal (1)"
+    },
+    {
+      "node_id": 18,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 0.8182,
+      "samples": 400,
+      "solver_mode": "exact",
+      "gini": 0.4504,
+      "gini_gain": 0.0263,
+      "left_samples": 90,
+      "right_samples": 310,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    {
+      "node_id": 30,
+      "depth": 4,
+      "feature_name": "m_wwbb",
+      "threshold": 0.9949,
+      "samples": 212,
+      "solver_mode": "exact",
+      "gini": 0.2693,
+      "gini_gain": 0.0209,
+      "left_samples": 7,
+      "right_samples": 205,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    }
+  ],
+  "tree_hierarchy": {
+    "node_id": 0,
+    "is_leaf": false,
+    "depth": 0,
+    "samples": 20000,
+    "class_counts": [
+      9452,
+      10548
+    ],
+    "probabilities": [
+      0.4726,
+      0.5274
+    ],
+    "predicted_class": "Signal (1)",
+    "predicted_class_idx": 1,
+    "gini": 0.4985,
+    "solver_mode": "mab",
+    "feature_idx": 25,
+    "feature_name": "m_bb",
+    "threshold": 1.0613,
+    "bin_idx": 179,
+    "left": {
+      "node_id": 1,
+      "is_leaf": false,
+      "depth": 1,
+      "samples": 14062,
+      "class_counts": [
+        5698,
+        8364
+      ],
+      "probabilities": [
+        0.4052,
+        0.5948
+      ],
+      "predicted_class": "Signal (1)",
+      "predicted_class_idx": 1,
+      "gini": 0.482,
+      "solver_mode": "mab",
+      "feature_idx": 26,
+      "feature_name": "m_wbb",
+      "threshold": 0.8106,
+      "bin_idx": 59,
+      "left": {
+        "node_id": 3,
+        "is_leaf": false,
+        "depth": 2,
+        "samples": 4462,
+        "class_counts": [
+          2426,
+          2036
+        ],
+        "probabilities": [
+          0.5437,
+          0.4563
+        ],
+        "predicted_class": "Background (0)",
+        "predicted_class_idx": 0,
+        "gini": 0.4962,
+        "solver_mode": "mab",
+        "feature_idx": 5,
+        "feature_name": "jet_1_pt",
+        "threshold": 0.817,
+        "bin_idx": 105,
+        "left": {
+          "node_id": 7,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 2919,
+          "class_counts": [
+            1745,
+            1174
+          ],
+          "probabilities": [
+            0.5978,
+            0.4022
+          ],
+          "predicted_class": "Background (0)",
+          "predicted_class_idx": 0,
+          "gini": 0.4809,
+          "solver_mode": "mab",
+          "feature_idx": 27,
+          "feature_name": "m_wwbb",
+          "threshold": 0.6865,
+          "bin_idx": 23,
+          "left": {
+            "node_id": 15,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 1220,
+            "class_counts": [
+              678,
+              542
+            ],
+            "probabilities": [
+              0.5557,
+              0.4443
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.4938,
+            "solver_mode": "mab",
+            "feature_idx": 22,
+            "feature_name": "m_jjj",
+            "threshold": 0.9528,
+            "bin_idx": 129,
+            "left": {
+              "node_id": 31,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 936,
+              "class_counts": [
+                550,
+                386
+              ],
+              "probabilities": [
+                0.5876,
+                0.4124
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4847,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 32,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 284,
+              "class_counts": [
+                128,
+                156
+              ],
+              "probabilities": [
+                0.4507,
+                0.5493
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4951,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0067
+          },
+          "right": {
+            "node_id": 16,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 1699,
+            "class_counts": [
+              1067,
+              632
+            ],
+            "probabilities": [
+              0.628,
+              0.372
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.4672,
+            "solver_mode": "mab",
+            "feature_idx": 27,
+            "feature_name": "m_wwbb",
+            "threshold": 0.7485,
+            "bin_idx": 50,
+            "left": {
+              "node_id": 33,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 854,
+              "class_counts": [
+                480,
+                374
+              ],
+              "probabilities": [
+                0.5621,
+                0.4379
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4923,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 34,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 845,
+              "class_counts": [
+                587,
+                258
+              ],
+              "probabilities": [
+                0.6947,
+                0.3053
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4242,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0088
+          },
+          "gini_gain": 0.0026
+        },
+        "right": {
+          "node_id": 8,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 1543,
+          "class_counts": [
+            681,
+            862
+          ],
+          "probabilities": [
+            0.4413,
+            0.5587
+          ],
+          "predicted_class": "Signal (1)",
+          "predicted_class_idx": 1,
+          "gini": 0.4931,
+          "solver_mode": "mab",
+          "feature_idx": 27,
+          "feature_name": "m_wwbb",
+          "threshold": 0.7892,
+          "bin_idx": 76,
+          "left": {
+            "node_id": 17,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 1143,
+            "class_counts": [
+              418,
+              725
+            ],
+            "probabilities": [
+              0.3657,
+              0.6343
+            ],
+            "predicted_class": "Signal (1)",
+            "predicted_class_idx": 1,
+            "gini": 0.4639,
+            "solver_mode": "mab",
+            "feature_idx": 4,
+            "feature_name": "missing_energy_phi",
+            "threshold": 1.1694,
+            "bin_idx": 213,
+            "left": {
+              "node_id": 35,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 954,
+              "class_counts": [
+                349,
+                605
+              ],
+              "probabilities": [
+                0.3658,
+                0.6342
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.464,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 36,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 189,
+              "class_counts": [
+                69,
+                120
+              ],
+              "probabilities": [
+                0.3651,
+                0.6349
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4636,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": -0.0
+          },
+          "right": {
+            "node_id": 18,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 400,
+            "class_counts": [
+              263,
+              137
+            ],
+            "probabilities": [
+              0.6575,
+              0.3425
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.4504,
+            "solver_mode": "exact",
+            "feature_idx": 27,
+            "feature_name": "m_wwbb",
+            "threshold": 0.8182,
+            "bin_idx": 96,
+            "left": {
+              "node_id": 37,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 90,
+              "class_counts": [
+                40,
+                50
+              ],
+              "probabilities": [
+                0.4444,
+                0.5556
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4938,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 38,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 310,
+              "class_counts": [
+                223,
+                87
+              ],
+              "probabilities": [
+                0.7194,
+                0.2806
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4038,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0263
+          },
+          "gini_gain": 0.0327
+        },
+        "gini_gain": 0.0111
+      },
+      "right": {
+        "node_id": 4,
+        "is_leaf": false,
+        "depth": 2,
+        "samples": 9600,
+        "class_counts": [
+          3272,
+          6328
+        ],
+        "probabilities": [
+          0.3408,
+          0.6592
+        ],
+        "predicted_class": "Signal (1)",
+        "predicted_class_idx": 1,
+        "gini": 0.4493,
+        "solver_mode": "mab",
+        "feature_idx": 25,
+        "feature_name": "m_bb",
+        "threshold": 0.689,
+        "bin_idx": 67,
+        "left": {
+          "node_id": 9,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 2513,
+          "class_counts": [
+            1309,
+            1204
+          ],
+          "probabilities": [
+            0.5209,
+            0.4791
+          ],
+          "predicted_class": "Background (0)",
+          "predicted_class_idx": 0,
+          "gini": 0.4991,
+          "solver_mode": "mab",
+          "feature_idx": 27,
+          "feature_name": "m_wwbb",
+          "threshold": 0.881,
+          "bin_idx": 133,
+          "left": {
+            "node_id": 19,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 1081,
+            "class_counts": [
+              405,
+              676
+            ],
+            "probabilities": [
+              0.3747,
+              0.6253
+            ],
+            "predicted_class": "Signal (1)",
+            "predicted_class_idx": 1,
+            "gini": 0.4686,
+            "solver_mode": "mab",
+            "feature_idx": 5,
+            "feature_name": "jet_1_pt",
+            "threshold": 0.7182,
+            "bin_idx": 76,
+            "left": {
+              "node_id": 39,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 383,
+              "class_counts": [
+                168,
+                215
+              ],
+              "probabilities": [
+                0.4386,
+                0.5614
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4925,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 40,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 698,
+              "class_counts": [
+                237,
+                461
+              ],
+              "probabilities": [
+                0.3395,
+                0.6605
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4485,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0045
+          },
+          "right": {
+            "node_id": 20,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 1432,
+            "class_counts": [
+              904,
+              528
+            ],
+            "probabilities": [
+              0.6313,
+              0.3687
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.4655,
+            "solver_mode": "mab",
+            "feature_idx": 27,
+            "feature_name": "m_wwbb",
+            "threshold": 1.0913,
+            "bin_idx": 198,
+            "left": {
+              "node_id": 41,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 813,
+              "class_counts": [
+                491,
+                322
+              ],
+              "probabilities": [
+                0.6039,
+                0.3961
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4784,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 42,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 619,
+              "class_counts": [
+                413,
+                206
+              ],
+              "probabilities": [
+                0.6672,
+                0.3328
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4441,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0019
+          },
+          "gini_gain": 0.0323
+        },
+        "right": {
+          "node_id": 10,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 7087,
+          "class_counts": [
+            1963,
+            5124
+          ],
+          "probabilities": [
+            0.277,
+            0.723
+          ],
+          "predicted_class": "Signal (1)",
+          "predicted_class_idx": 1,
+          "gini": 0.4005,
+          "solver_mode": "mab",
+          "feature_idx": 27,
+          "feature_name": "m_wwbb",
+          "threshold": 1.1417,
+          "bin_idx": 207,
+          "left": {
+            "node_id": 21,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 5817,
+            "class_counts": [
+              1423,
+              4394
+            ],
+            "probabilities": [
+              0.2446,
+              0.7554
+            ],
+            "predicted_class": "Signal (1)",
+            "predicted_class_idx": 1,
+            "gini": 0.3696,
+            "solver_mode": "mab",
+            "feature_idx": 27,
+            "feature_name": "m_wwbb",
+            "threshold": 0.9331,
+            "bin_idx": 155,
+            "left": {
+              "node_id": 43,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 4290,
+              "class_counts": [
+                859,
+                3431
+              ],
+              "probabilities": [
+                0.2002,
+                0.7998
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.3203,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 44,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 1527,
+              "class_counts": [
+                564,
+                963
+              ],
+              "probabilities": [
+                0.3694,
+                0.6306
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4659,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0111
+          },
+          "right": {
+            "node_id": 22,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 1270,
+            "class_counts": [
+              540,
+              730
+            ],
+            "probabilities": [
+              0.4252,
+              0.5748
+            ],
+            "predicted_class": "Signal (1)",
+            "predicted_class_idx": 1,
+            "gini": 0.4888,
+            "solver_mode": "mab",
+            "feature_idx": 22,
+            "feature_name": "m_jjj",
+            "threshold": 1.1763,
+            "bin_idx": 213,
+            "left": {
+              "node_id": 45,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 653,
+              "class_counts": [
+                351,
+                302
+              ],
+              "probabilities": [
+                0.5375,
+                0.4625
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4972,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 46,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 617,
+              "class_counts": [
+                189,
+                428
+              ],
+              "probabilities": [
+                0.3063,
+                0.6937
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.425,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0267
+          },
+          "gini_gain": 0.0095
+        },
+        "gini_gain": 0.023
+      },
+      "gini_gain": 0.0178
+    },
+    "right": {
+      "node_id": 2,
+      "is_leaf": false,
+      "depth": 1,
+      "samples": 5938,
+      "class_counts": [
+        3754,
+        2184
+      ],
+      "probabilities": [
+        0.6322,
+        0.3678
+      ],
+      "predicted_class": "Background (0)",
+      "predicted_class_idx": 0,
+      "gini": 0.465,
+      "solver_mode": "mab",
+      "feature_idx": 22,
+      "feature_name": "m_jjj",
+      "threshold": 1.0633,
+      "bin_idx": 184,
+      "left": {
+        "node_id": 5,
+        "is_leaf": false,
+        "depth": 2,
+        "samples": 4028,
+        "class_counts": [
+          2742,
+          1286
+        ],
+        "probabilities": [
+          0.6807,
+          0.3193
+        ],
+        "predicted_class": "Background (0)",
+        "predicted_class_idx": 0,
+        "gini": 0.4347,
+        "solver_mode": "mab",
+        "feature_idx": 27,
+        "feature_name": "m_wwbb",
+        "threshold": 0.8511,
+        "bin_idx": 117,
+        "left": {
+          "node_id": 11,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 1170,
+          "class_counts": [
+            697,
+            473
+          ],
+          "probabilities": [
+            0.5957,
+            0.4043
+          ],
+          "predicted_class": "Background (0)",
+          "predicted_class_idx": 0,
+          "gini": 0.4817,
+          "solver_mode": "mab",
+          "feature_idx": 5,
+          "feature_name": "jet_1_pt",
+          "threshold": 0.9189,
+          "bin_idx": 135,
+          "left": {
+            "node_id": 23,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 731,
+            "class_counts": [
+              491,
+              240
+            ],
+            "probabilities": [
+              0.6717,
+              0.3283
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.4411,
+            "solver_mode": "mab",
+            "feature_idx": 22,
+            "feature_name": "m_jjj",
+            "threshold": 0.9922,
+            "bin_idx": 153,
+            "left": {
+              "node_id": 47,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 617,
+              "class_counts": [
+                428,
+                189
+              ],
+              "probabilities": [
+                0.6937,
+                0.3063
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.425,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 48,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 114,
+              "class_counts": [
+                63,
+                51
+              ],
+              "probabilities": [
+                0.5526,
+                0.4474
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4945,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0053
+          },
+          "right": {
+            "node_id": 24,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 439,
+            "class_counts": [
+              206,
+              233
+            ],
+            "probabilities": [
+              0.4692,
+              0.5308
+            ],
+            "predicted_class": "Signal (1)",
+            "predicted_class_idx": 1,
+            "gini": 0.4981,
+            "solver_mode": "exact",
+            "feature_idx": 5,
+            "feature_name": "jet_1_pt",
+            "threshold": 1.4677,
+            "bin_idx": 225,
+            "left": {
+              "node_id": 49,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 405,
+              "class_counts": [
+                200,
+                205
+              ],
+              "probabilities": [
+                0.4938,
+                0.5062
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4999,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 50,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 34,
+              "class_counts": [
+                6,
+                28
+              ],
+              "probabilities": [
+                0.1765,
+                0.8235
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.2907,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0144
+          },
+          "gini_gain": 0.0192
+        },
+        "right": {
+          "node_id": 12,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 2858,
+          "class_counts": [
+            2045,
+            813
+          ],
+          "probabilities": [
+            0.7155,
+            0.2845
+          ],
+          "predicted_class": "Background (0)",
+          "predicted_class_idx": 0,
+          "gini": 0.4071,
+          "solver_mode": "mab",
+          "feature_idx": 24,
+          "feature_name": "m_jlv",
+          "threshold": 1.2515,
+          "bin_idx": 209,
+          "left": {
+            "node_id": 25,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 1941,
+            "class_counts": [
+              1504,
+              437
+            ],
+            "probabilities": [
+              0.7749,
+              0.2251
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.3489,
+            "solver_mode": "mab",
+            "feature_idx": 24,
+            "feature_name": "m_jlv",
+            "threshold": 1.036,
+            "bin_idx": 168,
+            "left": {
+              "node_id": 51,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 1403,
+              "class_counts": [
+                1152,
+                251
+              ],
+              "probabilities": [
+                0.8211,
+                0.1789
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.2938,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 52,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 538,
+              "class_counts": [
+                352,
+                186
+              ],
+              "probabilities": [
+                0.6543,
+                0.3457
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4524,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0111
+          },
+          "right": {
+            "node_id": 26,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 917,
+            "class_counts": [
+              541,
+              376
+            ],
+            "probabilities": [
+              0.59,
+              0.41
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.4838,
+            "solver_mode": "mab",
+            "feature_idx": 17,
+            "feature_name": "jet_4_pt",
+            "threshold": 1.301,
+            "bin_idx": 201,
+            "left": {
+              "node_id": 53,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 691,
+              "class_counts": [
+                409,
+                282
+              ],
+              "probabilities": [
+                0.5919,
+                0.4081
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4831,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 54,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 226,
+              "class_counts": [
+                132,
+                94
+              ],
+              "probabilities": [
+                0.5841,
+                0.4159
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4859,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0
+          },
+          "gini_gain": 0.0149
+        },
+        "gini_gain": 0.0059
+      },
+      "right": {
+        "node_id": 6,
+        "is_leaf": false,
+        "depth": 2,
+        "samples": 1910,
+        "class_counts": [
+          1012,
+          898
+        ],
+        "probabilities": [
+          0.5298,
+          0.4702
+        ],
+        "predicted_class": "Background (0)",
+        "predicted_class_idx": 0,
+        "gini": 0.4982,
+        "solver_mode": "mab",
+        "feature_idx": 25,
+        "feature_name": "m_bb",
+        "threshold": 1.6539,
+        "bin_idx": 233,
+        "left": {
+          "node_id": 13,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 1253,
+          "class_counts": [
+            573,
+            680
+          ],
+          "probabilities": [
+            0.4573,
+            0.5427
+          ],
+          "predicted_class": "Signal (1)",
+          "predicted_class_idx": 1,
+          "gini": 0.4964,
+          "solver_mode": "mab",
+          "feature_idx": 21,
+          "feature_name": "m_jj",
+          "threshold": 1.4155,
+          "bin_idx": 227,
+          "left": {
+            "node_id": 27,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 802,
+            "class_counts": [
+              356,
+              446
+            ],
+            "probabilities": [
+              0.4439,
+              0.5561
+            ],
+            "predicted_class": "Signal (1)",
+            "predicted_class_idx": 1,
+            "gini": 0.4937,
+            "solver_mode": "mab",
+            "feature_idx": 9,
+            "feature_name": "jet_2_pt",
+            "threshold": 1.2785,
+            "bin_idx": 202,
+            "left": {
+              "node_id": 55,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 543,
+              "class_counts": [
+                272,
+                271
+              ],
+              "probabilities": [
+                0.5009,
+                0.4991
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.5,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 56,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 259,
+              "class_counts": [
+                84,
+                175
+              ],
+              "probabilities": [
+                0.3243,
+                0.6757
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4383,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0136
+          },
+          "right": {
+            "node_id": 28,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 451,
+            "class_counts": [
+              217,
+              234
+            ],
+            "probabilities": [
+              0.4812,
+              0.5188
+            ],
+            "predicted_class": "Signal (1)",
+            "predicted_class_idx": 1,
+            "gini": 0.4993,
+            "solver_mode": "exact",
+            "feature_idx": 0,
+            "feature_name": "lepton_pT",
+            "threshold": 2.0818,
+            "bin_idx": 243,
+            "left": {
+              "node_id": 57,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 433,
+              "class_counts": [
+                201,
+                232
+              ],
+              "probabilities": [
+                0.4642,
+                0.5358
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4974,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 58,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 18,
+              "class_counts": [
+                16,
+                2
+              ],
+              "probabilities": [
+                0.8889,
+                0.1111
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.1975,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0139
+          },
+          "gini_gain": 0.0007
+        },
+        "right": {
+          "node_id": 14,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 657,
+          "class_counts": [
+            439,
+            218
+          ],
+          "probabilities": [
+            0.6682,
+            0.3318
+          ],
+          "predicted_class": "Background (0)",
+          "predicted_class_idx": 0,
+          "gini": 0.4434,
+          "solver_mode": "mab",
+          "feature_idx": 0,
+          "feature_name": "lepton_pT",
+          "threshold": 1.1687,
+          "bin_idx": 183,
+          "left": {
+            "node_id": 29,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 445,
+            "class_counts": [
+              261,
+              184
+            ],
+            "probabilities": [
+              0.5865,
+              0.4135
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.485,
+            "solver_mode": "exact",
+            "feature_idx": 6,
+            "feature_name": "jet_1_eta",
+            "threshold": -1.1477,
+            "bin_idx": 31,
+            "left": {
+              "node_id": 59,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 47,
+              "class_counts": [
+                16,
+                31
+              ],
+              "probabilities": [
+                0.3404,
+                0.6596
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4491,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 60,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 398,
+              "class_counts": [
+                245,
+                153
+              ],
+              "probabilities": [
+                0.6156,
+                0.3844
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.4733,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0143
+          },
+          "right": {
+            "node_id": 30,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 212,
+            "class_counts": [
+              178,
+              34
+            ],
+            "probabilities": [
+              0.8396,
+              0.1604
+            ],
+            "predicted_class": "Background (0)",
+            "predicted_class_idx": 0,
+            "gini": 0.2693,
+            "solver_mode": "exact",
+            "feature_idx": 27,
+            "feature_name": "m_wwbb",
+            "threshold": 0.9949,
+            "bin_idx": 175,
+            "left": {
+              "node_id": 61,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 7,
+              "class_counts": [
+                2,
+                5
+              ],
+              "probabilities": [
+                0.2857,
+                0.7143
+              ],
+              "predicted_class": "Signal (1)",
+              "predicted_class_idx": 1,
+              "gini": 0.4082,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 62,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 205,
+              "class_counts": [
+                176,
+                29
+              ],
+              "probabilities": [
+                0.8585,
+                0.1415
+              ],
+              "predicted_class": "Background (0)",
+              "predicted_class_idx": 0,
+              "gini": 0.2429,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0209
+          },
+          "gini_gain": 0.028
+        },
+        "gini_gain": 0.02
+      },
+      "gini_gain": 0.0099
+    },
+    "gini_gain": 0.0215
+  },
+  "feature_contributions": [
+    {
+      "rank": 1,
+      "feature_idx": 25,
+      "feature_name": "m_bb",
+      "mab_importance_pct": 9.68,
+      "rf_importance_pct": 16.11,
+      "mutual_info_pct": 29.84,
+      "mutual_info_raw": 0.0503,
+      "split_count": 3,
+      "stats": {
+        "feature_idx": 25,
+        "feature_name": "m_bb",
+        "min": 0.06289999932050705,
+        "max": 8.25510025024414,
+        "mean": 0.9732000231742859,
+        "std": 0.5206000208854675,
+        "unique_values": 997
+      },
+      "composite_score": 16.97,
+      "cumulative_pct": 16.97
+    },
+    {
+      "rank": 2,
+      "feature_idx": 27,
+      "feature_name": "m_wwbb",
+      "mab_importance_pct": 32.26,
+      "rf_importance_pct": 8.01,
+      "mutual_info_pct": 4.62,
+      "mutual_info_raw": 0.0078,
+      "split_count": 10,
+      "stats": {
+        "feature_idx": 27,
+        "feature_name": "m_wwbb",
+        "min": 0.4032000005245209,
+        "max": 6.015600204467773,
+        "mean": 0.9581999778747559,
+        "std": 0.310699999332428,
+        "unique_values": 999
+      },
+      "composite_score": 16.86,
+      "cumulative_pct": 33.84
+    },
+    {
+      "rank": 3,
+      "feature_idx": 22,
+      "feature_name": "m_jjj",
+      "mab_importance_pct": 12.9,
+      "rf_importance_pct": 6.63,
+      "mutual_info_pct": 11.93,
+      "mutual_info_raw": 0.0201,
+      "split_count": 4,
+      "stats": {
+        "feature_idx": 22,
+        "feature_name": "m_jjj",
+        "min": 0.37720000743865967,
+        "max": 7.701600074768066,
+        "mean": 1.0233999490737915,
+        "std": 0.36820000410079956,
+        "unique_values": 997
+      },
+      "composite_score": 10.46,
+      "cumulative_pct": 44.3
+    },
+    {
+      "rank": 4,
+      "feature_idx": 5,
+      "feature_name": "jet_1_pt",
+      "mab_importance_pct": 12.9,
+      "rf_importance_pct": 6.27,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 4,
+      "stats": {
+        "feature_idx": 5,
+        "feature_name": "jet_1_pt",
+        "min": 0.18359999358654022,
+        "max": 7.064700126647949,
+        "mean": 0.9861999750137329,
+        "std": 0.47920000553131104,
+        "unique_values": 967
+      },
+      "composite_score": 7.35,
+      "cumulative_pct": 51.65
+    },
+    {
+      "rank": 5,
+      "feature_idx": 24,
+      "feature_name": "m_jlv",
+      "mab_importance_pct": 6.45,
+      "rf_importance_pct": 7.61,
+      "mutual_info_pct": 6.51,
+      "mutual_info_raw": 0.011,
+      "split_count": 2,
+      "stats": {
+        "feature_idx": 24,
+        "feature_name": "m_jlv",
+        "min": 0.3709000051021576,
+        "max": 5.819499969482422,
+        "mean": 1.0077999830245972,
+        "std": 0.39959999918937683,
+        "unique_values": 999
+      },
+      "composite_score": 6.87,
+      "cumulative_pct": 58.52
+    },
+    {
+      "rank": 6,
+      "feature_idx": 26,
+      "feature_name": "m_wbb",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 8.39,
+      "mutual_info_pct": 7.76,
+      "mutual_info_raw": 0.0131,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 26,
+        "feature_name": "m_wbb",
+        "min": 0.3625999987125397,
+        "max": 7.31820011138916,
+        "mean": 1.0325000286102295,
+        "std": 0.3637999892234802,
+        "unique_values": 1000
+      },
+      "composite_score": 6.17,
+      "cumulative_pct": 64.69
+    },
+    {
+      "rank": 7,
+      "feature_idx": 0,
+      "feature_name": "lepton_pT",
+      "mab_importance_pct": 6.45,
+      "rf_importance_pct": 3.15,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 2,
+      "stats": {
+        "feature_idx": 0,
+        "feature_name": "lepton_pT",
+        "min": 0.27469998598098755,
+        "max": 7.00029993057251,
+        "mean": 0.9898999929428101,
+        "std": 0.5583999752998352,
+        "unique_values": 949
+      },
+      "composite_score": 3.68,
+      "cumulative_pct": 68.37
+    },
+    {
+      "rank": 8,
+      "feature_idx": 4,
+      "feature_name": "missing_energy_phi",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 1.84,
+      "mutual_info_pct": 4.75,
+      "mutual_info_raw": 0.008,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 4,
+        "feature_name": "missing_energy_phi",
+        "min": -1.743899941444397,
+        "max": 1.7431999444961548,
+        "mean": -0.008700000122189522,
+        "std": 1.0068999528884888,
+        "unique_values": 999
+      },
+      "composite_score": 3.12,
+      "cumulative_pct": 71.49
+    },
+    {
+      "rank": 9,
+      "feature_idx": 17,
+      "feature_name": "jet_4_pt",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 2.2,
+      "mutual_info_pct": 3.93,
+      "mutual_info_raw": 0.0066,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 17,
+        "feature_name": "jet_4_pt",
+        "min": 0.3653999865055084,
+        "max": 6.067699909210205,
+        "mean": 0.9878000020980835,
+        "std": 0.505299985408783,
+        "unique_values": 918
+      },
+      "composite_score": 3.04,
+      "cumulative_pct": 74.53
+    },
+    {
+      "rank": 10,
+      "feature_idx": 3,
+      "feature_name": "missing_energy_magnitude",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 4.46,
+      "mutual_info_pct": 5.16,
+      "mutual_info_raw": 0.0087,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 3,
+        "feature_name": "missing_energy_magnitude",
+        "min": 0.009999999776482582,
+        "max": 7.998700141906738,
+        "mean": 0.9908999800682068,
+        "std": 0.6031000018119812,
+        "unique_values": 1000
+      },
+      "composite_score": 2.85,
+      "cumulative_pct": 77.39
+    },
+    {
+      "rank": 11,
+      "feature_idx": 21,
+      "feature_name": "m_jj",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 2.85,
+      "mutual_info_pct": 1.93,
+      "mutual_info_raw": 0.0032,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 21,
+        "feature_name": "m_jj",
+        "min": 0.11089999973773956,
+        "max": 15.01159954071045,
+        "mean": 1.0328999757766724,
+        "std": 0.6406000256538391,
+        "unique_values": 1000
+      },
+      "composite_score": 2.77,
+      "cumulative_pct": 80.16
+    },
+    {
+      "rank": 12,
+      "feature_idx": 9,
+      "feature_name": "jet_2_pt",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 3.52,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 9,
+        "feature_name": "jet_2_pt",
+        "min": 0.1899999976158142,
+        "max": 7.577099800109863,
+        "mean": 0.9932000041007996,
+        "std": 0.49939998984336853,
+        "unique_values": 953
+      },
+      "composite_score": 2.52,
+      "cumulative_pct": 82.68
+    },
+    {
+      "rank": 13,
+      "feature_idx": 6,
+      "feature_name": "jet_1_eta",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 2.24,
+      "mutual_info_pct": 1.36,
+      "mutual_info_raw": 0.0023,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 6,
+        "feature_name": "jet_1_eta",
+        "min": -2.9628000259399414,
+        "max": 2.9686999320983887,
+        "mean": 0.004399999976158142,
+        "std": 1.013800024986267,
+        "unique_values": 854
+      },
+      "composite_score": 2.42,
+      "cumulative_pct": 85.1
+    },
+    {
+      "rank": 14,
+      "feature_idx": 2,
+      "feature_name": "lepton_phi",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.0,
+      "mutual_info_pct": 4.42,
+      "mutual_info_raw": 0.0075,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 2,
+        "feature_name": "lepton_phi",
+        "min": -1.7424999475479126,
+        "max": 1.7426999807357788,
+        "mean": -0.0032999999821186066,
+        "std": 1.006700038909912,
+        "unique_values": 935
+      },
+      "composite_score": 1.8,
+      "cumulative_pct": 86.9
+    },
+    {
+      "rank": 15,
+      "feature_idx": 18,
+      "feature_name": "jet_4_eta",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.37,
+      "mutual_info_pct": 3.3,
+      "mutual_info_raw": 0.0056,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 18,
+        "feature_name": "jet_4_eta",
+        "min": -2.497299909591675,
+        "max": 2.497999906539917,
+        "mean": -0.009800000116229057,
+        "std": 1.010599970817566,
+        "unique_values": 887
+      },
+      "composite_score": 1.65,
+      "cumulative_pct": 88.55
+    },
+    {
+      "rank": 16,
+      "feature_idx": 16,
+      "feature_name": "jet_3_b-tag",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.3,
+      "mutual_info_pct": 5.13,
+      "mutual_info_raw": 0.0087,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 16,
+        "feature_name": "jet_3_b-tag",
+        "min": 0.0,
+        "max": 2.5481998920440674,
+        "mean": 1.0048999786376953,
+        "std": 1.194599986076355,
+        "unique_values": 3
+      },
+      "composite_score": 1.39,
+      "cumulative_pct": 89.94
+    },
+    {
+      "rank": 17,
+      "feature_idx": 12,
+      "feature_name": "jet_2_b-tag",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.3,
+      "mutual_info_pct": 4.36,
+      "mutual_info_raw": 0.0074,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 12,
+        "feature_name": "jet_2_b-tag",
+        "min": 0.0,
+        "max": 2.214900016784668,
+        "mean": 1.0008000135421753,
+        "std": 1.048699975013733,
+        "unique_values": 3
+      },
+      "composite_score": 1.2,
+      "cumulative_pct": 91.14
+    },
+    {
+      "rank": 18,
+      "feature_idx": 11,
+      "feature_name": "jet_2_phi",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.27,
+      "mutual_info_pct": 0.83,
+      "mutual_info_raw": 0.0014,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 11,
+        "feature_name": "jet_2_phi",
+        "min": -1.742400050163269,
+        "max": 1.7431999444961548,
+        "mean": 0.007400000002235174,
+        "std": 1.013100028038025,
+        "unique_values": 929
+      },
+      "composite_score": 1.0,
+      "cumulative_pct": 92.14
+    },
+    {
+      "rank": 19,
+      "feature_idx": 1,
+      "feature_name": "lepton_eta",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.08,
+      "mutual_info_pct": 1.01,
+      "mutual_info_raw": 0.0017,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 1,
+        "feature_name": "lepton_eta",
+        "min": -2.4282000064849854,
+        "max": 2.430999994277954,
+        "mean": -0.006800000090152025,
+        "std": 1.0053000450134277,
+        "unique_values": 883
+      },
+      "composite_score": 0.98,
+      "cumulative_pct": 93.12
+    },
+    {
+      "rank": 20,
+      "feature_idx": 23,
+      "feature_name": "m_lv",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.76,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 23,
+        "feature_name": "m_lv",
+        "min": 0.41440001130104065,
+        "max": 3.863300085067749,
+        "mean": 1.048699975013733,
+        "std": 0.1598999947309494,
+        "unique_values": 976
+      },
+      "composite_score": 0.97,
+      "cumulative_pct": 94.09
+    },
+    {
+      "rank": 21,
+      "feature_idx": 8,
+      "feature_name": "jet_1_b-tag",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.7,
+      "mutual_info_pct": 2.78,
+      "mutual_info_raw": 0.0047,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 8,
+        "feature_name": "jet_1_b-tag",
+        "min": 0.0,
+        "max": 2.173099994659424,
+        "mean": 0.9915000200271606,
+        "std": 1.027400016784668,
+        "unique_values": 3
+      },
+      "composite_score": 0.94,
+      "cumulative_pct": 95.03
+    },
+    {
+      "rank": 22,
+      "feature_idx": 13,
+      "feature_name": "jet_3_pt",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.61,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 13,
+        "feature_name": "jet_3_pt",
+        "min": 0.2639999985694885,
+        "max": 6.5233001708984375,
+        "mean": 0.9954000115394592,
+        "std": 0.48989999294281006,
+        "unique_values": 943
+      },
+      "composite_score": 0.91,
+      "cumulative_pct": 95.94
+    },
+    {
+      "rank": 23,
+      "feature_idx": 7,
+      "feature_name": "jet_1_phi",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.47,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 7,
+        "feature_name": "jet_1_phi",
+        "min": -1.7411999702453613,
+        "max": 1.7415000200271606,
+        "mean": 0.010999999940395355,
+        "std": 1.002500057220459,
+        "unique_values": 915
+      },
+      "composite_score": 0.86,
+      "cumulative_pct": 96.8
+    },
+    {
+      "rank": 24,
+      "feature_idx": 14,
+      "feature_name": "jet_3_eta",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.31,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 14,
+        "feature_name": "jet_3_eta",
+        "min": -2.728800058364868,
+        "max": 2.727299928665161,
+        "mean": 0.005400000140070915,
+        "std": 1.0115000009536743,
+        "unique_values": 887
+      },
+      "composite_score": 0.81,
+      "cumulative_pct": 97.61
+    },
+    {
+      "rank": 25,
+      "feature_idx": 10,
+      "feature_name": "jet_2_eta",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.0,
+      "mutual_info_pct": 0.39,
+      "mutual_info_raw": 0.0007,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 10,
+        "feature_name": "jet_2_eta",
+        "min": -2.913100004196167,
+        "max": 2.91129994392395,
+        "mean": 0.004699999932199717,
+        "std": 1.0099999904632568,
+        "unique_values": 864
+      },
+      "composite_score": 0.8,
+      "cumulative_pct": 98.41
+    },
+    {
+      "rank": 26,
+      "feature_idx": 15,
+      "feature_name": "jet_3_phi",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.15,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 15,
+        "feature_name": "jet_3_phi",
+        "min": -1.7421000003814697,
+        "max": 1.742900013923645,
+        "mean": -0.009600000455975533,
+        "std": 1.0038000345230103,
+        "unique_values": 922
+      },
+      "composite_score": 0.75,
+      "cumulative_pct": 99.16
+    },
+    {
+      "rank": 27,
+      "feature_idx": 19,
+      "feature_name": "jet_4_phi",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.08,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 19,
+        "feature_name": "jet_4_phi",
+        "min": -1.7421000003814697,
+        "max": 1.743399977684021,
+        "mean": 0.006899999920278788,
+        "std": 1.0083999633789062,
+        "unique_values": 928
+      },
+      "composite_score": 0.73,
+      "cumulative_pct": 99.89
+    },
+    {
+      "rank": 28,
+      "feature_idx": 20,
+      "feature_name": "jet_4_b-tag",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.31,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 20,
+        "feature_name": "jet_4_b-tag",
+        "min": 0.0,
+        "max": 3.1019999980926514,
+        "mean": 0.9894999861717224,
+        "std": 1.3947999477386475,
+        "unique_values": 3
+      },
+      "composite_score": 0.11,
+      "cumulative_pct": 100.0
+    }
+  ]
+}

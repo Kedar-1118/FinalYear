@@ -1,0 +1,2449 @@
+{
+  "dataset_name": "Synthetic Tabular Benchmark",
+  "n_samples": 15000,
+  "n_features": 20,
+  "n_classes": 2,
+  "class_names": [
+    "Class 0",
+    "Class 1"
+  ],
+  "feature_names": [
+    "Feature_00",
+    "Feature_01",
+    "Feature_02",
+    "Feature_03",
+    "Feature_04",
+    "Feature_05",
+    "Feature_06",
+    "Feature_07",
+    "Feature_08",
+    "Feature_09",
+    "Feature_10",
+    "Feature_11",
+    "Feature_12",
+    "Feature_13",
+    "Feature_14",
+    "Feature_15",
+    "Feature_16",
+    "Feature_17",
+    "Feature_18",
+    "Feature_19"
+  ],
+  "performance": {
+    "mab_fit_time_sec": 0.3502,
+    "std_dt_fit_time_sec": 0.6439,
+    "speedup_ratio": 1.84,
+    "total_nodes": 63,
+    "tree_depth": 5,
+    "splits_by_mode": {
+      "exact": 8,
+      "mab": 23
+    },
+    "samples_evaluated": 74645,
+    "theoretical_full_scan_samples": 465000,
+    "sample_evaluation_reduction_pct": 83.9
+  },
+  "top_features": {
+    "top_3": [
+      "Feature_14",
+      "Feature_16",
+      "Feature_19"
+    ],
+    "top_5": [
+      "Feature_14",
+      "Feature_16",
+      "Feature_19",
+      "Feature_02",
+      "Feature_11"
+    ],
+    "top_5_cumulative_pct": 49.48
+  },
+  "root_split": {
+    "node_id": 0,
+    "depth": 0,
+    "feature_name": "Feature_14",
+    "threshold": -0.1747,
+    "samples": 15000,
+    "solver_mode": "mab",
+    "gini": 0.5,
+    "gini_gain": 0.0993,
+    "left_samples": 6914,
+    "right_samples": 8086,
+    "left_pred": "Class 1",
+    "right_pred": "Class 0"
+  },
+  "final_splits_count": 16,
+  "final_splits": [
+    {
+      "node_id": 27,
+      "depth": 4,
+      "feature_name": "Feature_11",
+      "threshold": -0.5412,
+      "samples": 4797,
+      "solver_mode": "mab",
+      "gini": 0.1693,
+      "gini_gain": 0.01,
+      "left_samples": 1876,
+      "right_samples": 2921,
+      "left_pred": "Class 0",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 21,
+      "depth": 4,
+      "feature_name": "Feature_14",
+      "threshold": -1.2667,
+      "samples": 3285,
+      "solver_mode": "mab",
+      "gini": 0.1271,
+      "gini_gain": 0.0038,
+      "left_samples": 2702,
+      "right_samples": 583,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 22,
+      "depth": 4,
+      "feature_name": "Feature_00",
+      "threshold": -0.8409,
+      "samples": 1098,
+      "solver_mode": "mab",
+      "gini": 0.3182,
+      "gini_gain": 0.0409,
+      "left_samples": 148,
+      "right_samples": 950,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 29,
+      "depth": 4,
+      "feature_name": "Feature_18",
+      "threshold": 4.6398,
+      "samples": 913,
+      "solver_mode": "mab",
+      "gini": 0.4702,
+      "gini_gain": 0.0421,
+      "left_samples": 534,
+      "right_samples": 379,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 18,
+      "depth": 4,
+      "feature_name": "Feature_09",
+      "threshold": 3.4319,
+      "samples": 767,
+      "solver_mode": "mab",
+      "gini": 0.2287,
+      "gini_gain": 0.0401,
+      "left_samples": 718,
+      "right_samples": 49,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 26,
+      "depth": 4,
+      "feature_name": "Feature_17",
+      "threshold": 0.1068,
+      "samples": 753,
+      "solver_mode": "mab",
+      "gini": 0.0365,
+      "gini_gain": 0.0069,
+      "left_samples": 740,
+      "right_samples": 13,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 28,
+      "depth": 4,
+      "feature_name": "Feature_01",
+      "threshold": -1.1354,
+      "samples": 674,
+      "solver_mode": "mab",
+      "gini": 0.4611,
+      "gini_gain": 0.0989,
+      "left_samples": 244,
+      "right_samples": 430,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 20,
+      "depth": 4,
+      "feature_name": "Feature_17",
+      "threshold": -0.7008,
+      "samples": 582,
+      "solver_mode": "mab",
+      "gini": 0.3654,
+      "gini_gain": 0.0379,
+      "left_samples": 156,
+      "right_samples": 426,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 19,
+      "depth": 4,
+      "feature_name": "Feature_02",
+      "threshold": 4.5627,
+      "samples": 469,
+      "solver_mode": "exact",
+      "gini": 0.4222,
+      "gini_gain": 0.1205,
+      "left_samples": 334,
+      "right_samples": 135,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 24,
+      "depth": 4,
+      "feature_name": "Feature_19",
+      "threshold": -2.3905,
+      "samples": 355,
+      "solver_mode": "exact",
+      "gini": 0.4457,
+      "gini_gain": 0.0858,
+      "left_samples": 130,
+      "right_samples": 225,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 15,
+      "depth": 4,
+      "feature_name": "Feature_12",
+      "threshold": -0.7702,
+      "samples": 310,
+      "solver_mode": "exact",
+      "gini": 0.2248,
+      "gini_gain": 0.022,
+      "left_samples": 62,
+      "right_samples": 248,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 23,
+      "depth": 4,
+      "feature_name": "Feature_19",
+      "threshold": -0.6381,
+      "samples": 290,
+      "solver_mode": "exact",
+      "gini": 0.3282,
+      "gini_gain": 0.0964,
+      "left_samples": 225,
+      "right_samples": 65,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 16,
+      "depth": 4,
+      "feature_name": "Feature_19",
+      "threshold": 0.5029,
+      "samples": 270,
+      "solver_mode": "exact",
+      "gini": 0.4815,
+      "gini_gain": 0.0707,
+      "left_samples": 122,
+      "right_samples": 148,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 30,
+      "depth": 4,
+      "feature_name": "Feature_00",
+      "threshold": -3.9403,
+      "samples": 266,
+      "solver_mode": "exact",
+      "gini": 0.3452,
+      "gini_gain": 0.0859,
+      "left_samples": 41,
+      "right_samples": 225,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 17,
+      "depth": 4,
+      "feature_name": "Feature_12",
+      "threshold": 0.8124,
+      "samples": 133,
+      "solver_mode": "exact",
+      "gini": 0.4986,
+      "gini_gain": 0.2139,
+      "left_samples": 56,
+      "right_samples": 77,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 25,
+      "depth": 4,
+      "feature_name": "Feature_06",
+      "threshold": 1.0034,
+      "samples": 38,
+      "solver_mode": "exact",
+      "gini": 0.3878,
+      "gini_gain": 0.2452,
+      "left_samples": 31,
+      "right_samples": 7,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    }
+  ],
+  "all_splits": [
+    {
+      "node_id": 0,
+      "depth": 0,
+      "feature_name": "Feature_14",
+      "threshold": -0.1747,
+      "samples": 15000,
+      "solver_mode": "mab",
+      "gini": 0.5,
+      "gini_gain": 0.0993,
+      "left_samples": 6914,
+      "right_samples": 8086,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 2,
+      "depth": 1,
+      "feature_name": "Feature_02",
+      "threshold": -3.0862,
+      "samples": 8086,
+      "solver_mode": "mab",
+      "gini": 0.4155,
+      "gini_gain": 0.0858,
+      "left_samples": 1436,
+      "right_samples": 6650,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 1,
+      "depth": 1,
+      "feature_name": "Feature_16",
+      "threshold": -0.8688,
+      "samples": 6914,
+      "solver_mode": "mab",
+      "gini": 0.3833,
+      "gini_gain": 0.061,
+      "left_samples": 1480,
+      "right_samples": 5434,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 6,
+      "depth": 2,
+      "feature_name": "Feature_18",
+      "threshold": 2.924,
+      "samples": 6650,
+      "solver_mode": "mab",
+      "gini": 0.3178,
+      "gini_gain": 0.0479,
+      "left_samples": 5471,
+      "right_samples": 1179,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 4,
+      "depth": 2,
+      "feature_name": "Feature_00",
+      "threshold": -1.5993,
+      "samples": 5434,
+      "solver_mode": "mab",
+      "gini": 0.2786,
+      "gini_gain": 0.0369,
+      "left_samples": 1051,
+      "right_samples": 4383,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 3,
+      "depth": 2,
+      "feature_name": "Feature_11",
+      "threshold": -0.6411,
+      "samples": 1480,
+      "solver_mode": "mab",
+      "gini": 0.4826,
+      "gini_gain": 0.1458,
+      "left_samples": 580,
+      "right_samples": 900,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 5,
+      "depth": 2,
+      "feature_name": "Feature_19",
+      "threshold": 0.3791,
+      "samples": 1436,
+      "solver_mode": "mab",
+      "gini": 0.3846,
+      "gini_gain": 0.1292,
+      "left_samples": 645,
+      "right_samples": 791,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 13,
+      "depth": 3,
+      "feature_name": "Feature_16",
+      "threshold": 2.8304,
+      "samples": 5471,
+      "solver_mode": "mab",
+      "gini": 0.2207,
+      "gini_gain": 0.0155,
+      "left_samples": 4797,
+      "right_samples": 674,
+      "left_pred": "Class 0",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 10,
+      "depth": 3,
+      "feature_name": "Feature_14",
+      "threshold": -0.8783,
+      "samples": 4383,
+      "solver_mode": "mab",
+      "gini": 0.1813,
+      "gini_gain": 0.0063,
+      "left_samples": 3285,
+      "right_samples": 1098,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 14,
+      "depth": 3,
+      "feature_name": "Feature_19",
+      "threshold": 0.1547,
+      "samples": 1179,
+      "solver_mode": "mab",
+      "gini": 0.498,
+      "gini_gain": 0.056,
+      "left_samples": 913,
+      "right_samples": 266,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 9,
+      "depth": 3,
+      "feature_name": "Feature_08",
+      "threshold": 0.3867,
+      "samples": 1051,
+      "solver_mode": "mab",
+      "gini": 0.4938,
+      "gini_gain": 0.1031,
+      "left_samples": 469,
+      "right_samples": 582,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 8,
+      "depth": 3,
+      "feature_name": "Feature_06",
+      "threshold": -0.3397,
+      "samples": 900,
+      "solver_mode": "mab",
+      "gini": 0.3078,
+      "gini_gain": 0.0392,
+      "left_samples": 133,
+      "right_samples": 767,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 12,
+      "depth": 3,
+      "feature_name": "Feature_16",
+      "threshold": -1.347,
+      "samples": 791,
+      "solver_mode": "mab",
+      "gini": 0.0588,
+      "gini_gain": 0.0054,
+      "left_samples": 38,
+      "right_samples": 753,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 11,
+      "depth": 3,
+      "feature_name": "Feature_10",
+      "threshold": 1.9685,
+      "samples": 645,
+      "solver_mode": "mab",
+      "gini": 0.4966,
+      "gini_gain": 0.1037,
+      "left_samples": 290,
+      "right_samples": 355,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 7,
+      "depth": 3,
+      "feature_name": "Feature_11",
+      "threshold": -1.8064,
+      "samples": 580,
+      "solver_mode": "mab",
+      "gini": 0.3818,
+      "gini_gain": 0.0375,
+      "left_samples": 310,
+      "right_samples": 270,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 27,
+      "depth": 4,
+      "feature_name": "Feature_11",
+      "threshold": -0.5412,
+      "samples": 4797,
+      "solver_mode": "mab",
+      "gini": 0.1693,
+      "gini_gain": 0.01,
+      "left_samples": 1876,
+      "right_samples": 2921,
+      "left_pred": "Class 0",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 21,
+      "depth": 4,
+      "feature_name": "Feature_14",
+      "threshold": -1.2667,
+      "samples": 3285,
+      "solver_mode": "mab",
+      "gini": 0.1271,
+      "gini_gain": 0.0038,
+      "left_samples": 2702,
+      "right_samples": 583,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 22,
+      "depth": 4,
+      "feature_name": "Feature_00",
+      "threshold": -0.8409,
+      "samples": 1098,
+      "solver_mode": "mab",
+      "gini": 0.3182,
+      "gini_gain": 0.0409,
+      "left_samples": 148,
+      "right_samples": 950,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 29,
+      "depth": 4,
+      "feature_name": "Feature_18",
+      "threshold": 4.6398,
+      "samples": 913,
+      "solver_mode": "mab",
+      "gini": 0.4702,
+      "gini_gain": 0.0421,
+      "left_samples": 534,
+      "right_samples": 379,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 18,
+      "depth": 4,
+      "feature_name": "Feature_09",
+      "threshold": 3.4319,
+      "samples": 767,
+      "solver_mode": "mab",
+      "gini": 0.2287,
+      "gini_gain": 0.0401,
+      "left_samples": 718,
+      "right_samples": 49,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 26,
+      "depth": 4,
+      "feature_name": "Feature_17",
+      "threshold": 0.1068,
+      "samples": 753,
+      "solver_mode": "mab",
+      "gini": 0.0365,
+      "gini_gain": 0.0069,
+      "left_samples": 740,
+      "right_samples": 13,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 28,
+      "depth": 4,
+      "feature_name": "Feature_01",
+      "threshold": -1.1354,
+      "samples": 674,
+      "solver_mode": "mab",
+      "gini": 0.4611,
+      "gini_gain": 0.0989,
+      "left_samples": 244,
+      "right_samples": 430,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 20,
+      "depth": 4,
+      "feature_name": "Feature_17",
+      "threshold": -0.7008,
+      "samples": 582,
+      "solver_mode": "mab",
+      "gini": 0.3654,
+      "gini_gain": 0.0379,
+      "left_samples": 156,
+      "right_samples": 426,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 19,
+      "depth": 4,
+      "feature_name": "Feature_02",
+      "threshold": 4.5627,
+      "samples": 469,
+      "solver_mode": "exact",
+      "gini": 0.4222,
+      "gini_gain": 0.1205,
+      "left_samples": 334,
+      "right_samples": 135,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 24,
+      "depth": 4,
+      "feature_name": "Feature_19",
+      "threshold": -2.3905,
+      "samples": 355,
+      "solver_mode": "exact",
+      "gini": 0.4457,
+      "gini_gain": 0.0858,
+      "left_samples": 130,
+      "right_samples": 225,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 15,
+      "depth": 4,
+      "feature_name": "Feature_12",
+      "threshold": -0.7702,
+      "samples": 310,
+      "solver_mode": "exact",
+      "gini": 0.2248,
+      "gini_gain": 0.022,
+      "left_samples": 62,
+      "right_samples": 248,
+      "left_pred": "Class 1",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 23,
+      "depth": 4,
+      "feature_name": "Feature_19",
+      "threshold": -0.6381,
+      "samples": 290,
+      "solver_mode": "exact",
+      "gini": 0.3282,
+      "gini_gain": 0.0964,
+      "left_samples": 225,
+      "right_samples": 65,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 16,
+      "depth": 4,
+      "feature_name": "Feature_19",
+      "threshold": 0.5029,
+      "samples": 270,
+      "solver_mode": "exact",
+      "gini": 0.4815,
+      "gini_gain": 0.0707,
+      "left_samples": 122,
+      "right_samples": 148,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 30,
+      "depth": 4,
+      "feature_name": "Feature_00",
+      "threshold": -3.9403,
+      "samples": 266,
+      "solver_mode": "exact",
+      "gini": 0.3452,
+      "gini_gain": 0.0859,
+      "left_samples": 41,
+      "right_samples": 225,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    {
+      "node_id": 17,
+      "depth": 4,
+      "feature_name": "Feature_12",
+      "threshold": 0.8124,
+      "samples": 133,
+      "solver_mode": "exact",
+      "gini": 0.4986,
+      "gini_gain": 0.2139,
+      "left_samples": 56,
+      "right_samples": 77,
+      "left_pred": "Class 0",
+      "right_pred": "Class 1"
+    },
+    {
+      "node_id": 25,
+      "depth": 4,
+      "feature_name": "Feature_06",
+      "threshold": 1.0034,
+      "samples": 38,
+      "solver_mode": "exact",
+      "gini": 0.3878,
+      "gini_gain": 0.2452,
+      "left_samples": 31,
+      "right_samples": 7,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    }
+  ],
+  "tree_hierarchy": {
+    "node_id": 0,
+    "is_leaf": false,
+    "depth": 0,
+    "samples": 15000,
+    "class_counts": [
+      7492,
+      7508
+    ],
+    "probabilities": [
+      0.4995,
+      0.5005
+    ],
+    "predicted_class": "Class 1",
+    "predicted_class_idx": 1,
+    "gini": 0.5,
+    "solver_mode": "mab",
+    "feature_idx": 14,
+    "feature_name": "Feature_14",
+    "threshold": -0.1747,
+    "bin_idx": 117,
+    "left": {
+      "node_id": 1,
+      "is_leaf": false,
+      "depth": 1,
+      "samples": 6914,
+      "class_counts": [
+        1787,
+        5127
+      ],
+      "probabilities": [
+        0.2585,
+        0.7415
+      ],
+      "predicted_class": "Class 1",
+      "predicted_class_idx": 1,
+      "gini": 0.3833,
+      "solver_mode": "mab",
+      "feature_idx": 16,
+      "feature_name": "Feature_16",
+      "threshold": -0.8688,
+      "bin_idx": 80,
+      "left": {
+        "node_id": 3,
+        "is_leaf": false,
+        "depth": 2,
+        "samples": 1480,
+        "class_counts": [
+          878,
+          602
+        ],
+        "probabilities": [
+          0.5932,
+          0.4068
+        ],
+        "predicted_class": "Class 0",
+        "predicted_class_idx": 0,
+        "gini": 0.4826,
+        "solver_mode": "mab",
+        "feature_idx": 11,
+        "feature_name": "Feature_11",
+        "threshold": -0.6411,
+        "bin_idx": 120,
+        "left": {
+          "node_id": 7,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 580,
+          "class_counts": [
+            149,
+            431
+          ],
+          "probabilities": [
+            0.2569,
+            0.7431
+          ],
+          "predicted_class": "Class 1",
+          "predicted_class_idx": 1,
+          "gini": 0.3818,
+          "solver_mode": "mab",
+          "feature_idx": 11,
+          "feature_name": "Feature_11",
+          "threshold": -1.8064,
+          "bin_idx": 68,
+          "left": {
+            "node_id": 15,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 310,
+            "class_counts": [
+              40,
+              270
+            ],
+            "probabilities": [
+              0.129,
+              0.871
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.2248,
+            "solver_mode": "exact",
+            "feature_idx": 12,
+            "feature_name": "Feature_12",
+            "threshold": -0.7702,
+            "bin_idx": 114,
+            "left": {
+              "node_id": 31,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 62,
+              "class_counts": [
+                21,
+                41
+              ],
+              "probabilities": [
+                0.3387,
+                0.6613
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.448,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 32,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 248,
+              "class_counts": [
+                19,
+                229
+              ],
+              "probabilities": [
+                0.0766,
+                0.9234
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.1415,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.022
+          },
+          "right": {
+            "node_id": 16,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 270,
+            "class_counts": [
+              109,
+              161
+            ],
+            "probabilities": [
+              0.4037,
+              0.5963
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.4815,
+            "solver_mode": "exact",
+            "feature_idx": 19,
+            "feature_name": "Feature_19",
+            "threshold": 0.5029,
+            "bin_idx": 148,
+            "left": {
+              "node_id": 33,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 122,
+              "class_counts": [
+                24,
+                98
+              ],
+              "probabilities": [
+                0.1967,
+                0.8033
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.316,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 34,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 148,
+              "class_counts": [
+                85,
+                63
+              ],
+              "probabilities": [
+                0.5743,
+                0.4257
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.489,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0707
+          },
+          "gini_gain": 0.0375
+        },
+        "right": {
+          "node_id": 8,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 900,
+          "class_counts": [
+            729,
+            171
+          ],
+          "probabilities": [
+            0.81,
+            0.19
+          ],
+          "predicted_class": "Class 0",
+          "predicted_class_idx": 0,
+          "gini": 0.3078,
+          "solver_mode": "mab",
+          "feature_idx": 6,
+          "feature_name": "Feature_06",
+          "threshold": -0.3397,
+          "bin_idx": 86,
+          "left": {
+            "node_id": 17,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 133,
+            "class_counts": [
+              63,
+              70
+            ],
+            "probabilities": [
+              0.4737,
+              0.5263
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.4986,
+            "solver_mode": "exact",
+            "feature_idx": 12,
+            "feature_name": "Feature_12",
+            "threshold": 0.8124,
+            "bin_idx": 187,
+            "left": {
+              "node_id": 35,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 56,
+              "class_counts": [
+                48,
+                8
+              ],
+              "probabilities": [
+                0.8571,
+                0.1429
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.2449,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 36,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 77,
+              "class_counts": [
+                15,
+                62
+              ],
+              "probabilities": [
+                0.1948,
+                0.8052
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.3137,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.2139
+          },
+          "right": {
+            "node_id": 18,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 767,
+            "class_counts": [
+              666,
+              101
+            ],
+            "probabilities": [
+              0.8683,
+              0.1317
+            ],
+            "predicted_class": "Class 0",
+            "predicted_class_idx": 0,
+            "gini": 0.2287,
+            "solver_mode": "mab",
+            "feature_idx": 9,
+            "feature_name": "Feature_09",
+            "threshold": 3.4319,
+            "bin_idx": 194,
+            "left": {
+              "node_id": 37,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 718,
+              "class_counts": [
+                650,
+                68
+              ],
+              "probabilities": [
+                0.9053,
+                0.0947
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.1715,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 38,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 49,
+              "class_counts": [
+                16,
+                33
+              ],
+              "probabilities": [
+                0.3265,
+                0.6735
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.4398,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0401
+          },
+          "gini_gain": 0.0392
+        },
+        "gini_gain": 0.1458
+      },
+      "right": {
+        "node_id": 4,
+        "is_leaf": false,
+        "depth": 2,
+        "samples": 5434,
+        "class_counts": [
+          909,
+          4525
+        ],
+        "probabilities": [
+          0.1673,
+          0.8327
+        ],
+        "predicted_class": "Class 1",
+        "predicted_class_idx": 1,
+        "gini": 0.2786,
+        "solver_mode": "mab",
+        "feature_idx": 0,
+        "feature_name": "Feature_00",
+        "threshold": -1.5993,
+        "bin_idx": 74,
+        "left": {
+          "node_id": 9,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 1051,
+          "class_counts": [
+            467,
+            584
+          ],
+          "probabilities": [
+            0.4443,
+            0.5557
+          ],
+          "predicted_class": "Class 1",
+          "predicted_class_idx": 1,
+          "gini": 0.4938,
+          "solver_mode": "mab",
+          "feature_idx": 8,
+          "feature_name": "Feature_08",
+          "threshold": 0.3867,
+          "bin_idx": 130,
+          "left": {
+            "node_id": 19,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 469,
+            "class_counts": [
+              327,
+              142
+            ],
+            "probabilities": [
+              0.6972,
+              0.3028
+            ],
+            "predicted_class": "Class 0",
+            "predicted_class_idx": 0,
+            "gini": 0.4222,
+            "solver_mode": "exact",
+            "feature_idx": 2,
+            "feature_name": "Feature_02",
+            "threshold": 4.5627,
+            "bin_idx": 204,
+            "left": {
+              "node_id": 39,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 334,
+              "class_counts": [
+                285,
+                49
+              ],
+              "probabilities": [
+                0.8533,
+                0.1467
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.2504,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 40,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 135,
+              "class_counts": [
+                42,
+                93
+              ],
+              "probabilities": [
+                0.3111,
+                0.6889
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.4286,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.1205
+          },
+          "right": {
+            "node_id": 20,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 582,
+            "class_counts": [
+              140,
+              442
+            ],
+            "probabilities": [
+              0.2405,
+              0.7595
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.3654,
+            "solver_mode": "mab",
+            "feature_idx": 17,
+            "feature_name": "Feature_17",
+            "threshold": -0.7008,
+            "bin_idx": 96,
+            "left": {
+              "node_id": 41,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 156,
+              "class_counts": [
+                73,
+                83
+              ],
+              "probabilities": [
+                0.4679,
+                0.5321
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.4979,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 42,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 426,
+              "class_counts": [
+                67,
+                359
+              ],
+              "probabilities": [
+                0.1573,
+                0.8427
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.2651,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0379
+          },
+          "gini_gain": 0.1031
+        },
+        "right": {
+          "node_id": 10,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 4383,
+          "class_counts": [
+            442,
+            3941
+          ],
+          "probabilities": [
+            0.1008,
+            0.8992
+          ],
+          "predicted_class": "Class 1",
+          "predicted_class_idx": 1,
+          "gini": 0.1813,
+          "solver_mode": "mab",
+          "feature_idx": 14,
+          "feature_name": "Feature_14",
+          "threshold": -0.8783,
+          "bin_idx": 84,
+          "left": {
+            "node_id": 21,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 3285,
+            "class_counts": [
+              224,
+              3061
+            ],
+            "probabilities": [
+              0.0682,
+              0.9318
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.1271,
+            "solver_mode": "mab",
+            "feature_idx": 14,
+            "feature_name": "Feature_14",
+            "threshold": -1.2667,
+            "bin_idx": 68,
+            "left": {
+              "node_id": 43,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 2702,
+              "class_counts": [
+                130,
+                2572
+              ],
+              "probabilities": [
+                0.0481,
+                0.9519
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.0916,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 44,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 583,
+              "class_counts": [
+                94,
+                489
+              ],
+              "probabilities": [
+                0.1612,
+                0.8388
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.2705,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0038
+          },
+          "right": {
+            "node_id": 22,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 1098,
+            "class_counts": [
+              218,
+              880
+            ],
+            "probabilities": [
+              0.1985,
+              0.8015
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.3182,
+            "solver_mode": "mab",
+            "feature_idx": 0,
+            "feature_name": "Feature_00",
+            "threshold": -0.8409,
+            "bin_idx": 108,
+            "left": {
+              "node_id": 45,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 148,
+              "class_counts": [
+                83,
+                65
+              ],
+              "probabilities": [
+                0.5608,
+                0.4392
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.4926,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 46,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 950,
+              "class_counts": [
+                135,
+                815
+              ],
+              "probabilities": [
+                0.1421,
+                0.8579
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.2438,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0409
+          },
+          "gini_gain": 0.0063
+        },
+        "gini_gain": 0.0369
+      },
+      "gini_gain": 0.061
+    },
+    "right": {
+      "node_id": 2,
+      "is_leaf": false,
+      "depth": 1,
+      "samples": 8086,
+      "class_counts": [
+        5705,
+        2381
+      ],
+      "probabilities": [
+        0.7055,
+        0.2945
+      ],
+      "predicted_class": "Class 0",
+      "predicted_class_idx": 0,
+      "gini": 0.4155,
+      "solver_mode": "mab",
+      "feature_idx": 2,
+      "feature_name": "Feature_02",
+      "threshold": -3.0862,
+      "bin_idx": 56,
+      "left": {
+        "node_id": 5,
+        "is_leaf": false,
+        "depth": 2,
+        "samples": 1436,
+        "class_counts": [
+          373,
+          1063
+        ],
+        "probabilities": [
+          0.2597,
+          0.7403
+        ],
+        "predicted_class": "Class 1",
+        "predicted_class_idx": 1,
+        "gini": 0.3846,
+        "solver_mode": "mab",
+        "feature_idx": 19,
+        "feature_name": "Feature_19",
+        "threshold": 0.3791,
+        "bin_idx": 142,
+        "left": {
+          "node_id": 11,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 645,
+          "class_counts": [
+            349,
+            296
+          ],
+          "probabilities": [
+            0.5411,
+            0.4589
+          ],
+          "predicted_class": "Class 0",
+          "predicted_class_idx": 0,
+          "gini": 0.4966,
+          "solver_mode": "mab",
+          "feature_idx": 10,
+          "feature_name": "Feature_10",
+          "threshold": 1.9685,
+          "bin_idx": 190,
+          "left": {
+            "node_id": 23,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 290,
+            "class_counts": [
+              230,
+              60
+            ],
+            "probabilities": [
+              0.7931,
+              0.2069
+            ],
+            "predicted_class": "Class 0",
+            "predicted_class_idx": 0,
+            "gini": 0.3282,
+            "solver_mode": "exact",
+            "feature_idx": 19,
+            "feature_name": "Feature_19",
+            "threshold": -0.6381,
+            "bin_idx": 93,
+            "left": {
+              "node_id": 47,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 225,
+              "class_counts": [
+                205,
+                20
+              ],
+              "probabilities": [
+                0.9111,
+                0.0889
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.162,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 48,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 65,
+              "class_counts": [
+                25,
+                40
+              ],
+              "probabilities": [
+                0.3846,
+                0.6154
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.4734,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0964
+          },
+          "right": {
+            "node_id": 24,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 355,
+            "class_counts": [
+              119,
+              236
+            ],
+            "probabilities": [
+              0.3352,
+              0.6648
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.4457,
+            "solver_mode": "exact",
+            "feature_idx": 19,
+            "feature_name": "Feature_19",
+            "threshold": -2.3905,
+            "bin_idx": 33,
+            "left": {
+              "node_id": 49,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 130,
+              "class_counts": [
+                79,
+                51
+              ],
+              "probabilities": [
+                0.6077,
+                0.3923
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.4768,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 50,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 225,
+              "class_counts": [
+                40,
+                185
+              ],
+              "probabilities": [
+                0.1778,
+                0.8222
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.2923,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0858
+          },
+          "gini_gain": 0.1037
+        },
+        "right": {
+          "node_id": 12,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 791,
+          "class_counts": [
+            24,
+            767
+          ],
+          "probabilities": [
+            0.0303,
+            0.9697
+          ],
+          "predicted_class": "Class 1",
+          "predicted_class_idx": 1,
+          "gini": 0.0588,
+          "solver_mode": "mab",
+          "feature_idx": 16,
+          "feature_name": "Feature_16",
+          "threshold": -1.347,
+          "bin_idx": 68,
+          "left": {
+            "node_id": 25,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 38,
+            "class_counts": [
+              10,
+              28
+            ],
+            "probabilities": [
+              0.2632,
+              0.7368
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.3878,
+            "solver_mode": "exact",
+            "feature_idx": 6,
+            "feature_name": "Feature_06",
+            "threshold": 1.0034,
+            "bin_idx": 154,
+            "left": {
+              "node_id": 51,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 31,
+              "class_counts": [
+                3,
+                28
+              ],
+              "probabilities": [
+                0.0968,
+                0.9032
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.1748,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 52,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 7,
+              "class_counts": [
+                7,
+                0
+              ],
+              "probabilities": [
+                1.0,
+                0.0
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.0,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.2452
+          },
+          "right": {
+            "node_id": 26,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 753,
+            "class_counts": [
+              14,
+              739
+            ],
+            "probabilities": [
+              0.0186,
+              0.9814
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.0365,
+            "solver_mode": "mab",
+            "feature_idx": 17,
+            "feature_name": "Feature_17",
+            "threshold": 0.1068,
+            "bin_idx": 134,
+            "left": {
+              "node_id": 53,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 740,
+              "class_counts": [
+                8,
+                732
+              ],
+              "probabilities": [
+                0.0108,
+                0.9892
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.0214,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 54,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 13,
+              "class_counts": [
+                6,
+                7
+              ],
+              "probabilities": [
+                0.4615,
+                0.5385
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.497,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0069
+          },
+          "gini_gain": 0.0054
+        },
+        "gini_gain": 0.1292
+      },
+      "right": {
+        "node_id": 6,
+        "is_leaf": false,
+        "depth": 2,
+        "samples": 6650,
+        "class_counts": [
+          5332,
+          1318
+        ],
+        "probabilities": [
+          0.8018,
+          0.1982
+        ],
+        "predicted_class": "Class 0",
+        "predicted_class_idx": 0,
+        "gini": 0.3178,
+        "solver_mode": "mab",
+        "feature_idx": 18,
+        "feature_name": "Feature_18",
+        "threshold": 2.924,
+        "bin_idx": 176,
+        "left": {
+          "node_id": 13,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 5471,
+          "class_counts": [
+            4780,
+            691
+          ],
+          "probabilities": [
+            0.8737,
+            0.1263
+          ],
+          "predicted_class": "Class 0",
+          "predicted_class_idx": 0,
+          "gini": 0.2207,
+          "solver_mode": "mab",
+          "feature_idx": 16,
+          "feature_name": "Feature_16",
+          "threshold": 2.8304,
+          "bin_idx": 200,
+          "left": {
+            "node_id": 27,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 4797,
+            "class_counts": [
+              4349,
+              448
+            ],
+            "probabilities": [
+              0.9066,
+              0.0934
+            ],
+            "predicted_class": "Class 0",
+            "predicted_class_idx": 0,
+            "gini": 0.1693,
+            "solver_mode": "mab",
+            "feature_idx": 11,
+            "feature_name": "Feature_11",
+            "threshold": -0.5412,
+            "bin_idx": 125,
+            "left": {
+              "node_id": 55,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 1876,
+              "class_counts": [
+                1535,
+                341
+              ],
+              "probabilities": [
+                0.8182,
+                0.1818
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.2975,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 56,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 2921,
+              "class_counts": [
+                2814,
+                107
+              ],
+              "probabilities": [
+                0.9634,
+                0.0366
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.0706,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.01
+          },
+          "right": {
+            "node_id": 28,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 674,
+            "class_counts": [
+              431,
+              243
+            ],
+            "probabilities": [
+              0.6395,
+              0.3605
+            ],
+            "predicted_class": "Class 0",
+            "predicted_class_idx": 0,
+            "gini": 0.4611,
+            "solver_mode": "mab",
+            "feature_idx": 1,
+            "feature_name": "Feature_01",
+            "threshold": -1.1354,
+            "bin_idx": 66,
+            "left": {
+              "node_id": 57,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 244,
+              "class_counts": [
+                84,
+                160
+              ],
+              "probabilities": [
+                0.3443,
+                0.6557
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.4515,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 58,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 430,
+              "class_counts": [
+                347,
+                83
+              ],
+              "probabilities": [
+                0.807,
+                0.193
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.3115,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0989
+          },
+          "gini_gain": 0.0155
+        },
+        "right": {
+          "node_id": 14,
+          "is_leaf": false,
+          "depth": 3,
+          "samples": 1179,
+          "class_counts": [
+            552,
+            627
+          ],
+          "probabilities": [
+            0.4682,
+            0.5318
+          ],
+          "predicted_class": "Class 1",
+          "predicted_class_idx": 1,
+          "gini": 0.498,
+          "solver_mode": "mab",
+          "feature_idx": 19,
+          "feature_name": "Feature_19",
+          "threshold": 0.1547,
+          "bin_idx": 131,
+          "left": {
+            "node_id": 29,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 913,
+            "class_counts": [
+              345,
+              568
+            ],
+            "probabilities": [
+              0.3779,
+              0.6221
+            ],
+            "predicted_class": "Class 1",
+            "predicted_class_idx": 1,
+            "gini": 0.4702,
+            "solver_mode": "mab",
+            "feature_idx": 18,
+            "feature_name": "Feature_18",
+            "threshold": 4.6398,
+            "bin_idx": 216,
+            "left": {
+              "node_id": 59,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 534,
+              "class_counts": [
+                267,
+                267
+              ],
+              "probabilities": [
+                0.5,
+                0.5
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.5,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 60,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 379,
+              "class_counts": [
+                78,
+                301
+              ],
+              "probabilities": [
+                0.2058,
+                0.7942
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.3269,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0421
+          },
+          "right": {
+            "node_id": 30,
+            "is_leaf": false,
+            "depth": 4,
+            "samples": 266,
+            "class_counts": [
+              207,
+              59
+            ],
+            "probabilities": [
+              0.7782,
+              0.2218
+            ],
+            "predicted_class": "Class 0",
+            "predicted_class_idx": 0,
+            "gini": 0.3452,
+            "solver_mode": "exact",
+            "feature_idx": 0,
+            "feature_name": "Feature_00",
+            "threshold": -3.9403,
+            "bin_idx": 12,
+            "left": {
+              "node_id": 61,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 41,
+              "class_counts": [
+                12,
+                29
+              ],
+              "probabilities": [
+                0.2927,
+                0.7073
+              ],
+              "predicted_class": "Class 1",
+              "predicted_class_idx": 1,
+              "gini": 0.414,
+              "solver_mode": "leaf"
+            },
+            "right": {
+              "node_id": 62,
+              "is_leaf": true,
+              "depth": 5,
+              "samples": 225,
+              "class_counts": [
+                195,
+                30
+              ],
+              "probabilities": [
+                0.8667,
+                0.1333
+              ],
+              "predicted_class": "Class 0",
+              "predicted_class_idx": 0,
+              "gini": 0.2311,
+              "solver_mode": "leaf"
+            },
+            "gini_gain": 0.0859
+          },
+          "gini_gain": 0.056
+        },
+        "gini_gain": 0.0479
+      },
+      "gini_gain": 0.0858
+    },
+    "gini_gain": 0.0993
+  },
+  "feature_contributions": [
+    {
+      "rank": 1,
+      "feature_idx": 14,
+      "feature_name": "Feature_14",
+      "mab_importance_pct": 9.68,
+      "rf_importance_pct": 15.49,
+      "mutual_info_pct": 19.88,
+      "mutual_info_raw": 0.1288,
+      "split_count": 3,
+      "stats": {
+        "feature_idx": 14,
+        "feature_name": "Feature_14",
+        "min": -9.323800086975098,
+        "max": 7.413599967956543,
+        "mean": 0.004600000102072954,
+        "std": 2.0622000694274902,
+        "unique_values": 1000
+      },
+      "composite_score": 14.26,
+      "cumulative_pct": 14.26
+    },
+    {
+      "rank": 2,
+      "feature_idx": 16,
+      "feature_name": "Feature_16",
+      "mab_importance_pct": 9.68,
+      "rf_importance_pct": 10.63,
+      "mutual_info_pct": 13.06,
+      "mutual_info_raw": 0.0847,
+      "split_count": 3,
+      "stats": {
+        "feature_idx": 16,
+        "feature_name": "Feature_16",
+        "min": -12.018400192260742,
+        "max": 14.888899803161621,
+        "mean": 0.4422999918460846,
+        "std": 3.222399950027466,
+        "unique_values": 1000
+      },
+      "composite_score": 10.86,
+      "cumulative_pct": 25.12
+    },
+    {
+      "rank": 3,
+      "feature_idx": 19,
+      "feature_name": "Feature_19",
+      "mab_importance_pct": 16.13,
+      "rf_importance_pct": 5.68,
+      "mutual_info_pct": 0.5,
+      "mutual_info_raw": 0.0032,
+      "split_count": 5,
+      "stats": {
+        "feature_idx": 19,
+        "feature_name": "Feature_19",
+        "min": -7.702600002288818,
+        "max": 7.162899971008301,
+        "mean": 0.003599999938160181,
+        "std": 2.0947000980377197,
+        "unique_values": 1000
+      },
+      "composite_score": 8.56,
+      "cumulative_pct": 33.68
+    },
+    {
+      "rank": 4,
+      "feature_idx": 2,
+      "feature_name": "Feature_02",
+      "mab_importance_pct": 6.45,
+      "rf_importance_pct": 7.91,
+      "mutual_info_pct": 11.54,
+      "mutual_info_raw": 0.0748,
+      "split_count": 2,
+      "stats": {
+        "feature_idx": 2,
+        "feature_name": "Feature_02",
+        "min": -13.826600074768066,
+        "max": 16.290199279785156,
+        "mean": 0.6800000071525574,
+        "std": 4.452899932861328,
+        "unique_values": 1000
+      },
+      "composite_score": 8.23,
+      "cumulative_pct": 41.91
+    },
+    {
+      "rank": 5,
+      "feature_idx": 11,
+      "feature_name": "Feature_11",
+      "mab_importance_pct": 9.68,
+      "rf_importance_pct": 6.49,
+      "mutual_info_pct": 5.7,
+      "mutual_info_raw": 0.0369,
+      "split_count": 3,
+      "stats": {
+        "feature_idx": 11,
+        "feature_name": "Feature_11",
+        "min": -8.980899810791016,
+        "max": 8.501199722290039,
+        "mean": -0.49559998512268066,
+        "std": 2.124500036239624,
+        "unique_values": 1000
+      },
+      "composite_score": 7.57,
+      "cumulative_pct": 49.48
+    },
+    {
+      "rank": 6,
+      "feature_idx": 0,
+      "feature_name": "Feature_00",
+      "mab_importance_pct": 9.68,
+      "rf_importance_pct": 6.13,
+      "mutual_info_pct": 5.92,
+      "mutual_info_raw": 0.0384,
+      "split_count": 3,
+      "stats": {
+        "feature_idx": 0,
+        "feature_name": "Feature_00",
+        "min": -8.407299995422363,
+        "max": 7.110300064086914,
+        "mean": -0.5040000081062317,
+        "std": 2.0578999519348145,
+        "unique_values": 1000
+      },
+      "composite_score": 7.5,
+      "cumulative_pct": 56.98
+    },
+    {
+      "rank": 7,
+      "feature_idx": 9,
+      "feature_name": "Feature_09",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 6.96,
+      "mutual_info_pct": 13.86,
+      "mutual_info_raw": 0.0898,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 9,
+        "feature_name": "Feature_09",
+        "min": -12.91819953918457,
+        "max": 15.163399696350098,
+        "mean": 0.684499979019165,
+        "std": 3.7844998836517334,
+        "unique_values": 1000
+      },
+      "composite_score": 7.19,
+      "cumulative_pct": 64.17
+    },
+    {
+      "rank": 8,
+      "feature_idx": 6,
+      "feature_name": "Feature_06",
+      "mab_importance_pct": 6.45,
+      "rf_importance_pct": 6.98,
+      "mutual_info_pct": 7.93,
+      "mutual_info_raw": 0.0514,
+      "split_count": 2,
+      "stats": {
+        "feature_idx": 6,
+        "feature_name": "Feature_06",
+        "min": -6.567399978637695,
+        "max": 9.718199729919434,
+        "mean": 0.5206999778747559,
+        "std": 1.9645999670028687,
+        "unique_values": 1000
+      },
+      "composite_score": 7.01,
+      "cumulative_pct": 71.18
+    },
+    {
+      "rank": 9,
+      "feature_idx": 18,
+      "feature_name": "Feature_18",
+      "mab_importance_pct": 6.45,
+      "rf_importance_pct": 9.6,
+      "mutual_info_pct": 4.03,
+      "mutual_info_raw": 0.0261,
+      "split_count": 2,
+      "stats": {
+        "feature_idx": 18,
+        "feature_name": "Feature_18",
+        "min": -12.40470027923584,
+        "max": 14.720999717712402,
+        "mean": 1.2865999937057495,
+        "std": 3.2576000690460205,
+        "unique_values": 1000
+      },
+      "composite_score": 6.95,
+      "cumulative_pct": 78.13
+    },
+    {
+      "rank": 10,
+      "feature_idx": 12,
+      "feature_name": "Feature_12",
+      "mab_importance_pct": 6.45,
+      "rf_importance_pct": 3.66,
+      "mutual_info_pct": 4.04,
+      "mutual_info_raw": 0.0262,
+      "split_count": 2,
+      "stats": {
+        "feature_idx": 12,
+        "feature_name": "Feature_12",
+        "min": -9.896300315856934,
+        "max": 6.685699939727783,
+        "mean": -0.5077000260353088,
+        "std": 2.06030011177063,
+        "unique_values": 1000
+      },
+      "composite_score": 4.87,
+      "cumulative_pct": 83.0
+    },
+    {
+      "rank": 11,
+      "feature_idx": 8,
+      "feature_name": "Feature_08",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 4.87,
+      "mutual_info_pct": 5.59,
+      "mutual_info_raw": 0.0362,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 8,
+        "feature_name": "Feature_08",
+        "min": -7.638700008392334,
+        "max": 8.165399551391602,
+        "mean": 0.49869999289512634,
+        "std": 1.9922000169754028,
+        "unique_values": 1000
+      },
+      "composite_score": 4.39,
+      "cumulative_pct": 87.39
+    },
+    {
+      "rank": 12,
+      "feature_idx": 17,
+      "feature_name": "Feature_17",
+      "mab_importance_pct": 6.45,
+      "rf_importance_pct": 2.67,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 2,
+      "stats": {
+        "feature_idx": 17,
+        "feature_name": "Feature_17",
+        "min": -8.160200119018555,
+        "max": 8.38029956817627,
+        "mean": 0.01899999938905239,
+        "std": 2.144399881362915,
+        "unique_values": 1000
+      },
+      "composite_score": 3.51,
+      "cumulative_pct": 90.9
+    },
+    {
+      "rank": 13,
+      "feature_idx": 10,
+      "feature_name": "Feature_10",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 3.18,
+      "mutual_info_pct": 3.14,
+      "mutual_info_raw": 0.0203,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 10,
+        "feature_name": "Feature_10",
+        "min": -8.376999855041504,
+        "max": 8.684900283813477,
+        "mean": 0.48980000615119934,
+        "std": 2.2725000381469727,
+        "unique_values": 1000
+      },
+      "composite_score": 3.19,
+      "cumulative_pct": 94.09
+    },
+    {
+      "rank": 14,
+      "feature_idx": 1,
+      "feature_name": "Feature_01",
+      "mab_importance_pct": 3.23,
+      "rf_importance_pct": 4.06,
+      "mutual_info_pct": 1.04,
+      "mutual_info_raw": 0.0067,
+      "split_count": 1,
+      "stats": {
+        "feature_idx": 1,
+        "feature_name": "Feature_01",
+        "min": -7.827300071716309,
+        "max": 6.520599842071533,
+        "mean": -0.0015999999595806003,
+        "std": 1.8309999704360962,
+        "unique_values": 1000
+      },
+      "composite_score": 2.97,
+      "cumulative_pct": 97.06
+    },
+    {
+      "rank": 15,
+      "feature_idx": 15,
+      "feature_name": "Feature_15",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 2.86,
+      "mutual_info_pct": 2.94,
+      "mutual_info_raw": 0.019,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 15,
+        "feature_name": "Feature_15",
+        "min": -20.027799606323242,
+        "max": 12.707500457763672,
+        "mean": -1.201200008392334,
+        "std": 4.373799800872803,
+        "unique_values": 1000
+      },
+      "composite_score": 1.74,
+      "cumulative_pct": 98.8
+    },
+    {
+      "rank": 16,
+      "feature_idx": 3,
+      "feature_name": "Feature_03",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.64,
+      "mutual_info_pct": 0.84,
+      "mutual_info_raw": 0.0054,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 3,
+        "feature_name": "Feature_03",
+        "min": -3.719899892807007,
+        "max": 3.564500093460083,
+        "mean": 0.000699999975040555,
+        "std": 0.9973999857902527,
+        "unique_values": 1000
+      },
+      "composite_score": 0.43,
+      "cumulative_pct": 99.23
+    },
+    {
+      "rank": 17,
+      "feature_idx": 7,
+      "feature_name": "Feature_07",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.67,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 7,
+        "feature_name": "Feature_07",
+        "min": -3.636699914932251,
+        "max": 3.6442999839782715,
+        "mean": -0.004100000020116568,
+        "std": 0.9979000091552734,
+        "unique_values": 1000
+      },
+      "composite_score": 0.23,
+      "cumulative_pct": 99.46
+    },
+    {
+      "rank": 18,
+      "feature_idx": 4,
+      "feature_name": "Feature_04",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.54,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 4,
+        "feature_name": "Feature_04",
+        "min": -4.374000072479248,
+        "max": 3.7822000980377197,
+        "mean": 0.001500000013038516,
+        "std": 1.0003999471664429,
+        "unique_values": 1000
+      },
+      "composite_score": 0.19,
+      "cumulative_pct": 99.65
+    },
+    {
+      "rank": 19,
+      "feature_idx": 5,
+      "feature_name": "Feature_05",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.53,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 5,
+        "feature_name": "Feature_05",
+        "min": -4.003600120544434,
+        "max": 3.732100009918213,
+        "mean": -0.005200000014156103,
+        "std": 0.9983999729156494,
+        "unique_values": 1000
+      },
+      "composite_score": 0.19,
+      "cumulative_pct": 99.84
+    },
+    {
+      "rank": 20,
+      "feature_idx": 13,
+      "feature_name": "Feature_13",
+      "mab_importance_pct": 0.0,
+      "rf_importance_pct": 0.46,
+      "mutual_info_pct": 0.0,
+      "mutual_info_raw": 0.0,
+      "split_count": 0,
+      "stats": {
+        "feature_idx": 13,
+        "feature_name": "Feature_13",
+        "min": -4.413899898529053,
+        "max": 3.976900100708008,
+        "mean": -0.0012000000569969416,
+        "std": 0.9980000257492065,
+        "unique_values": 1000
+      },
+      "composite_score": 0.16,
+      "cumulative_pct": 100.0
+    }
+  ]
+}

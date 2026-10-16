@@ -1,0 +1,1071 @@
+{
+  "adult": {
+    "dataset_name": "Adult Census Income",
+    "n_samples": 15000,
+    "n_features": 14,
+    "n_classes": 2,
+    "class_names": [
+      "<=50K",
+      ">50K"
+    ],
+    "performance": {
+      "mab_fit_time_sec": 1.866,
+      "std_dt_fit_time_sec": 0.0152,
+      "speedup_ratio": 0.01,
+      "total_nodes": 57,
+      "tree_depth": 5,
+      "splits_by_mode": {
+        "exact": 15,
+        "mab": 15
+      },
+      "samples_evaluated": 53428,
+      "theoretical_full_scan_samples": 420000,
+      "sample_evaluation_reduction_pct": 87.3
+    },
+    "top_features": {
+      "top_3": [
+        "capital.gain",
+        "education.num",
+        "relationship"
+      ],
+      "top_5": [
+        "capital.gain",
+        "education.num",
+        "relationship",
+        "age",
+        "hours.per.week"
+      ],
+      "top_5_cumulative_pct": 74.25
+    },
+    "root_split": {
+      "node_id": 0,
+      "depth": 0,
+      "feature_name": "relationship",
+      "threshold": 0.5,
+      "samples": 15000,
+      "solver_mode": "mab",
+      "gini": 0.3658,
+      "gini_gain": 0.0565,
+      "left_samples": 6052,
+      "right_samples": 8948,
+      "left_pred": "<=50K",
+      "right_pred": "<=50K"
+    },
+    "final_splits_count": 13,
+    "feature_contributions": [
+      {
+        "rank": 1,
+        "feature_idx": 10,
+        "feature_name": "capital.gain",
+        "mab_importance_pct": 35.71,
+        "rf_importance_pct": 20.45,
+        "mutual_info_pct": 11.28,
+        "mutual_info_raw": 0.0749,
+        "split_count": 10,
+        "stats": {
+          "feature_idx": 10,
+          "feature_name": "capital.gain",
+          "min": 0.0,
+          "max": 99999.0,
+          "mean": 1094.7919921875,
+          "std": 7458.58056640625,
+          "unique_values": 35
+        },
+        "composite_score": 24.26,
+        "cumulative_pct": 24.26
+      },
+      {
+        "rank": 2,
+        "feature_idx": 4,
+        "feature_name": "education.num",
+        "mab_importance_pct": 17.86,
+        "rf_importance_pct": 17.02,
+        "mutual_info_pct": 9.46,
+        "mutual_info_raw": 0.0628,
+        "split_count": 5,
+        "stats": {
+          "feature_idx": 4,
+          "feature_name": "education.num",
+          "min": 1.0,
+          "max": 16.0,
+          "mean": 10.064800262451172,
+          "std": 2.5673000812530518,
+          "unique_values": 15
+        },
+        "composite_score": 15.47,
+        "cumulative_pct": 39.72
+      },
+      {
+        "rank": 3,
+        "feature_idx": 7,
+        "feature_name": "relationship",
+        "mab_importance_pct": 7.14,
+        "rf_importance_pct": 18.32,
+        "mutual_info_pct": 15.6,
+        "mutual_info_raw": 0.1036,
+        "split_count": 2,
+        "stats": {
+          "feature_idx": 7,
+          "feature_name": "relationship",
+          "min": 0.0,
+          "max": 5.0,
+          "mean": 1.4472999572753906,
+          "std": 1.6032999753952026,
+          "unique_values": 6
+        },
+        "composite_score": 13.17,
+        "cumulative_pct": 52.89
+      },
+      {
+        "rank": 4,
+        "feature_idx": 0,
+        "feature_name": "age",
+        "mab_importance_pct": 14.29,
+        "rf_importance_pct": 11.65,
+        "mutual_info_pct": 10.39,
+        "mutual_info_raw": 0.069,
+        "split_count": 4,
+        "stats": {
+          "feature_idx": 0,
+          "feature_name": "age",
+          "min": 17.0,
+          "max": 90.0,
+          "mean": 38.59239959716797,
+          "std": 13.668399810791016,
+          "unique_values": 64
+        },
+        "composite_score": 12.39,
+        "cumulative_pct": 65.28
+      },
+      {
+        "rank": 5,
+        "feature_idx": 12,
+        "feature_name": "hours.per.week",
+        "mab_importance_pct": 14.29,
+        "rf_importance_pct": 5.17,
+        "mutual_info_pct": 5.77,
+        "mutual_info_raw": 0.0383,
+        "split_count": 4,
+        "stats": {
+          "feature_idx": 12,
+          "feature_name": "hours.per.week",
+          "min": 1.0,
+          "max": 99.0,
+          "mean": 40.3473014831543,
+          "std": 12.255000114440918,
+          "unique_values": 56
+        },
+        "composite_score": 8.97,
+        "cumulative_pct": 74.25
+      },
+      {
+        "rank": 6,
+        "feature_idx": 5,
+        "feature_name": "marital.status",
+        "mab_importance_pct": 0.0,
+        "rf_importance_pct": 8.69,
+        "mutual_info_pct": 13.54,
+        "mutual_info_raw": 0.0899,
+        "split_count": 0,
+        "stats": {
+          "feature_idx": 5,
+          "feature_name": "marital.status",
+          "min": 0.0,
+          "max": 6.0,
+          "mean": 2.628200054168701,
+          "std": 1.5049999952316284,
+          "unique_values": 7
+        },
+        "composite_score": 6.43,
+        "cumulative_pct": 80.67
+      },
+      {
+        "rank": 7,
+        "feature_idx": 6,
+        "feature_name": "occupation",
+        "mab_importance_pct": 3.57,
+        "rf_importance_pct": 3.84,
+        "mutual_info_pct": 11.51,
+        "mutual_info_raw": 0.0764,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 6,
+          "feature_name": "occupation",
+          "min": 0.0,
+          "max": 14.0,
+          "mean": 6.564199924468994,
+          "std": 4.225599765777588,
+          "unique_values": 14
+        },
+        "composite_score": 5.65,
+        "cumulative_pct": 86.32
+      },
+      {
+        "rank": 8,
+        "feature_idx": 3,
+        "feature_name": "education",
+        "mab_importance_pct": 0.0,
+        "rf_importance_pct": 2.92,
+        "mutual_info_pct": 8.48,
+        "mutual_info_raw": 0.0563,
+        "split_count": 0,
+        "stats": {
+          "feature_idx": 3,
+          "feature_name": "education",
+          "min": 0.0,
+          "max": 15.0,
+          "mean": 10.323100090026855,
+          "std": 3.8757998943328857,
+          "unique_values": 15
+        },
+        "composite_score": 3.14,
+        "cumulative_pct": 89.46
+      },
+      {
+        "rank": 9,
+        "feature_idx": 2,
+        "feature_name": "fnlwgt",
+        "mab_importance_pct": 3.57,
+        "rf_importance_pct": 3.01,
+        "mutual_info_pct": 1.32,
+        "mutual_info_raw": 0.0088,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 2,
+          "feature_name": "fnlwgt",
+          "min": 19214.0,
+          "max": 1484705.0,
+          "mean": 190287.25,
+          "std": 105597.6171875,
+          "unique_values": 982
+        },
+        "composite_score": 2.81,
+        "cumulative_pct": 92.27
+      },
+      {
+        "rank": 10,
+        "feature_idx": 1,
+        "feature_name": "workclass",
+        "mab_importance_pct": 3.57,
+        "rf_importance_pct": 1.5,
+        "mutual_info_pct": 3.1,
+        "mutual_info_raw": 0.0206,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 1,
+          "feature_name": "workclass",
+          "min": 0.0,
+          "max": 8.0,
+          "mean": 3.8596999645233154,
+          "std": 1.454800009727478,
+          "unique_values": 7
+        },
+        "composite_score": 2.73,
+        "cumulative_pct": 95.0
+      }
+    ]
+  },
+  "covertype": {
+    "dataset_name": "Forest Covertype",
+    "n_samples": 20000,
+    "n_features": 54,
+    "n_classes": 7,
+    "class_names": [
+      "Spruce/Fir",
+      "Lodgepole Pine",
+      "Ponderosa Pine",
+      "Cottonwood/Willow",
+      "Aspen",
+      "Douglas-fir",
+      "Krummholz"
+    ],
+    "performance": {
+      "mab_fit_time_sec": 0.0726,
+      "std_dt_fit_time_sec": 0.0461,
+      "speedup_ratio": 0.63,
+      "total_nodes": 57,
+      "tree_depth": 5,
+      "splits_by_mode": {
+        "exact": 7,
+        "mab": 23
+      },
+      "samples_evaluated": 99456,
+      "theoretical_full_scan_samples": 560000,
+      "sample_evaluation_reduction_pct": 82.2
+    },
+    "top_features": {
+      "top_3": [
+        "Elevation",
+        "Horizontal_Distance_To_Fire_Points",
+        "Horizontal_Distance_To_Roadways"
+      ],
+      "top_5": [
+        "Elevation",
+        "Horizontal_Distance_To_Fire_Points",
+        "Horizontal_Distance_To_Roadways",
+        "Hillshade_9am",
+        "Wilderness_Area_1"
+      ],
+      "top_5_cumulative_pct": 60.19
+    },
+    "root_split": {
+      "node_id": 0,
+      "depth": 0,
+      "feature_name": "Horizontal_Distance_To_Fire_Points",
+      "threshold": 2573.1992,
+      "samples": 20000,
+      "solver_mode": "mab",
+      "gini": 0.6615,
+      "gini_gain": 0.1199,
+      "left_samples": 8516,
+      "right_samples": 11484,
+      "left_pred": "Spruce/Fir",
+      "right_pred": "Lodgepole Pine"
+    },
+    "final_splits_count": 13,
+    "feature_contributions": [
+      {
+        "rank": 1,
+        "feature_idx": 0,
+        "feature_name": "Elevation",
+        "mab_importance_pct": 32.14,
+        "rf_importance_pct": 15.07,
+        "mutual_info_pct": 19.03,
+        "mutual_info_raw": 0.6626,
+        "split_count": 9,
+        "stats": {
+          "feature_idx": 0,
+          "feature_name": "Elevation",
+          "min": 1874.0,
+          "max": 3846.0,
+          "mean": 2812.884033203125,
+          "std": 299.50738525390625,
+          "unique_values": 549
+        },
+        "composite_score": 22.89,
+        "cumulative_pct": 22.88
+      },
+      {
+        "rank": 2,
+        "feature_idx": 9,
+        "feature_name": "Horizontal_Distance_To_Fire_Points",
+        "mab_importance_pct": 10.71,
+        "rf_importance_pct": 19.28,
+        "mutual_info_pct": 10.97,
+        "mutual_info_raw": 0.3818,
+        "split_count": 3,
+        "stats": {
+          "feature_idx": 9,
+          "feature_name": "Horizontal_Distance_To_Fire_Points",
+          "min": 0.0,
+          "max": 7172.0,
+          "mean": 3382.9951171875,
+          "std": 2036.2098388671875,
+          "unique_values": 888
+        },
+        "composite_score": 13.77,
+        "cumulative_pct": 36.65
+      },
+      {
+        "rank": 3,
+        "feature_idx": 5,
+        "feature_name": "Horizontal_Distance_To_Roadways",
+        "mab_importance_pct": 10.71,
+        "rf_importance_pct": 8.02,
+        "mutual_info_pct": 8.39,
+        "mutual_info_raw": 0.2921,
+        "split_count": 3,
+        "stats": {
+          "feature_idx": 5,
+          "feature_name": "Horizontal_Distance_To_Roadways",
+          "min": 0.0,
+          "max": 7117.0,
+          "mean": 3047.738037109375,
+          "std": 1987.9814453125,
+          "unique_values": 883
+        },
+        "composite_score": 9.19,
+        "cumulative_pct": 45.83
+      },
+      {
+        "rank": 4,
+        "feature_idx": 6,
+        "feature_name": "Hillshade_9am",
+        "mab_importance_pct": 14.29,
+        "rf_importance_pct": 2.44,
+        "mutual_info_pct": 2.55,
+        "mutual_info_raw": 0.0889,
+        "split_count": 4,
+        "stats": {
+          "feature_idx": 6,
+          "feature_name": "Hillshade_9am",
+          "min": 65.0,
+          "max": 254.0,
+          "mean": 216.63059997558594,
+          "std": 25.462099075317383,
+          "unique_values": 119
+        },
+        "composite_score": 7.21,
+        "cumulative_pct": 53.04
+      },
+      {
+        "rank": 5,
+        "feature_idx": 10,
+        "feature_name": "Wilderness_Area_1",
+        "mab_importance_pct": 0.0,
+        "rf_importance_pct": 13.16,
+        "mutual_info_pct": 10.16,
+        "mutual_info_raw": 0.3536,
+        "split_count": 0,
+        "stats": {
+          "feature_idx": 10,
+          "feature_name": "Wilderness_Area_1",
+          "min": 0.0,
+          "max": 1.0,
+          "mean": 0.7085999846458435,
+          "std": 0.4544000029563904,
+          "unique_values": 2
+        },
+        "composite_score": 7.15,
+        "cumulative_pct": 60.19
+      },
+      {
+        "rank": 6,
+        "feature_idx": 13,
+        "feature_name": "Wilderness_Area_4",
+        "mab_importance_pct": 0.0,
+        "rf_importance_pct": 6.68,
+        "mutual_info_pct": 8.11,
+        "mutual_info_raw": 0.2822,
+        "split_count": 0,
+        "stats": {
+          "feature_idx": 13,
+          "feature_name": "Wilderness_Area_4",
+          "min": 0.0,
+          "max": 1.0,
+          "mean": 0.11699999868869781,
+          "std": 0.321399986743927,
+          "unique_values": 2
+        },
+        "composite_score": 4.37,
+        "cumulative_pct": 64.55
+      },
+      {
+        "rank": 7,
+        "feature_idx": 4,
+        "feature_name": "Vertical_Distance_To_Hydrology",
+        "mab_importance_pct": 3.57,
+        "rf_importance_pct": 4.47,
+        "mutual_info_pct": 3.16,
+        "mutual_info_raw": 0.1101,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 4,
+          "feature_name": "Vertical_Distance_To_Hydrology",
+          "min": -123.0,
+          "max": 411.0,
+          "mean": 36.9900016784668,
+          "std": 49.10139846801758,
+          "unique_values": 196
+        },
+        "composite_score": 3.78,
+        "cumulative_pct": 68.33
+      },
+      {
+        "rank": 8,
+        "feature_idx": 3,
+        "feature_name": "Horizontal_Distance_To_Hydrology",
+        "mab_importance_pct": 3.57,
+        "rf_importance_pct": 2.85,
+        "mutual_info_pct": 1.74,
+        "mutual_info_raw": 0.0605,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 3,
+          "feature_name": "Horizontal_Distance_To_Hydrology",
+          "min": 0.0,
+          "max": 1343.0,
+          "mean": 223.27920532226562,
+          "std": 187.5225067138672,
+          "unique_values": 160
+        },
+        "composite_score": 2.86,
+        "cumulative_pct": 71.19
+      },
+      {
+        "rank": 9,
+        "feature_idx": 2,
+        "feature_name": "Slope",
+        "mab_importance_pct": 3.57,
+        "rf_importance_pct": 2.09,
+        "mutual_info_pct": 2.73,
+        "mutual_info_raw": 0.0949,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 2,
+          "feature_name": "Slope",
+          "min": 0.0,
+          "max": 61.0,
+          "mean": 13.511799812316895,
+          "std": 7.792200088500977,
+          "unique_values": 40
+        },
+        "composite_score": 2.84,
+        "cumulative_pct": 74.03
+      },
+      {
+        "rank": 10,
+        "feature_idx": 8,
+        "feature_name": "Hillshade_3pm",
+        "mab_importance_pct": 3.57,
+        "rf_importance_pct": 2.08,
+        "mutual_info_pct": 2.52,
+        "mutual_info_raw": 0.0879,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 8,
+          "feature_name": "Hillshade_3pm",
+          "min": 0.0,
+          "max": 248.0,
+          "mean": 137.29739379882812,
+          "std": 36.142398834228516,
+          "unique_values": 179
+        },
+        "composite_score": 2.79,
+        "cumulative_pct": 76.82
+      }
+    ]
+  },
+  "higgs": {
+    "dataset_name": "HIGGS Boson Kinematics",
+    "n_samples": 20000,
+    "n_features": 28,
+    "n_classes": 2,
+    "class_names": [
+      "Background (0)",
+      "Signal (1)"
+    ],
+    "performance": {
+      "mab_fit_time_sec": 0.3258,
+      "std_dt_fit_time_sec": 0.8304,
+      "speedup_ratio": 2.55,
+      "total_nodes": 63,
+      "tree_depth": 5,
+      "splits_by_mode": {
+        "exact": 5,
+        "mab": 26
+      },
+      "samples_evaluated": 98847,
+      "theoretical_full_scan_samples": 620000,
+      "sample_evaluation_reduction_pct": 84.1
+    },
+    "top_features": {
+      "top_3": [
+        "m_bb",
+        "m_wwbb",
+        "m_jjj"
+      ],
+      "top_5": [
+        "m_bb",
+        "m_wwbb",
+        "m_jjj",
+        "jet_1_pt",
+        "m_jlv"
+      ],
+      "top_5_cumulative_pct": 58.52
+    },
+    "root_split": {
+      "node_id": 0,
+      "depth": 0,
+      "feature_name": "m_bb",
+      "threshold": 1.0613,
+      "samples": 20000,
+      "solver_mode": "mab",
+      "gini": 0.4985,
+      "gini_gain": 0.0215,
+      "left_samples": 14062,
+      "right_samples": 5938,
+      "left_pred": "Signal (1)",
+      "right_pred": "Background (0)"
+    },
+    "final_splits_count": 16,
+    "feature_contributions": [
+      {
+        "rank": 1,
+        "feature_idx": 25,
+        "feature_name": "m_bb",
+        "mab_importance_pct": 9.68,
+        "rf_importance_pct": 16.11,
+        "mutual_info_pct": 29.84,
+        "mutual_info_raw": 0.0503,
+        "split_count": 3,
+        "stats": {
+          "feature_idx": 25,
+          "feature_name": "m_bb",
+          "min": 0.06289999932050705,
+          "max": 8.25510025024414,
+          "mean": 0.9732000231742859,
+          "std": 0.5206000208854675,
+          "unique_values": 997
+        },
+        "composite_score": 16.97,
+        "cumulative_pct": 16.97
+      },
+      {
+        "rank": 2,
+        "feature_idx": 27,
+        "feature_name": "m_wwbb",
+        "mab_importance_pct": 32.26,
+        "rf_importance_pct": 8.01,
+        "mutual_info_pct": 4.62,
+        "mutual_info_raw": 0.0078,
+        "split_count": 10,
+        "stats": {
+          "feature_idx": 27,
+          "feature_name": "m_wwbb",
+          "min": 0.4032000005245209,
+          "max": 6.015600204467773,
+          "mean": 0.9581999778747559,
+          "std": 0.310699999332428,
+          "unique_values": 999
+        },
+        "composite_score": 16.86,
+        "cumulative_pct": 33.84
+      },
+      {
+        "rank": 3,
+        "feature_idx": 22,
+        "feature_name": "m_jjj",
+        "mab_importance_pct": 12.9,
+        "rf_importance_pct": 6.63,
+        "mutual_info_pct": 11.93,
+        "mutual_info_raw": 0.0201,
+        "split_count": 4,
+        "stats": {
+          "feature_idx": 22,
+          "feature_name": "m_jjj",
+          "min": 0.37720000743865967,
+          "max": 7.701600074768066,
+          "mean": 1.0233999490737915,
+          "std": 0.36820000410079956,
+          "unique_values": 997
+        },
+        "composite_score": 10.46,
+        "cumulative_pct": 44.3
+      },
+      {
+        "rank": 4,
+        "feature_idx": 5,
+        "feature_name": "jet_1_pt",
+        "mab_importance_pct": 12.9,
+        "rf_importance_pct": 6.27,
+        "mutual_info_pct": 0.0,
+        "mutual_info_raw": 0.0,
+        "split_count": 4,
+        "stats": {
+          "feature_idx": 5,
+          "feature_name": "jet_1_pt",
+          "min": 0.18359999358654022,
+          "max": 7.064700126647949,
+          "mean": 0.9861999750137329,
+          "std": 0.47920000553131104,
+          "unique_values": 967
+        },
+        "composite_score": 7.35,
+        "cumulative_pct": 51.65
+      },
+      {
+        "rank": 5,
+        "feature_idx": 24,
+        "feature_name": "m_jlv",
+        "mab_importance_pct": 6.45,
+        "rf_importance_pct": 7.61,
+        "mutual_info_pct": 6.51,
+        "mutual_info_raw": 0.011,
+        "split_count": 2,
+        "stats": {
+          "feature_idx": 24,
+          "feature_name": "m_jlv",
+          "min": 0.3709000051021576,
+          "max": 5.819499969482422,
+          "mean": 1.0077999830245972,
+          "std": 0.39959999918937683,
+          "unique_values": 999
+        },
+        "composite_score": 6.87,
+        "cumulative_pct": 58.52
+      },
+      {
+        "rank": 6,
+        "feature_idx": 26,
+        "feature_name": "m_wbb",
+        "mab_importance_pct": 3.23,
+        "rf_importance_pct": 8.39,
+        "mutual_info_pct": 7.76,
+        "mutual_info_raw": 0.0131,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 26,
+          "feature_name": "m_wbb",
+          "min": 0.3625999987125397,
+          "max": 7.31820011138916,
+          "mean": 1.0325000286102295,
+          "std": 0.3637999892234802,
+          "unique_values": 1000
+        },
+        "composite_score": 6.17,
+        "cumulative_pct": 64.69
+      },
+      {
+        "rank": 7,
+        "feature_idx": 0,
+        "feature_name": "lepton_pT",
+        "mab_importance_pct": 6.45,
+        "rf_importance_pct": 3.15,
+        "mutual_info_pct": 0.0,
+        "mutual_info_raw": 0.0,
+        "split_count": 2,
+        "stats": {
+          "feature_idx": 0,
+          "feature_name": "lepton_pT",
+          "min": 0.27469998598098755,
+          "max": 7.00029993057251,
+          "mean": 0.9898999929428101,
+          "std": 0.5583999752998352,
+          "unique_values": 949
+        },
+        "composite_score": 3.68,
+        "cumulative_pct": 68.37
+      },
+      {
+        "rank": 8,
+        "feature_idx": 4,
+        "feature_name": "missing_energy_phi",
+        "mab_importance_pct": 3.23,
+        "rf_importance_pct": 1.84,
+        "mutual_info_pct": 4.75,
+        "mutual_info_raw": 0.008,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 4,
+          "feature_name": "missing_energy_phi",
+          "min": -1.743899941444397,
+          "max": 1.7431999444961548,
+          "mean": -0.008700000122189522,
+          "std": 1.0068999528884888,
+          "unique_values": 999
+        },
+        "composite_score": 3.12,
+        "cumulative_pct": 71.49
+      },
+      {
+        "rank": 9,
+        "feature_idx": 17,
+        "feature_name": "jet_4_pt",
+        "mab_importance_pct": 3.23,
+        "rf_importance_pct": 2.2,
+        "mutual_info_pct": 3.93,
+        "mutual_info_raw": 0.0066,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 17,
+          "feature_name": "jet_4_pt",
+          "min": 0.3653999865055084,
+          "max": 6.067699909210205,
+          "mean": 0.9878000020980835,
+          "std": 0.505299985408783,
+          "unique_values": 918
+        },
+        "composite_score": 3.04,
+        "cumulative_pct": 74.53
+      },
+      {
+        "rank": 10,
+        "feature_idx": 3,
+        "feature_name": "missing_energy_magnitude",
+        "mab_importance_pct": 0.0,
+        "rf_importance_pct": 4.46,
+        "mutual_info_pct": 5.16,
+        "mutual_info_raw": 0.0087,
+        "split_count": 0,
+        "stats": {
+          "feature_idx": 3,
+          "feature_name": "missing_energy_magnitude",
+          "min": 0.009999999776482582,
+          "max": 7.998700141906738,
+          "mean": 0.9908999800682068,
+          "std": 0.6031000018119812,
+          "unique_values": 1000
+        },
+        "composite_score": 2.85,
+        "cumulative_pct": 77.39
+      }
+    ]
+  },
+  "synthetic": {
+    "dataset_name": "Synthetic Tabular Benchmark",
+    "n_samples": 15000,
+    "n_features": 20,
+    "n_classes": 2,
+    "class_names": [
+      "Class 0",
+      "Class 1"
+    ],
+    "performance": {
+      "mab_fit_time_sec": 0.3502,
+      "std_dt_fit_time_sec": 0.6439,
+      "speedup_ratio": 1.84,
+      "total_nodes": 63,
+      "tree_depth": 5,
+      "splits_by_mode": {
+        "exact": 8,
+        "mab": 23
+      },
+      "samples_evaluated": 74645,
+      "theoretical_full_scan_samples": 465000,
+      "sample_evaluation_reduction_pct": 83.9
+    },
+    "top_features": {
+      "top_3": [
+        "Feature_14",
+        "Feature_16",
+        "Feature_19"
+      ],
+      "top_5": [
+        "Feature_14",
+        "Feature_16",
+        "Feature_19",
+        "Feature_02",
+        "Feature_11"
+      ],
+      "top_5_cumulative_pct": 49.48
+    },
+    "root_split": {
+      "node_id": 0,
+      "depth": 0,
+      "feature_name": "Feature_14",
+      "threshold": -0.1747,
+      "samples": 15000,
+      "solver_mode": "mab",
+      "gini": 0.5,
+      "gini_gain": 0.0993,
+      "left_samples": 6914,
+      "right_samples": 8086,
+      "left_pred": "Class 1",
+      "right_pred": "Class 0"
+    },
+    "final_splits_count": 16,
+    "feature_contributions": [
+      {
+        "rank": 1,
+        "feature_idx": 14,
+        "feature_name": "Feature_14",
+        "mab_importance_pct": 9.68,
+        "rf_importance_pct": 15.49,
+        "mutual_info_pct": 19.88,
+        "mutual_info_raw": 0.1288,
+        "split_count": 3,
+        "stats": {
+          "feature_idx": 14,
+          "feature_name": "Feature_14",
+          "min": -9.323800086975098,
+          "max": 7.413599967956543,
+          "mean": 0.004600000102072954,
+          "std": 2.0622000694274902,
+          "unique_values": 1000
+        },
+        "composite_score": 14.26,
+        "cumulative_pct": 14.26
+      },
+      {
+        "rank": 2,
+        "feature_idx": 16,
+        "feature_name": "Feature_16",
+        "mab_importance_pct": 9.68,
+        "rf_importance_pct": 10.63,
+        "mutual_info_pct": 13.06,
+        "mutual_info_raw": 0.0847,
+        "split_count": 3,
+        "stats": {
+          "feature_idx": 16,
+          "feature_name": "Feature_16",
+          "min": -12.018400192260742,
+          "max": 14.888899803161621,
+          "mean": 0.4422999918460846,
+          "std": 3.222399950027466,
+          "unique_values": 1000
+        },
+        "composite_score": 10.86,
+        "cumulative_pct": 25.12
+      },
+      {
+        "rank": 3,
+        "feature_idx": 19,
+        "feature_name": "Feature_19",
+        "mab_importance_pct": 16.13,
+        "rf_importance_pct": 5.68,
+        "mutual_info_pct": 0.5,
+        "mutual_info_raw": 0.0032,
+        "split_count": 5,
+        "stats": {
+          "feature_idx": 19,
+          "feature_name": "Feature_19",
+          "min": -7.702600002288818,
+          "max": 7.162899971008301,
+          "mean": 0.003599999938160181,
+          "std": 2.0947000980377197,
+          "unique_values": 1000
+        },
+        "composite_score": 8.56,
+        "cumulative_pct": 33.68
+      },
+      {
+        "rank": 4,
+        "feature_idx": 2,
+        "feature_name": "Feature_02",
+        "mab_importance_pct": 6.45,
+        "rf_importance_pct": 7.91,
+        "mutual_info_pct": 11.54,
+        "mutual_info_raw": 0.0748,
+        "split_count": 2,
+        "stats": {
+          "feature_idx": 2,
+          "feature_name": "Feature_02",
+          "min": -13.826600074768066,
+          "max": 16.290199279785156,
+          "mean": 0.6800000071525574,
+          "std": 4.452899932861328,
+          "unique_values": 1000
+        },
+        "composite_score": 8.23,
+        "cumulative_pct": 41.91
+      },
+      {
+        "rank": 5,
+        "feature_idx": 11,
+        "feature_name": "Feature_11",
+        "mab_importance_pct": 9.68,
+        "rf_importance_pct": 6.49,
+        "mutual_info_pct": 5.7,
+        "mutual_info_raw": 0.0369,
+        "split_count": 3,
+        "stats": {
+          "feature_idx": 11,
+          "feature_name": "Feature_11",
+          "min": -8.980899810791016,
+          "max": 8.501199722290039,
+          "mean": -0.49559998512268066,
+          "std": 2.124500036239624,
+          "unique_values": 1000
+        },
+        "composite_score": 7.57,
+        "cumulative_pct": 49.48
+      },
+      {
+        "rank": 6,
+        "feature_idx": 0,
+        "feature_name": "Feature_00",
+        "mab_importance_pct": 9.68,
+        "rf_importance_pct": 6.13,
+        "mutual_info_pct": 5.92,
+        "mutual_info_raw": 0.0384,
+        "split_count": 3,
+        "stats": {
+          "feature_idx": 0,
+          "feature_name": "Feature_00",
+          "min": -8.407299995422363,
+          "max": 7.110300064086914,
+          "mean": -0.5040000081062317,
+          "std": 2.0578999519348145,
+          "unique_values": 1000
+        },
+        "composite_score": 7.5,
+        "cumulative_pct": 56.98
+      },
+      {
+        "rank": 7,
+        "feature_idx": 9,
+        "feature_name": "Feature_09",
+        "mab_importance_pct": 3.23,
+        "rf_importance_pct": 6.96,
+        "mutual_info_pct": 13.86,
+        "mutual_info_raw": 0.0898,
+        "split_count": 1,
+        "stats": {
+          "feature_idx": 9,
+          "feature_name": "Feature_09",
+          "min": -12.91819953918457,
+          "max": 15.163399696350098,
+          "mean": 0.684499979019165,
+          "std": 3.7844998836517334,
+          "unique_values": 1000
+        },
+        "composite_score": 7.19,
+        "cumulative_pct": 64.17
+      },
+      {
+        "rank": 8,
+        "feature_idx": 6,
+        "feature_name": "Feature_06",
+        "mab_importance_pct": 6.45,
+        "rf_importance_pct": 6.98,
+        "mutual_info_pct": 7.93,
+        "mutual_info_raw": 0.0514,
+        "split_count": 2,
+        "stats": {
+          "feature_idx": 6,
+          "feature_name": "Feature_06",
+          "min": -6.567399978637695,
+          "max": 9.718199729919434,
+          "mean": 0.5206999778747559,
+          "std": 1.9645999670028687,
+          "unique_values": 1000
+        },
+        "composite_score": 7.01,
+        "cumulative_pct": 71.18
+      },
+      {
+        "rank": 9,
+        "feature_idx": 18,
+        "feature_name": "Feature_18",
+        "mab_importance_pct": 6.45,
+        "rf_importance_pct": 9.6,
+        "mutual_info_pct": 4.03,
+        "mutual_info_raw": 0.0261,
+        "split_count": 2,
+        "stats": {
+          "feature_idx": 18,
+          "feature_name": "Feature_18",
+          "min": -12.40470027923584,
+          "max": 14.720999717712402,
+          "mean": 1.2865999937057495,
+          "std": 3.2576000690460205,
+          "unique_values": 1000
+        },
+        "composite_score": 6.95,
+        "cumulative_pct": 78.13
+      },
+      {
+        "rank": 10,
+        "feature_idx": 12,
+        "feature_name": "Feature_12",
+        "mab_importance_pct": 6.45,
+        "rf_importance_pct": 3.66,
+        "mutual_info_pct": 4.04,
+        "mutual_info_raw": 0.0262,
+        "split_count": 2,
+        "stats": {
+          "feature_idx": 12,
+          "feature_name": "Feature_12",
+          "min": -9.896300315856934,
+          "max": 6.685699939727783,
+          "mean": -0.5077000260353088,
+          "std": 2.06030011177063,
+          "unique_values": 1000
+        },
+        "composite_score": 4.87,
+        "cumulative_pct": 83.0
+      }
+    ]
+  }
+}
