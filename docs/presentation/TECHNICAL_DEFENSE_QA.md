@@ -1,6 +1,7 @@
 # MABSplit++ Comprehensive Technical Defense & Viva Q&A Guide
 
-**Institution**: Pune Institute of Computer Technology (PICT), Pune  
+**Institution**: Walchand College of Engineering, Sangli  
+**Department**: Department of Computer Science and Engineering  
 **Project**: MABSplit++: Accelerated Decision Tree and Random Forest Training via Multi-Armed Bandits  
 **Target Audience**: External Examiners, Project Review Committee, Technical Evaluators
 

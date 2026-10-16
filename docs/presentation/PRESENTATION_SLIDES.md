@@ -1,7 +1,7 @@
 # MABSplit++ Final Presentation Slide Deck Transcript
 
-**Institution**: Pune Institute of Computer Technology (PICT), Pune  
-**Department**: Department of Computer Engineering  
+**Institution**: Walchand College of Engineering, Sangli  
+**Department**: Department of Computer Science and Engineering  
 **Project**: MABSplit++: Accelerated Decision Tree and Random Forest Training via Multi-Armed Bandits  
 **Duration**: 15–20 Minutes (including 5 min Technical Q&A)
 
@@ -15,7 +15,7 @@
   - Kedar Dhotre
   - Dhanashree Maid
   - Onkar Rane
-- **Academic Year**: 2026–2027 | Pune Institute of Computer Technology
+- **Academic Year**: 2026–2027 | Walchand College of Engineering, Sangli
 - **Speaker Cue**: *"Good morning respected evaluators and committee members. Today we present MABSplit++, an accelerated tree training architecture that reformulates the fundamental computational bottleneck of machine learning decision trees into a multi-armed bandit best-arm identification problem."*
 
 ---

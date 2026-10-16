@@ -2,7 +2,7 @@
 
 **Companion Document to:** [`PROJECT_ROADMAP.md`](file:///k:/mega%20project/PROJECT_ROADMAP.md)  
 **Project Title:** MABSplit — Accelerated Random Forest & Decision Tree Training via Multi-Armed Bandit Node Splitting  
-**Target:** Pune Institute of Computer Technology (PICT) — Department of Computer Engineering (2026–2027)  
+**Target:** Walchand College of Engineering, Sangli — Department of Computer Science and Engineering (2026–2027)  
 
 ---
 

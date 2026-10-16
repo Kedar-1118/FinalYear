@@ -391,7 +391,7 @@ This project builds upon the foundational research of:
 @article{mabsplit_plus_2026,
   title   = {MABSplit++: Accelerated Decision Tree and Random Forest Training via Finite-Population Multi-Armed Bandits},
   author  = {Aditya Pansare and Kedar Dhotre and Dhanashree Maid and Onkar Rane},
-  journal = {Pune Institute of Computer Technology (PICT), Pune},
+  journal = {Walchand College of Engineering, Sangli},
   year    = {2026}
 }
 ```

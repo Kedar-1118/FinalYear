@@ -1,7 +1,8 @@
 # MABSplit++ Verification & Testing Report
 
 **Project Title**: MABSplit++: Accelerated Decision Tree and Random Forest Training via Multi-Armed Bandits  
-**Institution**: Pune Institute of Computer Technology (PICT), Pune  
+**Institution**: Walchand College of Engineering, Sangli  
+**Department**: Department of Computer Science and Engineering  
 **Date of Execution**: October 16, 2026  
 **Test Runner**: Pytest 8.4.2 / pytest-cov 7.1.0  
 **Environment**: Python 3.13.9 (Windows 64-bit / x86_64)

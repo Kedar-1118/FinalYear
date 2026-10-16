@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed missing `n_features_` attribute check in `check_is_fitted` across decision tree serialization and random forest feature importance routines.
-- Resolved institution documentation alignment to Pune Institute of Computer Technology (PICT).
+- Resolved institution documentation alignment to Walchand College of Engineering, Sangli.
 
 ---
 

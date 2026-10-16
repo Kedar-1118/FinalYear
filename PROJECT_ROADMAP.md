@@ -1,7 +1,7 @@
 # MABSplit Project Implementation Roadmap & Action Plan
 
 **Project Title**: MABSplit — Accelerated Random Forest & Decision Tree Training via Multi-Armed Bandit Node Splitting  
-**Institution**: Pune Institute of Computer Technology (PICT) — Department of Computer Engineering  
+**Institution**: Walchand College of Engineering, Sangli — Department of Computer Science and Engineering  
 **Academic Year**: 2026–2027  
 **Core Reference**: Tiwari et al., *MABSplit: Faster Forest Training Using Multi-Armed Bandits*, NeurIPS 2022 (`ThrunGroup/FastForest`)
 
