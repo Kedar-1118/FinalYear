@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.coverage
+coverage_html/
+htmlcov/
+.vscode/
 
 # Executables & build artifacts
 *.exe
