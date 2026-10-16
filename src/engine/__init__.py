@@ -8,6 +8,7 @@ from .numba_kernels import (
 )
 from .fast_mab import FastMABEngine
 from .hybrid_solver import HybridSolver
+from .cpp_backend import CppEngineBridge
 
 __all__ = [
     "accumulate_histograms_uint8",
@@ -17,5 +18,7 @@ __all__ = [
     "hoeffding_bound",
     "exact_best_split_vectorized",
     "FastMABEngine",
-    "HybridSolver"
+    "HybridSolver",
+    "CppEngineBridge"
 ]
+

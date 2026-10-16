@@ -89,6 +89,17 @@ class TestMABProfiler(unittest.TestCase):
         self.assertIn("DummyAlgorithm", table)
         self.assertIn("75.0%", table)
 
+    def test_cpp_engine_bridge(self):
+        from src.engine import CppEngineBridge
+        bridge = CppEngineBridge()
+        if bridge.is_available:
+            telemetry = bridge.run_benchmark()
+            self.assertEqual(telemetry["status"], "success")
+            self.assertIn("execution_time_ms", telemetry)
+            self.assertGreater(telemetry["execution_time_ms"], 0.0)
+            self.assertLessEqual(telemetry["sample_read_pct"], 100.0)
+
 
 if __name__ == "__main__":
     unittest.main()
+
