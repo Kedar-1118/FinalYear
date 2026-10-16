@@ -1,0 +1,6 @@
+Ablation Configuration,Train Time (s),Speedup vs Vanilla,Sample Queries,Accuracy,F1 Score
+"1. Vanilla MAB (Hoeffding, Fixed Batch, No Hybrid)",0.6958,1.0x,"1,279,733",0.9012,0.9012
+2. + Serfling Finite-Population Bound,0.51,1.36x,"1,202,716",0.8948,0.8948
+3. + ADMA (Adaptive Dynamic Minibatch),0.6638,1.05x,"1,266,274",0.9057,0.9057
+4. + Hybrid Depth/Sample Switch,0.6393,1.09x,"1,270,163",0.9062,0.9062
+5. Full System (+ Hierarchical Coarse-to-Fine H-MAB),0.8644,0.81x,"2,255,220",0.9096,0.9096

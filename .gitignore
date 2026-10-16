@@ -19,5 +19,7 @@ datasets/*
 *.zip
 *.tar.gz
 *.gz
-*.csv
 *.data
+datasets/**/*.csv
+!benchmarks/results/*.csv
+!experiments/results/*.csv
