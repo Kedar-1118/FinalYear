@@ -16,6 +16,8 @@ Building upon Tiwari et al. (*NeurIPS 2022*), **MABSplit++** introduces **four f
 
 Compatible with the standard **`scikit-learn`** estimator API (`BaseEstimator`, `ClassifierMixin`), backed by high-throughput **Numba JIT kernels** and a bare-metal **C++17 engine**.
 
+> 💡 **New to this project or looking for a non-technical explanation?** Read the [Layman's Complete Explainer Guide](PROJECT_EXPLAINER_LAYMAN.md) for intuitive analogies, diagrams, and plain-English walkthroughs!
+
 ---
 
 ## 📑 Table of Contents
