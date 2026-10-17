@@ -29,14 +29,19 @@ from benchmarks.benchmark_suite import warmup_jit
 
 def run_live_demo():
     print("=" * 75)
-    print("  🌲 MABSplit++ Live Verification & Demonstration Suite")
-    print("  Walchand College of Engineering, Sangli — Dept. of CSE")
+    print("  [+] MABSplit++ Live Verification & Demonstration Suite")
+    print("  Walchand College of Engineering, Sangli -- Dept. of CSE")
     print("=" * 75)
     
     # 1. Warm up Numba JIT kernels
     print("\n[1/4] Initializing and warming up Numba JIT machine kernels...")
     warmup_jit()
-    print("      ✓ Numba compilation active and cached.")
+    # Ensure full pipeline warmup including coarse-to-fine
+    _warmup_clf = MABDecisionTreeClassifier(max_depth=3, use_coarse_to_fine=True, random_state=42)
+    _X_w = np.random.randn(100, 20).astype(np.float32)
+    _y_w = np.random.randint(0, 2, size=100).astype(np.int32)
+    _warmup_clf.fit(_X_w, _y_w)
+    print("      -> Numba compilation active and cached.")
 
     # 2. Generate Synthetic Dataset
     n_samples = 30000
@@ -83,7 +88,7 @@ def run_live_demo():
 
     # 5. Display Comparative Results
     print("\n" + "=" * 75)
-    print("  📊 COMPARATIVE BENCHMARK RESULTS")
+    print("  COMPARATIVE BENCHMARK RESULTS")
     print("=" * 75)
     print(f"{'Metric':<30} | {'Scikit-Learn CART':<18} | {'MABSplit++ (Ours)':<18}")
     print("-" * 75)
@@ -103,11 +108,11 @@ def run_live_demo():
         print("\n[4/4] Executing Bare-Metal C++17 Micro-Benchmark Engine...")
         res = bridge.run_benchmark()
         if res.get("status") == "success":
-            print(f"      ✓ C++ Engine Runtime: {res.get('execution_time_ms', 0):.2f} ms")
-            print(f"      ✓ Sample Queries:    {res.get('samples_evaluated', 0):,} / {res.get('total_samples', 0):,} ({res.get('sample_read_pct', 0):.1f}%)")
+            print(f"      -> C++ Engine Runtime: {res.get('execution_time_ms', 0):.2f} ms")
+            print(f"      -> Sample Queries:    {res.get('samples_evaluated', 0):,} / {res.get('total_samples', 0):,} ({res.get('sample_read_pct', 0):.1f}%)")
 
     # 7. Next Steps & UI Links
-    print("\n💡 NEXT STEPS FOR EVALUATION & DEMONSTRATION:")
+    print("\nNEXT STEPS FOR EVALUATION & DEMONSTRATION:")
     print("  1. Interactive Web Dashboard: Run 'python visualization/serve.py' or open 'visualization/index.html'")
     print("  2. Slide Deck Presentation:   Open 'docs/presentation/presentation.html' in your browser")
     print("  3. Technical Defense QA:      Read 'docs/presentation/TECHNICAL_DEFENSE_QA.md'")
