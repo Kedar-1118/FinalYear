@@ -1,0 +1,15 @@
+# Core Numerical & Machine Learning Libraries
+numpy>=1.23.0
+scipy>=1.9.0
+scikit-learn>=1.2.0
+numba>=0.56.0
+joblib>=1.2.0
+pandas>=1.5.0
+
+# Visualization & Plotting
+matplotlib>=3.6.0
+seaborn>=0.12.0
+
+# Testing & CI Coverage
+pytest>=7.0.0
+pytest-cov>=4.0.0
