@@ -124,6 +124,7 @@ public:
         double alpha = 1.0,
         bool use_adaptive_batch = true
     ) {
+        (void)N_total_dataset;
         int N_node = static_cast<int>(node_indices.size());
         if (N_node <= 1 || candidate_features.empty()) {
             return {-1, -1, 0.0, 0};

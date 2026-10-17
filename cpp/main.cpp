@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <string>
+#include <numeric>
 
 int main(int argc, char* argv[]) {
     std::cout << "==========================================================" << std::endl;
@@ -43,7 +45,7 @@ int main(int argc, char* argv[]) {
         for (int f = 0; f < F; ++f) {
             // Plant informative signal in feature 3
             if (f == 3) {
-                X_binned[i * F + f] = (y[i] == 1) ? bin_dist(rng) / 2 : bin_dist(rng);
+                X_binned[i * F + f] = static_cast<uint8_t>((y[i] == 1) ? (bin_dist(rng) / 2) : bin_dist(rng));
             } else {
                 X_binned[i * F + f] = static_cast<uint8_t>(bin_dist(rng));
             }
