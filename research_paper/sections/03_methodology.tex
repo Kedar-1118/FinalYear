@@ -48,7 +48,7 @@ M_t = \max\left( M_{\min}, \left\lfloor M_0 \cdot \left( \frac{|\mathcal{A}_t|}{
 where $K$ is the initial arm count, $M_{\min}$ is the lower bound constraint (default: 64), and $\alpha \in [0.3, 0.7]$ is the sub-linear scaling exponent (default: $\alpha = 0.5$). When only contending arms remain, $M_t$ scales down gracefully, terminating the elimination loop at the exact boundary of statistical separation.
 
 \subsection{Depth-Adaptive Hybrid Solver}
-Near the bottom of decision trees, sub-tree leaf partitions contain relatively few training instances ($N \ll 500$). Running MAB bookkeeping, dynamic allocation, and random permutation generation on small nodes incurs non-trivial computational overhead.
+Near the bottom of decision trees, sub-tree leaf partitions contain relatively few training instances ($N \ll 500$). Running MAB bookkeeping, dynamic allocation, and random permutation generation on small nodes incurs non-trivial computational overhead. This observation is theoretically grounded in recent structural insights by Babbar et al. \cite{babbar2024near}, who demonstrated that sub-problems close to tree leaves do not require complex optimization solvers because greediness is sufficient near leaves.
 
 The Depth-Adaptive Hybrid Solver computes an empirical dispatch rule:
 \begin{equation}

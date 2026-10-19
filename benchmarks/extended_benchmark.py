@@ -27,7 +27,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import ttest_rel, wilcoxon
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassifier, ExtraTreesClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score
 
@@ -106,10 +106,34 @@ def build_model_suite(max_depth=10, n_trees=10):
         "tree"
     ))
 
-    # 2. Sklearn HistGradientBoosting
+    # 2. ExtraTrees (Geurts et al. 2006)
+    models.append((
+        "Sklearn ExtraTrees",
+        ExtraTreesClassifier(max_depth=max_depth, n_estimators=n_trees, random_state=42),
+        "forest"
+    ))
+
+    # 3. Sklearn HistGradientBoosting
     models.append((
         "Sklearn HistGradientBoosting",
         HistGradientBoostingClassifier(max_depth=max_depth, max_iter=20, random_state=42),
+        "tree"
+    ))
+
+    # 4. Baseline MABSplit (Tiwari et al. 2022 - Naive Hoeffding, no hybrid, static batch)
+    models.append((
+        "Baseline MABSplit (Tiwari et al.)",
+        MABDecisionTreeClassifier(
+            max_depth=max_depth,
+            n_bins=128,
+            n_thresh=0,
+            use_hybrid=False,
+            use_adaptive_batch=False,
+            use_serfling=False,
+            use_coarse_to_fine=False,
+            m0=120,
+            random_state=42
+        ),
         "tree"
     ))
 

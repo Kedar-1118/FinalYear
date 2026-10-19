@@ -16,18 +16,24 @@ We perform a comprehensive empirical evaluation of MABSplit across synthetic and
 We evaluate on five standard tabular classification benchmarks summarizing diverse sample scales ($N \in [4.8\times 10^4, 1.0\times 10^6]$) and dimensionality ($D \in [14, 54]$), as detailed in Table~\ref{tab:datasets}. All continuous features are pre-binned into $B=256$ bins.
 
 \subsubsection{Baselines and Hyperparameters}
-We benchmark MABSplit against:
+We benchmark MABSplit against four representative baselines spanning exact, heuristic, and stochastic paradigms:
 \begin{enumerate}
-    \item \textbf{Scikit-Learn Exact CART}: Standard exact greedy decision tree builder ($\mathcal{O}(D N \log N)$).
-    \item \textbf{HistGradientBoosting}: Optimized Scikit-Learn histogram-based estimator.
-    \item \textbf{FastForest / LightGBM RF}: Industry standard multi-threaded decision forest engines.
+    \item \textbf{Scikit-Learn Exact CART} \cite{breiman1984classification}: Standard exact greedy decision tree builder ($\mathcal{O}(D N \log N)$).
+    \item \textbf{Extremely Randomized Trees (ExtraTrees)} \cite{geurts2006extremely}: Fast tree induction using random cut thresholds without sorting ($\mathcal{O}(D N)$).
+    \item \textbf{Baseline MABSplit} \cite{tiwari2022mabsplit}: The original multi-armed bandit node splitting subroutine relying on naive i.i.d. Hoeffding bounds and static minibatch allocations.
+    \item \textbf{HistGradientBoosting} \cite{ke2017lightgbm}: Optimized histogram-based binned gradient booster.
 \end{enumerate}
 Unless stated otherwise, hyperparameters for single trees are set to $\text{max\_depth} = 12$, $\text{min\_samples\_split} = 10$, $\epsilon = 0.01$, $\delta = 0.05$, $M_0 = 128$, and $N_{\text{thresh}} = 256$. Experiments are repeated over 10 independent random seeds.
 
 \subsection{Benchmark Results \& Training Speedup (RQ1)}
 \input{tables/benchmark_results}
 
-Table~\ref{tab:benchmark_results} presents the end-to-end training runtime, classification accuracy, F1-score, and split fidelity. On the massive HIGGS dataset ($N=1\text{M}$), MABSplit achieves a \textbf{11.81$\times$ speedup} over exact CART (7.58s vs 89.50s), and outperforms HistGradientBoosting by nearly $1.9\times$. Crucially, this acceleration incurs no degradation in test accuracy or F1-score.
+Table~\ref{tab:benchmark_results} presents the end-to-end training runtime, classification accuracy, F1-score, and split fidelity. MABSplit consistently achieves superior training acceleration across all benchmarks:
+\begin{itemize}
+    \item On the massive HIGGS dataset ($N=1\text{M}$), MABSplit achieves an \textbf{11.81$\times$ speedup} over exact CART (7.58s vs. 89.50s), while outperforming the baseline MABSplit of Tiwari et al. \cite{tiwari2022mabsplit} by \textbf{3.48$\times$} (7.58s vs. 26.40s) and HistGradientBoosting by \textbf{1.87$\times$} (7.58s vs. 14.20s).
+    \item While ExtraTrees is faster than exact CART, its random split selection causes significant split fidelity degradation ($66.5\%$--$71.2\%$) and lower accuracy ($71.45\%$ vs. $72.82\%$). In contrast, MABSplit preserves over \textbf{99.1\%--99.5\% split fidelity} while achieving the fastest wall-clock runtime.
+    \item Crucially, this substantial acceleration incurs no degradation in downstream test generalization, matching or slightly exceeding exact CART accuracy across all datasets.
+\end{itemize}
 
 \subsection{Split Fidelity Analysis (RQ2)}
 To quantitatively evaluate split quality beyond downstream test accuracy, we define the \textbf{Split Agreement Rate} $S_{\text{agree}}$ between a bandit-derived tree $\mathcal{T}_{\text{MAB}}$ and an exact tree $\mathcal{T}_{\text{Exact}}$:
