@@ -28,9 +28,16 @@ Unless stated otherwise, hyperparameters for single trees are set to $\text{max\
 \subsection{Benchmark Results \& Training Speedup (RQ1)}
 \input{tables/benchmark_results}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig1_speedup_scaling.pdf}
+\caption{Training speedup factor relative to Scikit-Learn Exact CART ($1.0\times$) across sample population sizes $N \in [10^4, 10^6]$.}
+\label{fig:speedup_scaling}
+\end{figure}
+
 Table~\ref{tab:benchmark_results} presents the end-to-end training runtime, classification accuracy, F1-score, and split fidelity. MABSplit consistently achieves superior training acceleration across all benchmarks:
 \begin{itemize}
-    \item On the massive HIGGS dataset ($N=1\text{M}$), MABSplit achieves an \textbf{11.81$\times$ speedup} over exact CART (7.58s vs. 89.50s), while outperforming the baseline MABSplit of Tiwari et al. \cite{tiwari2022mabsplit} by \textbf{3.48$\times$} (7.58s vs. 26.40s) and HistGradientBoosting by \textbf{1.87$\times$} (7.58s vs. 14.20s).
+    \item On the massive HIGGS dataset ($N=1\text{M}$), MABSplit achieves an \textbf{11.81$\times$ speedup} over exact CART (7.58s vs. 89.50s), while outperforming the baseline MABSplit of Tiwari et al. \cite{tiwari2022mabsplit} by \textbf{3.48$\times$} (7.58s vs. 26.40s) and HistGradientBoosting by \textbf{1.87$\times$} (7.58s vs. 14.20s). As shown in Fig.~\ref{fig:speedup_scaling}, MABSplit's speedup grows superlinearly as $N$ expands to millions of instances.
     \item While ExtraTrees is faster than exact CART, its random split selection causes significant split fidelity degradation ($66.5\%$--$71.2\%$) and lower accuracy ($71.45\%$ vs. $72.82\%$). In contrast, MABSplit preserves over \textbf{99.1\%--99.5\% split fidelity} while achieving the fastest wall-clock runtime.
     \item Crucially, this substantial acceleration incurs no degradation in downstream test generalization, matching or slightly exceeding exact CART accuracy across all datasets.
 \end{itemize}
@@ -40,12 +47,35 @@ To quantitatively evaluate split quality beyond downstream test accuracy, we def
 \begin{equation}
 S_{\text{agree}}(\mathcal{T}_{\text{MAB}}, \mathcal{T}_{\text{Exact}}) = \frac{1}{|\mathcal{V}_{\text{internal}}|} \sum_{u \in \mathcal{V}_{\text{internal}}} \mathbb{I}\left( j^*_{\text{MAB}}(u) = j^*_{\text{Exact}}(u) \right)
 \end{equation}
-Across all datasets, MABSplit preserves $>99.1\%$ split agreement with the exact greedy baseline, confirming that PAC arm elimination accurately isolates the global optimum without structural tree distortion.
+Across all datasets, MABSplit preserves $>99.1\%$ split agreement with the exact greedy baseline. As depicted in Fig.~\ref{fig:split_fidelity}, while naive Hoeffding and ExtraTrees diverge deeper in the hierarchy, MABSplit maintains near-perfect split fidelity across all depths, switching seamlessly to the exact SIMD solver at deep leaves.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig3_split_fidelity.pdf}
+\caption{Internal node split agreement rate ($S_{\text{agree}}$) with exact CART across tree depth levels on Covertype.}
+\label{fig:split_fidelity}
+\end{figure}
 
 \subsection{Ablation Study (RQ3)}
 \input{tables/ablation_table}
 
-To isolate the impact of each innovation, we perform an ablation analysis on the Covertype dataset ($N=581\text{k}$), reported in Table~\ref{tab:ablation}. Replacing naive Hoeffding bounds with Serfling finite-population bounds reduces sample queries from 41.5\% to 32.8\% and accelerates training from $3.02\times$ to $4.09\times$. Adding H-MAB coarse-to-fine filtering doubles the speedup to $6.23\times$, while ADMA and the hybrid solver further reduce sample queries to just 14.2\%, achieving a cumulative speedup of \textbf{9.18$\times$}.
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/fig2_ablation_breakdown.pdf}
+\caption{Ablation analysis showing incremental speedup ($\times$, blue bars) and sample evaluation queries (\%, red bars) across algorithmic configurations on Covertype.}
+\label{fig:ablation_breakdown}
+\end{figure}
+
+To isolate the impact of each innovation, we perform an ablation analysis on the Covertype dataset ($N=581\text{k}$), reported in Table~\ref{tab:ablation} and Fig.~\ref{fig:ablation_breakdown}. Replacing naive Hoeffding bounds with Serfling finite-population bounds reduces sample queries from 41.5\% to 32.8\% and accelerates training from $3.02\times$ to $4.09\times$. Adding H-MAB coarse-to-fine filtering doubles the speedup to $6.23\times$, while ADMA and the hybrid solver further reduce sample queries to just 14.2\%, achieving a cumulative speedup of \textbf{9.18$\times$}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig4_pareto_tradeoff.pdf}
+\caption{Efficiency vs. generalization Pareto frontier (Fit Time vs. Test Accuracy) on Covertype.}
+\label{fig:pareto_tradeoff}
+\end{figure}
+
+Furthermore, Fig.~\ref{fig:pareto_tradeoff} maps the Pareto trade-off between training time and generalization accuracy on Covertype. MABSplit occupies the dominant top-left frontier, matching the accuracy of exact CART while finishing in a fraction of the time.
 
 \subsection{Random Forest Ensemble Scaling (RQ4)}
 We scale MABSplit to 100-tree Random Forest ensembles using OpenMP multi-threading. MABSplit scales linearly with CPU cores ($>94\%$ parallel efficiency on 16 threads), cutting 100-tree ensemble training on HIGGS from 420 seconds (Scikit-Learn) down to 34.6 seconds.
