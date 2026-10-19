@@ -1,50 +1,54 @@
 \section{Background and Problem Formulation}
 \label{sec:background}
 
-\subsection{Decision Tree Node Splitting & Impurity Metrics}
-Let $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N$ denote a training dataset partitioned to an internal tree node, where $\mathbf{x}_i \in \mathbb{R}^D$ is a feature vector and $y_i \in \{1, \dots, C\}$ is a class label. A candidate split point is defined by a tuple $a = (j, \theta)$, corresponding to feature index $j \in \{1, \dots, D\}$ and threshold $\theta \in \mathbb{R}$. Split $a$ divides the node data $\mathcal{D}$ into left and right subsets:
+\subsection{Decision Node Impurity and Arm Reward Formulation}
+Consider a training sample cohort $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N$ residing at an arbitrary internal decision tree node, where each instance pairs a feature vector $\mathbf{x}_i \in \mathbb{R}^D$ with a categorical class assignment $y_i \in \{1, \dots, C\}$. A candidate split decision is parameterized by an action tuple $a = (j, \theta)$, corresponding to continuous attribute index $j \in \{1, \dots, D\}$ and decision threshold $\theta \in \mathbb{R}$. Action $a$ bifurcates $\mathcal{D}$ into complementary subsets:
 \begin{equation}
 \mathcal{D}_L(a) = \{(\mathbf{x}_i, y_i) \in \mathcal{D} \mid x_{i, j} \le \theta\}, \quad \mathcal{D}_R(a) = \mathcal{D} \setminus \mathcal{D}_L(a)
 \end{equation}
 
-The quality of split $a$ is measured by the impurity reduction $\Delta I(a, \mathcal{D})$:
+The optimization objective at the node is identifying the split action $a^* \in \mathcal{A}$ maximizing the impurity reduction $\Delta I(a, \mathcal{D})$:
 \begin{equation}
-\Delta I(a, \mathcal{D}) = I(\mathcal{D}) - \left[ \frac{|\mathcal{D}_L(a)|}{|\mathcal{D}|} I(\mathcal{D}_L(a)) + \frac{|\mathcal{D}_R(a)|}{|\mathcal{D}|} I(\mathcal{D}_R(a)) \right]
+\Delta I(a, \mathcal{D}) = I(\mathcal{D}) - \sum_{k \in \{L, R\}} \frac{|\mathcal{D}_k(a)|}{|\mathcal{D}|} I(\mathcal{D}_k(a))
 \label{eq:gini_gain}
 \end{equation}
-where $I(\mathcal{S}) = 1 - \sum_{c=1}^C p_c^2$ is the Gini impurity of sample subset $\mathcal{S}$, and $p_c = \frac{1}{|\mathcal{S}|} \sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}} \mathbb{I}(y_i = c)$. The optimal split is:
+where $I(\mathcal{S}) = 1 - \sum_{c=1}^C p_c^2$ denotes the Gini impurity over set $\mathcal{S}$ with class marginals $p_c = \frac{1}{|\mathcal{S}|} \sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}} \mathbb{I}(y_i = c)$. In our bandit framework, each candidate split represents an arm $a \in \mathcal{A}$ ($|\mathcal{A}| = K$), whose latent expected reward equals its exact node impurity reduction:
 \begin{equation}
-a^* = \arg\max_{a \in \mathcal{A}} \Delta I(a, \mathcal{D})
+\mu_a \equiv \Delta I(a, \mathcal{D}), \quad a^* = \arg\max_{a \in \mathcal{A}} \mu_a
 \end{equation}
-where $\mathcal{A}$ is the discrete set of all candidate splits across all feature dimensions ($|\mathcal{A}| = K$).
 
-\subsection{PAC Best Arm Identification Formulation}
-In the $(\epsilon, \delta)$-Probably Approximately Correct (PAC) Best Arm Identification framework \cite{evendar2006action,kaufmann2016complexity}, the optimization objective is to find a split $\hat{a} \in \mathcal{A}$ using a minimal number of sample evaluations such that:
+\subsection{PAC Best Arm Identification Under Stochastic Subsampling}
+Rather than evaluating all $N$ partition residents to compute $\mu_a$ exactly, a randomized splitter samples a minibatch $\mathcal{S}_n \subset \mathcal{D}$ of size $n \ll N$ to form an empirical estimate $\hat{\mu}_a(n) = \Delta I(a, \mathcal{S}_n)$. Under the $(\epsilon, \delta)$-Probably Approximately Correct (PAC) Best Arm Identification framework \cite{evendar2006action,kaufmann2016complexity}, the objective is to isolate an action $\hat{a} \in \mathcal{A}$ using minimal cumulative sample queries such that:
 \begin{equation}
-\mathbb{P}\left(\Delta I(a^*, \mathcal{D}) - \Delta I(\hat{a}, \mathcal{D}) \le \epsilon \right) \ge 1 - \delta
+\mathbb{P}\left(\mu_{a^*} - \mu_{\hat{a}} \le \epsilon \right) \ge 1 - \delta
 \end{equation}
-where $\epsilon \ge 0$ is the user-specified tolerance parameter and $\delta \in (0, 1)$ is the failure probability.
+where $\epsilon \ge 0$ governs tolerance to sub-optimality and $\delta \in (0, 1)$ establishes the maximum allowable error budget.
 
-\subsection{Hoeffding Bounds vs. Serfling Finite-Population Bounds}
-Standard active arm elimination algorithms rely on Hoeffding's inequality. For a sample mean $\hat{\mu}_n$ computed over $n$ i.i.d. draws from a bounded random variable in $[0, 1]$, the classical Hoeffding confidence radius is given by:
+\subsection{Why Infinite-Population Bounds Fail in Decision Trees}
+Standard multi-armed bandit algorithms invoke Hoeffding's inequality under the assumption of independent, identically distributed draws from an infinite superpopulation. For a bounded random variable normalized to $[0, 1]$, the classical Hoeffding confidence radius is:
 \begin{equation}
 \text{Rad}_{\text{Hoeffding}}(n, \delta) = \sqrt{\frac{\ln(2/\delta)}{2n}}
 \end{equation}
-Because Hoeffding's inequality presumes sampling with replacement from an infinite population, the confidence radius decays strictly as $\mathcal{O}(1/\sqrt{n})$, never reaching zero at $n = N$.
+Because this bound presumes replacement from an unbounded pool, the confidence radius contracts strictly as $\mathcal{O}(n^{-1/2})$. Crucially, even when an algorithm observes all $N$ instances residing at the node ($n = N$), $\text{Rad}_{\text{Hoeffding}}(N, \delta) > 0$. In competitive datasets where two candidate thresholds yield nearly identical true impurity reductions ($|\mu_{a_1} - \mu_{a_2}| < \text{Rad}$), algorithms governed by Hoeffding bounds cannot separate the arms even after observing every available training example, precipitating artificial execution deadlocks.
 
-In contrast, when drawing minibatches $\mathcal{S}_n \subset \mathcal{D}$ of size $n$ \textit{without replacement} from a fixed finite node population of size $N$, the true variance of the estimator contracts as the unobserved fraction of the population diminishes.
+\subsection{Serfling Finite-Population Concentration}
+In contrast, node partitioning operates over a fixed finite universe of size $N$ sampled \textit{without replacement}. As consecutive sample minibatches are queried, the unobserved remainder of the population contracts, reducing the variance of the sample mean.
 
-\begin{definition}[Finite Population Correction Factor]
-For a sample of size $n$ drawn without replacement from a finite population of size $N$, the finite population correction (FPC) coefficient is defined as:
+\begin{definition}[Finite Population Correction Coefficient]
+For a sample of $n$ instances drawn without replacement from a finite cohort of size $N$, the finite population correction (FPC) factor is formalized as:
 \begin{equation}
 \kappa(n, N) = 1 - \frac{n - 1}{N}
 \end{equation}
 \end{definition}
 
-Leveraging the seminal results of Serfling \cite{serfling1974probability}, Bardenet and Maillard \cite{bardenet2015concentration}, and Waudby-Smith and Ramdas \cite{waudbysmith2020confidence}, the finite-population empirical Bernstein confidence radius for bounded random variables in $[0, 1]$ with sample variance $\hat{\sigma}_n^2$ is formalized as:
+Building upon the concentration inequalities of Serfling \cite{serfling1974probability}, Bardenet and Maillard \cite{bardenet2015concentration}, and Waudby-Smith and Ramdas \cite{waudbysmith2020confidence}, the empirical Bernstein confidence radius for bounded rewards in $[0, 1]$ with sample variance $\hat{\sigma}_n^2$ satisfies:
 \begin{equation}
-\text{Rad}_{\text{Serfling}}(n, N, \delta) = \sqrt{2 \hat{\sigma}_n^2 \kappa(n, N) \frac{\ln(3/\delta)}{n}} + \frac{3 \ln(3/\delta) \kappa(n, N)}{n}
+\text{Rad}_{\text{Serfling}}(n, N, \delta) = \sqrt{\frac{2 \hat{\sigma}_n^2 \kappa(n, N) \ln(3/\delta)}{n}} + \frac{3 \kappa(n, N) \ln(3/\delta)}{n}
 \label{eq:serfling_bound}
 \end{equation}
 
-\noindent\textbf{Key Property:} As $n \to N$, $\kappa(n, N) \to \frac{1}{N} \approx 0$, which causes $\text{Rad}_{\text{Serfling}}(N, N, \delta) \to 0$. Thus, when the entire node dataset is processed, the empirical estimate is identical to the exact ground truth with zero remaining uncertainty, preventing pathological deadlocks common in naive bandit implementations.
+\noindent\textbf{Critical Analytical Behavior:} As sample accumulation approaches node capacity ($n \to N$), the FPC factor converges to zero ($\kappa(N, N) = \frac{1}{N} \to 0$), driving the confidence radius to zero:
+\begin{equation}
+\lim_{n \to N} \text{Rad}_{\text{Serfling}}(n, N, \delta) = 0
+\end{equation}
+This property guarantees that empirical estimates seamlessly recover exact ground truth upon dataset exhaustion, eliminating artificial tie-breaking stalls while delivering tighter confidence bounds throughout sequential testing.

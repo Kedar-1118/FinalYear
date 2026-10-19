@@ -1,60 +1,60 @@
 \section{Proposed Methodology}
 \label{sec:methodology}
 
-This section describes the four architectural pillars comprising the \textbf{MABSplit} engine: Columnar Pre-Binning, Hierarchical Arm Pruning (H-MAB), Adaptive Dynamic Minibatch Allocation (ADMA), and the Depth-Adaptive Hybrid Solver.
+The \textbf{MABSplit} architecture integrates four modular components designed to maximize throughput and sample efficiency: Columnar Quantization, Hierarchical Arm Pruning (H-MAB), Adaptive Dynamic Minibatch Allocation (ADMA), and the Depth-Adaptive Hybrid Solver.
 
-\subsection{Columnar $\texttt{uint8}$ Quantization \& SIMD Memory Layout}
-To eliminate repeated floating-point comparisons during split evaluation, continuous features are quantized into $B \le 256$ bins prior to tree induction:
+\subsection{Columnar $\texttt{uint8}$ Quantization \& SIMD Memory Alignment}
+To eliminate repeated floating-point sorting during split evaluations, continuous dimensions are discretized into $B \le 256$ quantile intervals during dataset preprocessing:
 \begin{equation}
-\tilde{x}_{i, j} = \text{Quantize}(x_{i, j}; B) \in \{0, 1, \dots, B-1\}
+\tilde{x}_{i, j} = \text{Discretize}(x_{i, j}; B) \in \{0, 1, \dots, B-1\}
 \end{equation}
-The quantized feature matrix $\mathbf{\tilde{X}} \in \{0, \dots, B-1\}^{N \times D}$ is stored in Fortran-contiguous (column-major) order. This provides an $8\times$ memory reduction compared to 64-bit doubles and facilitates contiguous SIMD histogram aggregation across minibatches.
+The quantized feature matrix $\mathbf{\tilde{X}} \in \{0, \dots, B-1\}^{N \times D}$ is configured in column-major (Fortran-contiguous) storage. This layout grants an $8\times$ compression over 64-bit float representations, fits larger data subsets into L3 CPU cache, and enables auto-vectorized SIMD histogram accumulation across queried minibatches.
 
-\subsection{Hierarchical Coarse-to-Fine Arm Pruning (H-MAB)}
-Rather than evaluating all $D \times B_{\text{fine}}$ candidates simultaneously ($B_{\text{fine}} = 256$), H-MAB operates in two sequential stages:
+\subsection{Hierarchical Coarse-to-Fine Arm Screening (H-MAB)}
+Rather than allocating sample queries across all $K = D \times B_{\text{fine}}$ candidates simultaneously ($B_{\text{fine}} = 256$), H-MAB decomposes candidate discovery into two disciplined phases:
 
 \begin{enumerate}
-    \item \textbf{Stage 1: Coarse Feature Screening ($B_{\text{coarse}} = 16$):} Candidate arms are initialized at coarse 16-bin quantization ($|\mathcal{A}_{\text{coarse}}| = 16 D$). Successive Elimination runs with confidence parameter $\delta_{\text{coarse}} = \frac{\delta}{3}$. Arms failing the condition:
+    \item \textbf{Phase 1: Coarse Dimension Filtering ($B_{\text{coarse}} = 16$):} Split candidates are initially grouped into 16 coarse bins per feature ($|\mathcal{A}_{\text{coarse}}| = 16 D$). Active arm elimination operates under a conservative Bonferroni confidence slice $\delta_{\text{coarse}} = \frac{\delta}{3}$. Arms failing the statistical dominance criterion:
     \begin{equation}
     \hat{\mu}_a + \text{Rad}_{\text{Serfling}}(n, N, \delta_{\text{coarse}}) < \max_{a' \in \mathcal{A}} \left[ \hat{\mu}_{a'} - \text{Rad}_{\text{Serfling}}(n, N, \delta_{\text{coarse}}) \right]
     \end{equation}
-    are immediately discarded.
-    \item \textbf{Stage 2: Fine-Grained Expansion ($B_{\text{fine}} = 256$):} Features retaining at least one active coarse arm are expanded to full 256-bin precision. The fine-grained elimination loop executes with $\delta_{\text{fine}} = \frac{2\delta}{3}$ until a single $(\epsilon, \delta)$-optimal arm survives or sample budget $N$ is exhausted.
+    are promptly pruned. Features retaining zero active arms are flagged as uninformative and discarded from subsequent node computations.
+    \item \textbf{Phase 2: Fine-Grained Candidate Resolution ($B_{\text{fine}} = 256$):} Features surviving Phase 1 expand into full 256-bin precision. Successive elimination then processes surviving arms using the remaining confidence budget $\delta_{\text{fine}} = \frac{2\delta}{3}$ until a single $(\epsilon, \delta)$-optimal threshold emerges or the partition population $N$ is exhausted.
 \end{enumerate}
 
 \begin{algorithm}[t]
-\caption{MABSplit Node Splitting Algorithm}
+\caption{MABSplit Accelerated Node Splitting Pipeline}
 \label{alg:mabsplit}
 \begin{algorithmic}[1]
-\REQUIRE Node samples $\mathcal{D}$, candidate features $\mathcal{F}$, budget $N$, tolerance $\epsilon$, error rate $\delta$, base batch size $M_0$, hybrid threshold $N_{\text{thresh}}$.
-\ENSURE Optimal split arm $\hat{a} = (j^*, \theta^*)$.
+\REQUIRE Node partition $\mathcal{D}$, candidate features $\mathcal{F}$, population $N$, tolerance $\epsilon$, error budget $\delta$, base batch $M_0$, hybrid threshold $N_{\text{thresh}}$.
+\ENSURE Identified optimal split arm $\hat{a} = (j^*, \theta^*)$.
 \IF{$|\mathcal{D}| < N_{\text{thresh}}$}
-    \RETURN $\text{ExactGreedySplit}(\mathcal{D}, \mathcal{F})$ \COMMENT{Depth-Adaptive Fast Path}
+    \RETURN $\text{SIMD\_ExactGreedySplit}(\mathcal{D}, \mathcal{F})$ \COMMENT{Fast Leaf Bypass}
 \ENDIF
-\STATE $\mathcal{A}_{\text{coarse}} \leftarrow \text{GenerateCoarseArms}(\mathcal{F}, B=16)$
-\STATE $\mathcal{A}_{\text{surv}} \leftarrow \text{SuccessiveElimination}(\mathcal{D}, \mathcal{A}_{\text{coarse}}, \delta/3, M_0)$
-\STATE $\mathcal{A}_{\text{fine}} \leftarrow \text{ExpandArmsToFineResolution}(\mathcal{A}_{\text{surv}}, B=256)$
-\STATE $\hat{a} \leftarrow \text{SuccessiveElimination}(\mathcal{D}, \mathcal{A}_{\text{fine}}, 2\delta/3, M_0)$
+\STATE $\mathcal{A}_{\text{coarse}} \leftarrow \text{InitializeCoarseCandidates}(\mathcal{F}, B=16)$
+\STATE $\mathcal{A}_{\text{surv}} \leftarrow \text{SequentialPruning}(\mathcal{D}, \mathcal{A}_{\text{coarse}}, \delta/3, M_0)$
+\STATE $\mathcal{A}_{\text{fine}} \leftarrow \text{ExpandActiveFeatures}(\mathcal{A}_{\text{surv}}, B=256)$
+\STATE $\hat{a} \leftarrow \text{SequentialPruning}(\mathcal{D}, \mathcal{A}_{\text{fine}}, 2\delta/3, M_0)$
 \RETURN $\hat{a}$
 \end{algorithmic}
 \end{algorithm}
 
 \subsection{Adaptive Dynamic Minibatch Allocation (ADMA)}
-Standard Successive Elimination uses a constant minibatch step size $M_0$. When the active candidate pool $|\mathcal{A}_t|$ shrinks significantly, maintaining large batch increments results in redundant sample processing. ADMA dynamically adapts the step size $M_t$ at iteration $t$ via the scaling relation:
+Standard Successive Elimination draws static batch increments $M_0$. However, as inferior splits are rejected and the active arm set $|\mathcal{A}_t|$ diminishes, continuing to draw large sample batches leads to redundant computation. ADMA dynamically adjusts the step size $M_t$ at elimination round $t$ according to:
 \begin{equation}
 M_t = \max\left( M_{\min}, \left\lfloor M_0 \cdot \left( \frac{|\mathcal{A}_t|}{K} \right)^\alpha \right\rfloor \right)
 \label{eq:adma}
 \end{equation}
-where $K$ is the initial arm count, $M_{\min}$ is the lower bound constraint (default: 64), and $\alpha \in [0.3, 0.7]$ is the sub-linear scaling exponent (default: $\alpha = 0.5$). When only contending arms remain, $M_t$ scales down gracefully, terminating the elimination loop at the exact boundary of statistical separation.
+where $K$ denotes initial candidate cardinality, $M_{\min}$ is a hardware-conscious floor constraint (default: 64), and $\alpha \in [0.3, 0.7]$ is a sub-linear compression exponent (default: $\alpha = 0.5$). When only the top contending splits remain, $M_t$ decreases smoothly, isolating the optimal threshold at the exact statistical boundary without wasteful over-sampling.
 
 \subsection{Depth-Adaptive Hybrid Solver}
-Near the bottom of decision trees, sub-tree leaf partitions contain relatively few training instances ($N \ll 500$). Running MAB bookkeeping, dynamic allocation, and random permutation generation on small nodes incurs non-trivial computational overhead. This observation is theoretically grounded in recent structural insights by Babbar et al. \cite{babbar2024near}, who demonstrated that sub-problems close to tree leaves do not require complex optimization solvers because greediness is sufficient near leaves.
+Toward the base of decision tree hierarchies, sample subsets partitioned to internal nodes become small ($N \ll 500$). At this terminal scale, maintaining active arm indices, running variance updates, and evaluating logarithmic confidence radii produces net negative speedup relative to a straightforward scan.
 
-The Depth-Adaptive Hybrid Solver computes an empirical dispatch rule:
+Grounded in the structural theorem of Babbar et al. \cite{babbar2024near}—which demonstrates that sub-problems proximate to tree leaves do not warrant heavy optimization because greediness suffices near leaves—the Depth-Adaptive Hybrid Solver applies an automated routing rule:
 \begin{equation}
-\text{Engine}(\mathcal{D}) = \begin{cases} 
+\text{Solver}(\mathcal{D}) = \begin{cases} 
 \text{SIMD Exact Greedy Split}, & \text{if } |\mathcal{D}| < N_{\text{thresh}} \\
 \text{MABSplit Arm Elimination}, & \text{if } |\mathcal{D}| \ge N_{\text{thresh}}
 \end{cases}
 \end{equation}
-We empirically establish that setting $N_{\text{thresh}} \in [256, 512]$ achieves the optimal trade-off, accelerating shallow sub-tree convergence without sacrificing global tree fidelity.
+Configuring $N_{\text{thresh}} \in [256, 512]$ ensures that large ancestral nodes harness the sublinear sample efficiency of bandits, while small subtrees execute via zero-overhead vectorized exact sorting, achieving optimal end-to-end latency.
