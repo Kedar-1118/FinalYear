@@ -21,7 +21,7 @@ Applying Boole's inequality (union bound) across sequential dependent phases:
 Thus, segmenting the error quota into a one-third fraction for coarse pruning and a two-thirds fraction for fine resolution guarantees that the overall family-wise error rate remains strictly capped at $\delta$.
 \end{proof}
 
-\subsection{$(\epsilon, \delta)$-PAC Optimality Guarantees}
+\subsection{PAC Optimality and Correctness Guarantees}
 \begin{theorem}[PAC Optimality of MABSplit]
 \label{thm:pac_optimality}
 For any partition dataset $\mathcal{D}$ with $N$ instances, user-defined failure tolerance $\delta \in (0, 1)$, and sub-optimality allowance $\epsilon \ge 0$, Algorithm~\ref{alg:mabsplit} outputs an identified split arm $\hat{a}$ satisfying:

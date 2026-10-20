@@ -4,7 +4,7 @@
 We structure our empirical inquiry around four core investigative hypotheses:
 \begin{itemize}
     \item \textbf{RQ1 (Computational Throughput):} Does MABSplit achieve superior training acceleration over exact CART, stochastic cut-point heuristics, and histogram boosters across escalating sample regimes?
-    \item \textbf{RQ2 (Topological & Generalization Fidelity):} Does PAC arm elimination preserve the internal split decisions and out-of-sample generalization of exact greedy builders?
+    \item \textbf{RQ2 (Topological and Generalization Fidelity):} Does PAC arm elimination preserve the internal split decisions and out-of-sample generalization of exact greedy builders?
     \item \textbf{RQ3 (Component-Wise Ablation):} How much does each algorithmic mechanism (Serfling bounds, H-MAB, ADMA, and hybrid dispatch) contribute to query reduction and wall-clock speedup?
     \item \textbf{RQ4 (Multithreaded Forest Scalability):} Does MABSplit maintain high parallel efficiency when scaled to multi-core Random Forest ensembles?
 \end{itemize}
@@ -15,7 +15,7 @@ We structure our empirical inquiry around four core investigative hypotheses:
 \subsubsection{Benchmark Corpora}
 As summarized in Table~\ref{tab:datasets}, we assess performance across diverse empirical distributions: two demographic survey benchmarks ($N \approx 5\times 10^4$), an ecological spatial classification corpus characterized by 54 continuous attributes ($N \approx 5.8\times 10^5$), and an uncompressed million-instance particle collision dataset ($N = 10^6$). In addition, synthetic mixtures provide controlled ground truth. Continuous predictors undergo 256-bin quantile discretization prior to induction.
 
-\subsubsection{Baseline Implementations & Parameters}
+\subsubsection{Baseline Implementations and Parameters}
 We contrast MABSplit against four baseline paradigms:
 \begin{enumerate}
     \item \textbf{Exact CART} \cite{breiman1984classification}: Scikit-Learn's canonical sorting-based greedy tree induction ($\mathcal{O}(D N \log N)$).

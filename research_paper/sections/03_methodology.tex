@@ -3,7 +3,7 @@
 
 The \textbf{MABSplit} architecture integrates four modular components designed to maximize throughput and sample efficiency: Columnar Quantization, Hierarchical Arm Pruning (H-MAB), Adaptive Dynamic Minibatch Allocation (ADMA), and the Depth-Adaptive Hybrid Solver.
 
-\subsection{Columnar $\texttt{uint8}$ Quantization \& SIMD Memory Alignment}
+\subsection{Columnar uint8 Quantization and SIMD Memory Alignment}
 To eliminate repeated floating-point sorting during split evaluations, continuous dimensions are discretized into $B \le 256$ quantile intervals during dataset preprocessing:
 \begin{equation}
 \tilde{x}_{i, j} = \text{Discretize}(x_{i, j}; B) \in \{0, 1, \dots, B-1\}
