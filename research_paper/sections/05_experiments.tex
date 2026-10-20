@@ -19,7 +19,7 @@ As summarized in Table~\ref{tab:datasets}, we assess performance across diverse 
 We contrast MABSplit against four baseline paradigms:
 \begin{enumerate}
     \item \textbf{Exact CART} \cite{breiman1984classification}: Scikit-Learn's canonical sorting-based greedy tree induction ($\mathcal{O}(D N \log N)$).
-    \item \textbf{Extremely Randomized Trees (ExtraTrees)} \cite{geurts2006extremely}: Linear-time induction utilizing stochastic split cut-points without sorting ($\mathcal{O}(D N)$).
+    \item \textbf{Extremely Randomized Trees (ExtraTrees)} \cite{geurts2006extremely}: Linear-time induction via stochastic split cut-points without sorting ($\mathcal{O}(D N)$).
     \item \textbf{Baseline MABSplit} \cite{tiwari2022mabsplit}: The pioneering multi-armed bandit splitter utilizing naive i.i.d. Hoeffding bounds and static minibatch sizing.
     \item \textbf{HistGradientBoosting} \cite{ke2017lightgbm}: Scikit-Learn's optimized histogram-based binned estimator.
 \end{enumerate}

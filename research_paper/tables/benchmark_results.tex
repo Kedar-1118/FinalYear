@@ -2,6 +2,7 @@
 \centering
 \caption{End-to-End Performance and Speedup Comparison on Single Decision Trees ($\text{max\_depth}=12$)}
 \label{tab:benchmark_results}
+\resizebox{\linewidth}{!}{%
 \begin{tabular}{lcccccc}
 \toprule
 \textbf{Dataset} & \textbf{Algorithm} & \textbf{Fit Time (s)} & \textbf{Speedup vs Exact} & \textbf{Accuracy (\%)} & \textbf{F1-Score} & \textbf{Split Fidelity (\%)} \\
@@ -34,5 +35,6 @@
  & HistGradientBoosting \cite{ke2017lightgbm} & 14.20 $\pm$ 0.35 & 6.30$\times$ & 72.65 $\pm$ 0.18 & 0.723 & 92.4\% \\
  & \textbf{MABSplit (Ours)} & \textbf{7.58 $\pm$ 0.22} & \textbf{11.81$\times$} & \textbf{72.82 $\pm$ 0.16} & \textbf{0.726} & \textbf{99.5\%} \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
