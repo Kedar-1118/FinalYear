@@ -22,7 +22,7 @@ Rather than allocating sample queries across all $K = D \times B_{\text{fine}}$ 
     \item \textbf{Phase 2: Fine-Grained Candidate Resolution ($B_{\text{fine}} = 256$):} Features surviving Phase 1 expand into full 256-bin precision. Successive elimination then processes surviving arms using the remaining confidence budget $\delta_{\text{fine}} = \frac{2\delta}{3}$ until a single $(\epsilon, \delta)$-optimal threshold emerges or the partition population $N$ is exhausted.
 \end{enumerate}
 
-\begin{algorithm}[t]
+\begin{algorithm}[htbp]
 \caption{MABSplit Accelerated Node Splitting Pipeline}
 \label{alg:mabsplit}
 \begin{algorithmic}[1]

@@ -28,9 +28,9 @@ Default hyperparameters for individual trees are fixed at $\text{max\_depth} = 1
 \subsection{Benchmark Throughput and Runtime Scaling (RQ1)}
 \input{tables/benchmark_results}
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/fig1_speedup_scaling.pdf}
+\includegraphics[width=0.72\linewidth]{figures/fig1_speedup_scaling.pdf}
 \caption{Empirical speedup ratio over Scikit-Learn Exact CART ($1.0\times$) across sample population volumes $N \in [10^4, 10^6]$.}
 \label{fig:speedup_scaling}
 \end{figure}
@@ -49,9 +49,9 @@ S_{\text{agree}}(\mathcal{T}_{\text{MAB}}, \mathcal{T}_{\text{Exact}}) = \frac{1
 \end{equation}
 MABSplit reliably maintains $>99.1\%$ split concordance across all benchmarks. As traced across tree depths in Fig.~\ref{fig:split_fidelity}, while naive Hoeffding and ExtraTrees exhibit cumulative topological divergence at deeper tiers, MABSplit preserves near-perfect fidelity throughout the hierarchy, transitioning smoothly to exact SIMD sorting at deep subtrees.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/fig3_split_fidelity.pdf}
+\includegraphics[width=0.72\linewidth]{figures/fig3_split_fidelity.pdf}
 \caption{Internal node split agreement rate ($S_{\text{agree}}$) with exact CART across hierarchical depth levels on Covertype.}
 \label{fig:split_fidelity}
 \end{figure}
@@ -59,18 +59,18 @@ MABSplit reliably maintains $>99.1\%$ split concordance across all benchmarks. A
 \subsection{Ablation Study (RQ3)}
 \input{tables/ablation_table}
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig2_ablation_breakdown.pdf}
+\includegraphics[width=0.75\linewidth]{figures/fig2_ablation_breakdown.pdf}
 \caption{Ablation breakdown illustrating incremental speedup ($\times$, blue bars) and sample query requirements (\%, red bars) across structural configurations on Covertype.}
 \label{fig:ablation_breakdown}
 \end{figure}
 
 To quantify the standalone efficacy of each design pillar, we execute an ablation decomposition on Covertype ($N=581\text{k}$), detailed in Table~\ref{tab:ablation} and Fig.~\ref{fig:ablation_breakdown}. Substituting naive Hoeffding bounds with Serfling finite-population bounds lowers sample evaluations from 41.5\% to 32.8\% and enhances throughput from $3.02\times$ to $4.09\times$. Activating H-MAB coarse-to-fine filtering doubles speedup to $6.23\times$, while ADMA batching and hybrid dispatch further curtail sample evaluations to just 14.2\%, realizing an aggregate \textbf{9.18$\times$ speedup}.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/fig4_pareto_tradeoff.pdf}
+\includegraphics[width=0.72\linewidth]{figures/fig4_pareto_tradeoff.pdf}
 \caption{Computational latency versus classification accuracy Pareto trade-off landscape on Covertype.}
 \label{fig:pareto_tradeoff}
 \end{figure}
