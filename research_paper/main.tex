@@ -1,4 +1,9 @@
-\documentclass[10pt,conference]{IEEEtran}
+\documentclass[11pt,journal,onecolumn]{IEEEtran}
+
+% Page Geometry for Standard Single Column Format
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{setspace}
+\setstretch{1.15} % Clean professional academic line spacing for single-column reading
 
 % Packages
 \usepackage{cite}
@@ -31,37 +36,19 @@
 
 \begin{document}
 
-\title{MABSplit: Accelerated Decision Tree and Random Forest Training via Multi-Armed Bandits with Finite-Population Bounds}
+\title{\LARGE\bfseries MABSplit: Accelerated Decision Tree and Random Forest Training\\via Multi-Armed Bandits with Finite-Population Bounds}
 
 \author{
-    \IEEEauthorblockN{Aditya Pansare}
-    \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-    \textit{Walchand College of Engineering, Sangli}\\
-    Sangli, India \\
-    pansareaditya281@gmail.com}
-    \and
-    \IEEEauthorblockN{Kedar Dhotre}
-    \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-    \textit{Walchand College of Engineering, Sangli}\\
-    Sangli, India \\
-    kedardhotre6@gmail.com}
-    \and
-    \IEEEauthorblockN{Dhanashree Maid}
-    \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-    \textit{Walchand College of Engineering, Sangli}\\
-    Sangli, India \\
-    dhanashreemaid9@gmail.com}
-    \and
-    \IEEEauthorblockN{Onkar Rane}
-    \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-    \textit{Walchand College of Engineering, Sangli}\\
-    Sangli, India \\
-    onkarrane60@gmail.com}
-    \and
-    \IEEEauthorblockN{Dr.Poonam Kulkarni}
-    \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-    \textit{Walchand College of Engineering, Sangli}\\
-    Sangli, India \\
+    \IEEEauthorblockN{
+        Aditya~Pansare\IEEEauthorrefmark{1},
+        Kedar~Dhotre\IEEEauthorrefmark{1},
+        Dhanashree~Maid\IEEEauthorrefmark{1},
+        Onkar~Rane\IEEEauthorrefmark{1},
+        and~Dr.~Poonam~Kulkarni\IEEEauthorrefmark{2}
+    }\\[0.6em]
+    \IEEEauthorblockA{
+        \IEEEauthorrefmark{1}\IEEEauthorrefmark{2}Department of Computer Science and Engineering, Walchand College of Engineering, Sangli, Maharashtra, India\\
+        Email: \{pansareaditya281, kedardhotre6, dhanashreemaid9, onkarrane60\}@gmail.com
     }
 }
 
