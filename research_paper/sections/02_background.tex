@@ -1,5 +1,28 @@
-\section{Background and Problem Formulation}
+\section{Related Work and Problem Formulation}
 \label{sec:background}
+
+\subsection{Related Work and Literature Review}
+The acceleration of decision tree and random forest induction on massive datasets has inspired diverse algorithmic strategies across database systems, machine learning theory, and statistical bandits. We categorize existing contributions across four thematic pillars.
+
+\subsubsection{Pillar I: Scalable, Out-of-Core, and Approximate Split Finding}
+Canonical CART \cite{breiman1984classification} and Random Forests \cite{breiman2001random} require sorting continuous attributes at every node, scaling as $\mathcal{O}(D \cdot N \log N)$. Early scalable systems, such as RainForest \cite{gehrke1998rainforest}, introduced Attribute-Value-Class (AVC) count matrices to decouple compute from memory limits, while BOAT \cite{gehrke1999boat} utilized small bootstrap subsets to construct optimistic split bounds that required validation passes over disk. 
+
+Modern high-performance boosting frameworks substitute continuous sorting with equal-frequency or quantile histogram binning. XGBoost \cite{chen2016xgboost} introduced distributed weighted quantile sketching to handle weighted samples under Hessian expansions. LightGBM \cite{ke2017lightgbm} introduced Gradient-based One-Side Sampling (GOSS), which prioritizes samples with large gradients while randomly subsampling instances with small gradients. FastBDT \cite{keck2017fastbdt} exploits equal-frequency binning and SIMD vector registers to achieve extreme throughput in high-energy physics, while ThunderGBM \cite{wen2020thundergbm} offloads histogram construction to parallel GPU thread blocks. Minimal Variance Sampling (MVS) \cite{ibragimov2019minimal} further optimizes stochastic gradient boosting by determining per-sample inclusion probabilities that minimize gradient estimation variance. However, while these histogram engines quantize feature values, they still scan 100\% of the data instances residing at every tree node.
+
+\subsubsection{Pillar II: Multi-Armed Bandits and Pure Exploration Best Arm Identification}
+Multi-Armed Bandit (MAB) theory traditionally emphasizes cumulative regret minimization under the exploration-exploitation trade-off, formalised by Auer et al.'s UCB1 \cite{auer2002finite}. In contrast, decision tree split selection constitutes a \textit{pure exploration} game known as Best Arm Identification (BAI) \cite{audibert2010best,kaufmann2016complexity}. Maron and Moore \cite{maron1994hoeffding} pioneered Hoeffding Races to accelerate model selection search by eliminating statistically inferior models as bounds separated. Even-Dar et al. \cite{evendar2006action} formalized the Successive Elimination and Median Elimination algorithms, proving that an $(\epsilon, \delta)$-PAC optimal arm can be identified using $\mathcal{O}\left(\sum_{a \neq a^*} \Delta_a^{-2} \ln(K/\delta)\right)$ sample queries, where $\Delta_a = \mu_{a^*} - \mu_a$ denotes the sub-optimality gap. In data stream mining, Domingos and Hulten \cite{domingos2000mining} applied Hoeffding bounds in Very Fast Decision Trees (VFDT), accumulating streaming examples until the difference between top candidates exceeded the Hoeffding radius.
+
+\subsubsection{Pillar III: Finite-Population Concentration Inequalities}
+A fundamental limitation of classical concentration bounds (such as Hoeffding, Bennett, and standard empirical Bernstein) is their assumption of independent, identically distributed (i.i.d.) draws with replacement from an infinite superpopulation. In decision tree induction, each node partitions a \textit{fixed finite dataset} $\mathcal{D}$ of size $N$ without replacement. Classical probability theory by Serfling \cite{serfling1974probability} established that sampling without replacement contracts the variance of sample sums by a factor of $(1 - (n-1)/N)$. Bardenet and Maillard \cite{bardenet2015concentration} provided rigorous Bernstein-type concentration inequalities for finite populations, demonstrating substantial confidence interval tightening over superpopulation bounds. Recently, Waudby-Smith and Ramdas \cite{waudbysmith2020confidence} developed time-uniform empirical-Bernstein confidence sequences for sampling without replacement, establishing the foundational mathematical machinery for sequential stopping rules under finite-horizon sampling.
+
+\subsubsection{Pillar IV: Recent Frontiers in Accelerated Tree Optimization (2020--2025)}
+In recent years, several efforts have revisited tree induction. Tiwari et al. \cite{tiwari2022mabsplit} pioneered the framing of decision tree node splitting as a Multi-Armed Bandit BAI problem (MABSplit), proving sublinear sample complexity per node. However, their reference implementation utilized infinite-superpopulation Hoeffding bounds, maintained static minibatch allocations, and suffered from severe Python bookkeeping overheads on shallow subtrees. In parallel work on metric clustering, Tiwari et al. \cite{tiwari2023banditpam} demonstrated that computation reuse and multi-stage arm filtering drastically accelerate $k$-medoids (BanditPAM++). 
+
+Babbar et al. \cite{babbar2024near} introduced SPLIT at ICML 2024, proving that while finding optimal decision trees is NP-hard, greedy splitting heuristics suffice near leaves, formalizing the theoretical justification for switching to fast heuristics on shallow subtrees. Sullivan et al. \cite{sullivan2024maptree} introduced MAPTree at AAAI 2024, employing Bayesian marginal likelihoods for tree exploration. Liu et al. \cite{liu2024superfast} proposed Superfast Selection via prefix-sum reductions, while Liu and Mazumder \cite{liu2023forestprune} formulated ForestPrune for post-hoc ensemble depth pruning. Karthikeyan et al. \cite{karthikeyan2023learning} explored tree learning under bandit feedback, and Shanto et al. \cite{shanto2025mab} applied MAB exploration to tree pruning.
+
+Table~\ref{tab:literature_taxonomy} presents a systematic taxonomy comparing these state-of-the-art tree acceleration and bandit architectures against our proposed MABSplit framework.
+
+\input{tables/literature_taxonomy}
 
 \subsection{Decision Node Impurity and Arm Reward Formulation}
 Consider a training sample cohort $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N$ residing at an arbitrary internal decision tree node, where each instance pairs a feature vector $\mathbf{x}_i \in \mathbb{R}^D$ with a categorical class assignment $y_i \in \{1, \dots, C\}$. A candidate split decision is parameterized by an action tuple $a = (j, \theta)$, corresponding to continuous attribute index $j \in \{1, \dots, D\}$ and decision threshold $\theta \in \mathbb{R}$. Action $a$ bifurcates $\mathcal{D}$ into complementary subsets:
@@ -47,7 +70,7 @@ Building upon the concentration inequalities of Serfling \cite{serfling1974proba
 \label{eq:serfling_bound}
 \end{equation}
 
-\noindent\textbf{Critical Analytical Behavior:} As sample accumulation approaches node capacity ($n \to N$), the FPC factor converges to zero ($\kappa(N, N) = \frac{1}{N} \to 0$), driving the confidence radius to zero:
+\noindent\textbf{Critical Analytical Behavior:} As sample accumulation approaches node capacity ($n \to N$), the FPC factor converges to zero ($\kappa(N, N) = \frac{1}{N} \to 0$), driving the confidence radius strictly to zero:
 \begin{equation}
 \lim_{n \to N} \text{Rad}_{\text{Serfling}}(n, N, \delta) = 0
 \end{equation}

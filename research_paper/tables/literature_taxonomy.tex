@@ -1,0 +1,22 @@
+\begin{table*}[htbp]
+\centering
+\caption{Comparative Taxonomy of Decision Tree and Forest Induction Paradigms}
+\label{tab:literature_taxonomy}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllll}
+\toprule
+\textbf{Paradigm / Architecture} & \textbf{Sampling Regime} & \textbf{Per-Node Cost} & \textbf{Theoretical Guarantee} & \textbf{Leaf Strategy} & \textbf{Representative Literature} \\
+\midrule
+Exact Full-Scan CART & Exhaustive (100\% data) & $\mathcal{O}(D \cdot N \log N)$ & Exact empirical risk minimizer & Pure greedy until leaf limits & Breiman et al. \cite{breiman1984classification} \\
+Extremely Randomized Trees (ExtraTrees) & Stochastic cut-points & $\mathcal{O}(D \cdot N)$ & Variance reduction heuristic & Full-sample random evaluation & Geurts et al. \cite{geurts2006extremely} \\
+Out-of-Core Systems (RainForest, BOAT) & Buffered / Bootstrap pass & $\mathcal{O}(D \cdot N)$ scans & AVC / Bootstrap confidence intervals & Disk-bounded exact fallback & Gehrke et al. \cite{gehrke1998rainforest,gehrke1999boat} \\
+Binned GBDT (XGBoost, LightGBM, FastBDT) & Quantized histograms + GOSS & $\mathcal{O}(D \cdot (N_{\text{sub}} + B))$ & Second-order loss / gradient bounds & Uniform histogram evaluation & Ke et al. \cite{ke2017lightgbm}, Chen \cite{chen2016xgboost}, Keck \cite{keck2017fastbdt} \\
+Streaming Induction (VFDT / Hoeffding) & Infinite streaming draws & $\mathcal{O}(D \cdot B)$ per sample & $(\epsilon, \delta)$-PAC Hoeffding bound & Bound thresholding on stream & Domingos \& Hulten \cite{domingos2000mining} \\
+Near-Optimal Branch \& Bound (SPLIT) & Rashomon set pruning & Exponential / heuristic & Lookahead optimality certificate & Greedy expansion near leaves & Babbar et al. \cite{babbar2024near} \\
+Baseline MABSplit & With-replacement sampling & $\mathcal{O}(D \cdot B \log N)$ & Classical i.i.d. Hoeffding bound & Fixed batching down to leaf & Tiwari et al. \cite{tiwari2022mabsplit} \\
+\midrule
+\textbf{MABSplit (Proposed)} & \textbf{Without replacement (Finite $N$)} & $\mathbf{\mathcal{O}(D_{\text{surv}} \cdot \log N)}$ & \textbf{$(\epsilon, \delta)$-PAC Serfling Bernstein Bound} & \textbf{Depth-Adaptive SIMD Hybrid Switch} & \textbf{This Work} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

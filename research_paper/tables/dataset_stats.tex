@@ -1,16 +1,16 @@
 \begin{table}[htbp]
 \centering
-\caption{Benchmark Dataset Summary and Characteristics}
+\caption{Summary and Empirical Characteristics of Benchmark Tabular Datasets}
 \label{tab:datasets}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrll}
 \toprule
-\textbf{Dataset} & \textbf{Samples ($N$)} & \textbf{Features ($D$)} & \textbf{Classes ($C$)} & \textbf{Domain} \\
+\textbf{Dataset} & \textbf{Samples ($N$)} & \textbf{Features ($D$)} & \textbf{Classes ($C$)} & \textbf{Domain} & \textbf{Source / Provenance} \\
 \midrule
-Synthetic-100K   & 100,000 & 20  & 2 & Synthetic \\
-Synthetic-500K   & 500,000 & 50  & 2 & Synthetic \\
-Adult Census     & 48,842  & 14  & 2 & Socioeconomic \\
-Covertype        & 581,012 & 54  & 7 & Geospatial \\
-HIGGS            & 1,000,000 & 28 & 2 & High-Energy Physics \\
+Synthetic-100K & 100,000 & 20 & 2 & Synthetic & Scikit-Learn Generator \\
+Synthetic-500K & 500,000 & 50 & 2 & Synthetic & Scikit-Learn Generator \\
+Adult Census \cite{kaggle_adult} & 48,842 & 14 & 2 & Socioeconomic & Kaggle / UCI Repository \\
+Covertype \cite{kaggle_covertype} & 581,012 & 54 & 7 & Geospatial & Kaggle / UCI Repository \\
+HIGGS \cite{baldi2014searching} & 1,000,000 & 28 & 2 & High-Energy Physics & UCI Repository / Kaggle \\
 \bottomrule
 \end{tabular}
 \end{table}
