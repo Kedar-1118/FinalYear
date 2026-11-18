@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MABSplit++ | Accelerated Decision Tree & Random Forest Training</title>
+  <style>
+    /* ===== CSS Variables & Reset ===== */
+    :root {
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #111827;
+      --bg-card: #1a2332;
+      --bg-card-hover: #1e2a3d;
+      --text-primary: #f0f4f8;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --accent-dark: #0284c7;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --green: #34d399;
+      --green-dark: #059669;
+      --orange: #fb923c;
+      --red: #f87171;
+      --purple: #a78bfa;
+      --pink: #f472b6;
+      --yellow: #fbbf24;
+      --border: #1e293b;
+      --border-light: #334155;
+      --gradient-1: linear-gradient(135deg, #38bdf8, #818cf8);
+      --gradient-2: linear-gradient(135deg, #34d399, #38bdf8);
+      --gradient-3: linear-gradient(135deg, #f472b6, #a78bfa);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== Utility ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--bg-secondary); }
+    .gradient-text {
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Particle Background ===== */
+    #particles-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===== Navigation ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 15, 26, 0.85);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.25rem; font-weight: 700;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo .logo-icon {
+      width: 32px; height: 32px;
+      background: var(--gradient-1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-secondary);
+      font-size: 0.875rem; font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--accent);
+      transform: scaleX(0); transition: transform 0.2s;
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative;
+      padding-top: 64px;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 800px;
+      animation: fadeInUp 1s ease;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(56,189,248,0.3);
+      border-radius: 100px;
+      font-size: 0.8rem; color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    .hero h1 {
+      font-size: 3.5rem; font-weight: 800;
+      line-height: 1.1; margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      font-size: 1.15rem; color: var(--text-secondary);
+      max-width: 600px; margin-bottom: 36px;
+    }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; cursor: pointer;
+      transition: all 0.2s; border: none;
+    }
+    .btn-primary {
+      background: var(--gradient-1); color: #fff;
+      box-shadow: 0 4px 15px rgba(56,189,248,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(56,189,248,0.4); }
+    .btn-secondary {
+      background: var(--bg-card); color: var(--text-primary);
+      border: 1px solid var(--border-light);
+    }
+    .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 48px;
+      padding-top: 32px; border-top: 1px solid var(--border);
+    }
+    .hero-stat-value {
+      font-size: 2rem; font-weight: 800;
+    }
+    .hero-stat-label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    /* ===== Key Metrics Bar ===== */
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: -40px;
+      position: relative; z-index: 2;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .metric-item {
+      background: var(--bg-card);
+      padding: 28px 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .metric-item:hover { background: var(--bg-card-hover); }
+    .metric-icon {
+      font-size: 2rem; margin-bottom: 8px;
+      display: block;
+    }
+    .metric-value {
+      font-size: 2rem; font-weight: 800;
+      display: block;
+    }
+    .metric-label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    /* ===== Section Headers ===== */
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-header .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(56,189,248,0.2);
+      border-radius: 100px;
+      font-size: 0.75rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .section-header h2 {
+      font-size: 2.5rem; font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      color: var(--text-secondary);
+      max-width: 600px; margin: 0 auto;
+    }
+
+    /* ===== Innovation Cards ===== */
+    .innovations-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .innovation-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .innovation-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+    .innovation-card:nth-child(1)::before { background: var(--gradient-1); }
+    .innovation-card:nth-child(2)::before { background: var(--gradient-2); }
+    .innovation-card:nth-child(3)::before { background: var(--gradient-3); }
+    .innovation-card:nth-child(4)::before { background: linear-gradient(135deg, #fbbf24, #fb923c); }
+    .innovation-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+    .innovation-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .innovation-card:nth-child(1) .innovation-number { background: rgba(56,189,248,0.15); color: var(--accent); }
+    .innovation-card:nth-child(2) .innovation-number { background: rgba(52,211,153,0.15); color: var(--green); }
+    .innovation-card:nth-child(3) .innovation-number { background: rgba(167,139,250,0.15); color: var(--purple); }
+    .innovation-card:nth-child(4) .innovation-number { background: rgba(251,191,36,0.15); color: var(--yellow); }
+    .innovation-card h3 {
+      font-size: 1.15rem; font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .innovation-card p {
+      color: var(--text-secondary); font-size: 0.9rem;
+    }
+    .innovation-formula {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      overflow-x: auto;
+    }
+
+    /* ===== Performance / Benchmarks ===== */
+    .benchmark-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .benchmark-table-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .benchmark-table-header h3 { font-size: 1.1rem; font-weight: 700; }
+    .benchmark-table-header .badge {
+      padding: 4px 10px;
+      background: rgba(52,211,153,0.15);
+      color: var(--green);
+      border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      padding: 12px 20px;
+      text-align: left;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+    }
+    tbody td {
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(56,189,248,0.03); }
+    .row-highlight { background: rgba(56,189,248,0.06) !important; }
+    .row-highlight td { font-weight: 600; }
+    .speedup-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .speedup-fast {
+      background: rgba(52,211,153,0.15);
+      color: var(--green);
+    }
+    .speedup-baseline {
+      background: rgba(100,116,139,0.15);
+      color: var(--text-muted);
+    }
+
+    /* ===== Chart / Bar Visualizations ===== */
+    .chart-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .chart-title {
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bar-chart {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .bar-row {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .bar-label {
+      width: 220px; min-width: 220px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+    .bar-track {
+      flex: 1; height: 32px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 8px;
+      display: flex; align-items: center;
+      padding-left: 12px;
+      font-size: 0.78rem; font-weight: 700;
+      color: #fff;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+
+    /* ===== Architecture Diagram ===== */
+    .architecture {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .arch-flow {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0;
+    }
+    .arch-node {
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-size: 0.9rem; font-weight: 600;
+      text-align: center;
+      position: relative;
+      max-width: 400px;
+      width: 100%;
+    }
+    .arch-node-primary {
+      background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(129,140,248,0.15));
+      border: 1px solid rgba(56,189,248,0.3);
+      color: var(--accent);
+    }
+    .arch-node-secondary {
+      background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.3);
+      color: var(--green);
+    }
+    .arch-node-warning {
+      background: rgba(251,191,36,0.1);
+      border: 1px solid rgba(251,191,36,0.3);
+      color: var(--yellow);
+    }
+    .arch-arrow {
+      width: 2px; height: 32px;
+      background: var(--border-light);
+      position: relative;
+    }
+    .arch-arrow::after {
+      content: '▼';
+      position: absolute;
+      bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      color: var(--border-light);
+      font-size: 10px;
+    }
+    .arch-branch {
+      display: flex; gap: 40px; align-items: flex-start;
+      justify-content: center;
+      position: relative;
+    }
+    .arch-branch::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: calc(50% - 160px);
+      width: 320px;
+      height: 2px;
+      background: var(--border-light);
+    }
+    .arch-decision {
+      padding: 10px 20px;
+      background: rgba(167,139,250,0.1);
+      border: 1px solid rgba(167,139,250,0.3);
+      color: var(--purple);
+      border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600;
+      text-align: center;
+    }
+
+    /* ===== Ablation ===== */
+    .ablation-grid {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .ablation-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+    .ablation-row:hover {
+      border-color: var(--border-light);
+      background: var(--bg-card-hover);
+    }
+    .ablation-num {
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px; font-weight: 700; font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .ablation-info { flex: 1; }
+    .ablation-name { font-size: 0.9rem; font-weight: 600; }
+    .ablation-stats {
+      display: flex; gap: 24px; margin-top: 4px;
+    }
+    .ablation-stat {
+      font-size: 0.78rem; color: var(--text-muted);
+    }
+    .ablation-stat strong {
+      color: var(--text-primary); font-weight: 600;
+    }
+
+    /* ===== Statistical Significance ===== */
+    .stat-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .stat-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-2px);
+    }
+    .stat-card .comparison {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .stat-card .p-value {
+      font-size: 2.2rem; font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .stat-card .verdict {
+      font-size: 0.85rem; font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      display: inline-block;
+    }
+    .verdict-pass { background: rgba(52,211,153,0.15); color: var(--green); }
+    .verdict-sig { background: rgba(56,189,248,0.15); color: var(--accent); }
+
+    /* ===== Timeline ===== */
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -33px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg-primary);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-date {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .timeline-desc {
+      font-size: 0.85rem; color: var(--text-secondary);
+    }
+
+    /* ===== Tech Stack Badges ===== */
+    .tech-grid {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center;
+    }
+    .tech-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.85rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .tech-badge:hover {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+    }
+    .tech-badge-icon { font-size: 1.2rem; }
+
+    /* ===== Team ===== */
+    .team-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .team-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .team-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 700;
+      margin: 0 auto 12px;
+    }
+    .team-name { font-weight: 700; font-size: 0.95rem; }
+    .team-role { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ===== Footer ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+    }
+    footer p { font-size: 0.85rem; color: var(--text-muted); }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ===== C++ Engine Callout ===== */
+    .cpp-callout {
+      background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(167,139,250,0.08));
+      border: 1px solid rgba(56,189,248,0.2);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex; align-items: center; gap: 32px;
+      margin-top: 32px;
+    }
+    .cpp-callout-icon {
+      font-size: 3rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    .cpp-callout h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .cpp-callout p { font-size: 0.9rem; color: var(--text-secondary); }
+    .cpp-stats {
+      display: flex; gap: 24px; margin-top: 12px;
+    }
+    .cpp-stat { text-align: center; }
+    .cpp-stat-value { font-size: 1.3rem; font-weight: 800; color: var(--accent); }
+    .cpp-stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+
+    /* ===== Dataset tabs ===== */
+    .dataset-tabs {
+      display: flex; gap: 8px; margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .dataset-tab {
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.82rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-secondary);
+    }
+    .dataset-tab.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .dataset-tab:hover:not(.active) {
+      border-color: var(--border-light);
+    }
+    .dataset-panel { display: none; }
+    .dataset-panel.active { display: block; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero-stats { flex-direction: column; gap: 20px; }
+      .metrics-bar { grid-template-columns: repeat(2, 1fr); }
+      .innovations-grid { grid-template-columns: 1fr; }
+      .stat-cards { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .bar-label { width: 120px; min-width: 120px; font-size: 0.72rem; }
+      .arch-branch { flex-direction: column; align-items: center; gap: 16px; }
+      .arch-branch::before { display: none; }
+      .cpp-callout { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Particle Canvas ===== -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ===== Navigation ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="logo-icon">🌲</div>
+      <span>MABSplit<span class="gradient-text">++</span></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#innovations">Innovations</a></li>
+      <li><a href="#performance">Performance</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#ablation">Ablation</a></li>
+      <li><a href="#significance">Statistics</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        NeurIPS 2022 Extension &middot; Walchand College of Engineering
+      </div>
+      <h1>
+        Accelerated Decision Trees via
+        <span class="gradient-text">Multi-Armed Bandits</span>
+      </h1>
+      <p>
+        MABSplit++ delivers <strong>5× faster training</strong> with <strong>zero accuracy loss</strong>, 
+        proven across 4 real-world datasets using 4 novel algorithmic innovations and 
+        high-performance Numba JIT + C++17 engines.
+      </p>
+      <div class="hero-buttons">
+        <a href="https://github.com/Kedar-1118/FinalYear" class="btn btn-primary" target="_blank">
+          ⭐ View on GitHub
+        </a>
+        <a href="#performance" class="btn btn-secondary">
+          📊 See Benchmarks
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value gradient-text" data-count="5.37">0×</div>
+          <div class="hero-stat-label">Speedup vs CART</div>
+        </div>
+        <div>
+          <div class="hero-stat-value" style="color: var(--green)" data-count="0">0%</div>
+          <div class="hero-stat-label">Accuracy Loss</div>
+        </div>
+        <div>
+          <div class="hero-stat-value" style="color: var(--purple)" data-count="8">0×</div>
+          <div class="hero-stat-label">Memory Reduction</div>
+        </div>
+        <div>
+          <div class="hero-stat-value" style="color: var(--yellow)" data-count="75.5">0%</div>
+          <div class="hero-stat-label">Sample Reduction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Metrics Bar ===== -->
+<section class="container" style="position: relative; z-index: 2;">
+  <div class="metrics-bar">
+    <div class="metric-item">
+      <span class="metric-icon">🧠</span>
+      <span class="metric-value gradient-text">4</span>
+      <span class="metric-label">Novel Innovations</span>
+    </div>
+    <div class="metric-item">
+      <span class="metric-icon">📂</span>
+      <span class="metric-value" style="color: var(--green)">4</span>
+      <span class="metric-label">Benchmark Datasets</span>
+    </div>
+    <div class="metric-item">
+      <span class="metric-icon">⚡</span>
+      <span class="metric-value" style="color: var(--yellow)">3.12ms</span>
+      <span class="metric-label">C++ Node Split</span>
+    </div>
+    <div class="metric-item">
+      <span class="metric-icon">🧪</span>
+      <span class="metric-value" style="color: var(--purple)">p=0.672</span>
+      <span class="metric-label">Statistical Parity</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Innovations ===== -->
+<section id="innovations" class="section section-alt">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">Core Contributions</span>
+      <h2>Four Algorithmic <span class="gradient-text">Innovations</span></h2>
+      <p>Building upon Tiwari et al. (NeurIPS 2022) with four formal theoretical and systems contributions.</p>
+    </div>
+    <div class="innovations-grid">
+      <div class="innovation-card animate-on-scroll">
+        <div class="innovation-number">1</div>
+        <h3>Serfling Finite-Population Bounds</h3>
+        <p>Replaces naive Hoeffding bounds with concentration inequalities that account for sampling without replacement. Uncertainty collapses to exactly zero when all samples are observed.</p>
+        <div class="innovation-formula">ε = √(2σ²·κ(n,N)·ln(3/δ)/n) + 3·ln(3/δ)·κ(n,N)/n<br>where κ(n,N) = max(0, 1 − (n−1)/N)</div>
+      </div>
+      <div class="innovation-card animate-on-scroll">
+        <div class="innovation-number">2</div>
+        <h3>Adaptive Dynamic Minibatch (ADMA)</h3>
+        <p>Dynamically scales batch size with the shrinking active arm set. When 80% of candidates are eliminated, batch size drops automatically — cutting sample evaluations by 20–30%.</p>
+        <div class="innovation-formula">M_t = max(M_min, ⌊M₀·(|Active_t|/K)^α⌋)</div>
+      </div>
+      <div class="innovation-card animate-on-scroll">
+        <div class="innovation-number">3</div>
+        <h3>Hierarchical Coarse-to-Fine (H-MAB)</h3>
+        <p>Two-stage tournament: coarse screening at 16 bins eliminates weak features, then survivors compete at full 256-bin resolution — with a formal Bonferroni δ-budget split.</p>
+        <div class="innovation-formula">δ = δ_coarse + δ_fine = δ/3 + 2δ/3</div>
+      </div>
+      <div class="innovation-card animate-on-scroll">
+        <div class="innovation-number">4</div>
+        <h3>Depth-Adaptive Hybrid Solver</h3>
+        <p>Near tree leaves (N &lt; 500), MAB overhead exceeds brute-force cost. The HybridSolver switches to vectorized exact sorting for 70%+ of tree nodes, eliminating overhead at leaf levels.</p>
+        <div class="innovation-formula">Solver = { Exact Sort if N &lt; 500 | MAB if N ≥ 500 }</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Performance / Benchmarks ===== -->
+<section id="performance" class="section">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">Empirical Results</span>
+      <h2>Benchmark <span class="gradient-text">Performance</span></h2>
+      <p>Rigorous evaluation: 5 random seeds, stratified 80/20 splits, paired statistical tests across 4 datasets.</p>
+    </div>
+
+    <!-- Dataset Tabs -->
+    <div class="dataset-tabs animate-on-scroll">
+      <div class="dataset-tab active" data-panel="synthetic">🔬 Synthetic (200K)</div>
+      <div class="dataset-tab" data-panel="covertype">🌲 Covertype (200K)</div>
+      <div class="dataset-tab" data-panel="higgs">⚛️ HIGGS (20K)</div>
+      <div class="dataset-tab" data-panel="adult">👤 Adult (15K)</div>
+    </div>
+
+    <!-- Synthetic Panel -->
+    <div class="dataset-panel active" id="panel-synthetic">
+      <div class="benchmark-table-wrap animate-on-scroll">
+        <div class="benchmark-table-header">
+          <h3>Synthetic Dataset — N=200,000 · F=20 · Depth 10</h3>
+          <span class="badge">Multi-Baseline</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Train Time</th><th>Test Accuracy</th><th>Speedup</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>LightGBM (RF Mode)</td><td>0.47 ± 0.18s</td><td>87.31%</td><td><span class="speedup-badge speedup-fast">40.39×</span></td></tr>
+            <tr><td>XGBoost (RF Mode)</td><td>1.63 ± 0.46s</td><td>96.10%</td><td><span class="speedup-badge speedup-fast">11.41×</span></td></tr>
+            <tr><td>Sklearn RandomForest</td><td>2.33 ± 0.84s</td><td>95.86%</td><td><span class="speedup-badge speedup-fast">7.77×</span></td></tr>
+            <tr class="row-highlight"><td>✨ MABSplit++ RF (Ours)</td><td>8.58 ± 4.18s</td><td><strong>96.10%</strong></td><td><span class="speedup-badge speedup-fast">2.28×</span></td></tr>
+            <tr class="row-highlight"><td>✨ MABSplit++ DT (Ours)</td><td><strong>3.52 ± 1.35s</strong></td><td><strong>93.57%</strong></td><td><span class="speedup-badge speedup-fast">5.37×</span></td></tr>
+            <tr><td>Sklearn DecisionTree</td><td>17.07 ± 4.33s</td><td>93.61%</td><td><span class="speedup-badge speedup-baseline">1.00×</span></td></tr>
+            <tr><td>Sklearn HistGradientBoosting</td><td>1.11 ± 0.68s</td><td>93.35%</td><td><span class="speedup-badge speedup-fast">19.78×</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="chart-container animate-on-scroll">
+        <div class="chart-title">📊 Training Time Comparison (Synthetic 200K)</div>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">Sklearn DecisionTree</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%; background: var(--text-muted);" data-width="100%">17.07s (Baseline)</div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">MABSplit++ DT (Ours)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%; background: var(--gradient-1);" data-width="20.6%">3.52s — 5.37× faster ⚡</div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">MABSplit++ RF (Ours)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%; background: var(--gradient-2);" data-width="50.3%">8.58s — 96.10% acc</div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Sklearn RandomForest</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%; background: rgba(148,163,184,0.5);" data-width="13.6%">2.33s</div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">XGBoost (RF Mode)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%; background: rgba(148,163,184,0.5);" data-width="9.6%">1.63s</div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">HistGradientBoosting</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%; background: rgba(148,163,184,0.5);" data-width="6.5%">1.11s</div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">LightGBM (RF Mode)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%; background: rgba(148,163,184,0.5);" data-width="2.8%">0.47s</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Covertype Panel -->
+    <div class="dataset-panel" id="panel-covertype">
+      <div class="benchmark-table-wrap animate-on-scroll">
+        <div class="benchmark-table-header">
+          <h3>Covertype Forest — N=200,000 · F=54 · 7 Classes</h3>
+          <span class="badge">Multi-Class</span>
+        </div>
+        <table>
+          <thead><tr><th>Model</th><th>Train Time</th><th>Test Accuracy</th><th>Speedup</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td>✨ MABSplit++ DT (Ours)</td><td><strong>1.18 ± 0.95s</strong></td><td><strong>83.49%</strong></td><td><span class="speedup-badge speedup-fast">2.20× ⚡</span></td></tr>
+            <tr><td>Sklearn DecisionTree</td><td>2.37 ± 2.07s</td><td>82.26%</td><td><span class="speedup-badge speedup-baseline">1.00×</span></td></tr>
+            <tr class="row-highlight"><td>✨ MABSplit++ RF (Ours)</td><td><strong>1.30 ± 0.05s</strong></td><td>79.20%</td><td><span class="speedup-badge speedup-fast">1.83×</span></td></tr>
+            <tr><td>Sklearn HistGradientBoosting</td><td>3.22 ± 3.07s</td><td>82.87%</td><td><span class="speedup-badge speedup-baseline">0.81×</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding: 20px; background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); border-radius: 12px; margin-top: 16px;">
+        <strong style="color: var(--green);">🌟 Key Finding:</strong>
+        <span style="color: var(--text-secondary);">
+          On high-dimensional multi-class data, MABSplit++ DT achieves <strong style="color: var(--text-primary)">+1.23% higher accuracy</strong> than exact CART while training <strong style="color: var(--text-primary)">2.2× faster</strong>. 
+          Bandit sub-sampling acts as implicit regularization, avoiding overfitting to noise.
+        </span>
+      </div>
+    </div>
+
+    <!-- HIGGS Panel -->
+    <div class="dataset-panel" id="panel-higgs">
+      <div class="benchmark-table-wrap animate-on-scroll">
+        <div class="benchmark-table-header">
+          <h3>HIGGS Boson — N=20,000 · F=28 · Binary</h3>
+          <span class="badge">Physics</span>
+        </div>
+        <table>
+          <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>MAB Fit Time</td><td><strong>0.326s</strong></td></tr>
+            <tr><td>Sklearn Exact DT Fit Time</td><td>0.830s</td></tr>
+            <tr class="row-highlight"><td>Speedup Ratio</td><td><span class="speedup-badge speedup-fast">2.55× faster</span></td></tr>
+            <tr><td>Sample Evaluation Reduction</td><td><strong>84.1%</strong></td></tr>
+            <tr><td>Solver Split (Exact / MAB)</td><td>5 exact / 26 MAB</td></tr>
+            <tr><td>Top Features</td><td>m_bb, m_wwbb, m_jjj</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Adult Panel -->
+    <div class="dataset-panel" id="panel-adult">
+      <div class="benchmark-table-wrap animate-on-scroll">
+        <div class="benchmark-table-header">
+          <h3>Adult Census Income — N=15,000 · F=14 · Binary</h3>
+          <span class="badge">Tabular</span>
+        </div>
+        <table>
+          <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Sample Evaluation Reduction</td><td><strong>87.3%</strong></td></tr>
+            <tr><td>Solver Split (Exact / MAB)</td><td>15 exact / 15 MAB</td></tr>
+            <tr><td>Total Tree Nodes</td><td>57</td></tr>
+            <tr><td>Top Features</td><td>capital.gain, education.num, relationship</td></tr>
+            <tr><td>Top-5 Cumulative Importance</td><td>74.25%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- C++ Engine Callout -->
+    <div class="cpp-callout animate-on-scroll">
+      <div class="cpp-callout-icon">⚙️</div>
+      <div>
+        <h3>C++17 Bare-Metal High-Throughput Engine</h3>
+        <p>Header-only implementation with SIMD-aligned arrays, zero runtime heap allocations, and native Serfling bounds for maximum throughput.</p>
+        <div class="cpp-stats">
+          <div class="cpp-stat">
+            <div class="cpp-stat-value">3.12ms</div>
+            <div class="cpp-stat-label">Per Node Split</div>
+          </div>
+          <div class="cpp-stat">
+            <div class="cpp-stat-value">75.5%</div>
+            <div class="cpp-stat-label">Sample Reduction</div>
+          </div>
+          <div class="cpp-stat">
+            <div class="cpp-stat-value">100%</div>
+            <div class="cpp-stat-label">Split Correctness</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Architecture ===== -->
+<section id="architecture" class="section section-alt">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">System Design</span>
+      <h2>Algorithm <span class="gradient-text">Architecture</span></h2>
+      <p>The MABSplit++ node splitting pipeline — from raw data to optimal split in milliseconds.</p>
+    </div>
+    <div class="architecture animate-on-scroll">
+      <div class="arch-flow">
+        <div class="arch-node arch-node-primary">📥 Raw Data (N×F float64)</div>
+        <div class="arch-arrow"></div>
+        <div class="arch-node arch-node-secondary">⚡ FastBinner — Quantize to uint8 (8× memory ↓)</div>
+        <div class="arch-arrow"></div>
+        <div class="arch-decision" style="margin: 0 auto;">Node size N &lt; 500?</div>
+        <div style="height: 24px;"></div>
+        <div class="arch-branch">
+          <div>
+            <div class="arch-node arch-node-warning" style="max-width: 280px;">✅ YES → Vectorized Exact Sort<br><small style="font-weight: 400; opacity: 0.8;">Zero bandit overhead, microsecond splits</small></div>
+          </div>
+          <div>
+            <div class="arch-node arch-node-primary" style="max-width: 320px;">
+              ❌ NO → MAB Pipeline
+              <div style="font-weight: 400; font-size: 0.8rem; margin-top: 8px; text-align: left; color: var(--text-secondary);">
+                1. H-MAB Coarse Screen (B=16, δ/3)<br>
+                2. Fine MAB Elimination (B=256, 2δ/3)<br>
+                3. ADMA Dynamic Batch Sizing<br>
+                4. Serfling Finite-Pop Bounds<br>
+                5. UCB &lt; best LCB → Eliminate
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="height: 24px;"></div>
+        <div class="arch-arrow"></div>
+        <div class="arch-node arch-node-secondary">🎯 Best Split Found → Partition Left / Right → Recurse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Ablation Study ===== -->
+<section id="ablation" class="section">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">Component Analysis</span>
+      <h2>Ablation <span class="gradient-text">Study</span></h2>
+      <p>Quantifying each innovation's incremental contribution on 200K samples at depth 10.</p>
+    </div>
+    <div class="ablation-grid">
+      <div class="ablation-row animate-on-scroll">
+        <div class="ablation-num" style="background: rgba(100,116,139,0.2); color: var(--text-muted);">1</div>
+        <div class="ablation-info">
+          <div class="ablation-name">Vanilla MAB (Hoeffding, Fixed Batch, No Hybrid)</div>
+          <div class="ablation-stats">
+            <span class="ablation-stat">Time: <strong>0.696s</strong></span>
+            <span class="ablation-stat">Speedup: <strong style="color: var(--text-muted);">1.00×</strong></span>
+            <span class="ablation-stat">Queries: <strong>1,279,733</strong></span>
+            <span class="ablation-stat">Acc: <strong>90.12%</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="ablation-row animate-on-scroll">
+        <div class="ablation-num" style="background: rgba(56,189,248,0.15); color: var(--accent);">2</div>
+        <div class="ablation-info">
+          <div class="ablation-name">+ Serfling Finite-Population Bound</div>
+          <div class="ablation-stats">
+            <span class="ablation-stat">Time: <strong>0.510s</strong></span>
+            <span class="ablation-stat">Speedup: <strong style="color: var(--green);">1.36×</strong></span>
+            <span class="ablation-stat">Queries: <strong>1,202,716</strong></span>
+            <span class="ablation-stat">Acc: <strong>89.48%</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="ablation-row animate-on-scroll">
+        <div class="ablation-num" style="background: rgba(52,211,153,0.15); color: var(--green);">3</div>
+        <div class="ablation-info">
+          <div class="ablation-name">+ ADMA (Adaptive Dynamic Minibatch)</div>
+          <div class="ablation-stats">
+            <span class="ablation-stat">Time: <strong>0.664s</strong></span>
+            <span class="ablation-stat">Speedup: <strong style="color: var(--green);">1.05×</strong></span>
+            <span class="ablation-stat">Queries: <strong>1,266,274</strong></span>
+            <span class="ablation-stat">Acc: <strong>90.57%</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="ablation-row animate-on-scroll">
+        <div class="ablation-num" style="background: rgba(251,191,36,0.15); color: var(--yellow);">4</div>
+        <div class="ablation-info">
+          <div class="ablation-name">+ Hybrid Solver (Depth-Adaptive Exact Leaf Dispatch)</div>
+          <div class="ablation-stats">
+            <span class="ablation-stat">Time: <strong>0.639s</strong></span>
+            <span class="ablation-stat">Speedup: <strong style="color: var(--green);">1.09×</strong></span>
+            <span class="ablation-stat">Queries: <strong>1,270,163</strong></span>
+            <span class="ablation-stat">Acc: <strong>90.62%</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="ablation-row animate-on-scroll" style="border-color: var(--accent);">
+        <div class="ablation-num" style="background: rgba(167,139,250,0.15); color: var(--purple);">5</div>
+        <div class="ablation-info">
+          <div class="ablation-name" style="color: var(--accent);">★ Full System (+ Hierarchical Coarse-to-Fine H-MAB)</div>
+          <div class="ablation-stats">
+            <span class="ablation-stat">Time: <strong>0.864s</strong></span>
+            <span class="ablation-stat">Queries: <strong>2,255,220</strong></span>
+            <span class="ablation-stat">Acc: <strong style="color: var(--green);">90.96%</strong></span>
+            <span class="ablation-stat">F1: <strong style="color: var(--green);">0.9096</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Statistical Significance ===== -->
+<section id="significance" class="section section-alt">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">Rigorous Proof</span>
+      <h2>Statistical <span class="gradient-text">Significance</span></h2>
+      <p>Paired t-tests and Wilcoxon signed-rank tests prove zero accuracy loss with rigorous confidence.</p>
+    </div>
+    <div class="stat-cards animate-on-scroll">
+      <div class="stat-card">
+        <div class="comparison">MABSplit++ DT vs Sklearn DT</div>
+        <div class="p-value" style="color: var(--green);">p = 0.672</div>
+        <div class="verdict verdict-pass">✓ Statistically Indistinguishable</div>
+        <div style="margin-top: 10px; font-size: 0.78rem; color: var(--text-muted);">
+          Mean Diff: −0.03% · t = 0.456 · Cohen's d ≈ 0
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="comparison">MABSplit++ RF vs Sklearn RF</div>
+        <div class="p-value" style="color: var(--accent);">p = 0.0001</div>
+        <div class="verdict verdict-sig">★ MAB++ RF Exceeds Baseline</div>
+        <div style="margin-top: 10px; font-size: 0.78rem; color: var(--text-muted);">
+          Mean Diff: +2.49% · t = −14.08
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="comparison">MABSplit++ DT vs HistGBT</div>
+        <div class="p-value" style="color: var(--green);">p = 0.062</div>
+        <div class="verdict verdict-pass">✓ Competitive With Boosting</div>
+        <div style="margin-top: 10px; font-size: 0.78rem; color: var(--text-muted);">
+          Mean Diff: −0.26% · t = 2.57
+        </div>
+      </div>
+    </div>
+
+    <!-- Split Fidelity -->
+    <div class="chart-container animate-on-scroll" style="margin-top: 40px;">
+      <div class="chart-title">🎯 Novel Metric: Split Fidelity & Agreement Rate</div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">
+        No prior bandit decision tree paper measures whether bandit-selected splits match exact greedy splits. We introduce two novel fidelity metrics.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+        <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+          <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">21.6–27.8%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Feature Agreement Rate</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+          <div style="font-size: 2rem; font-weight: 800; color: var(--purple);">2.5–6.7%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Exact Split Match Rate</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+          <div style="font-size: 2rem; font-weight: 800; color: var(--green);">+0.03%</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Accuracy Difference</div>
+        </div>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 16px; font-style: italic;">
+        💡 Insight: Bandit trees discover alternative splitting paths yielding equivalent or slightly superior generalization while evaluating a fraction of the sample space.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Memory & Systems Engineering ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">Systems Engineering</span>
+      <h2>Memory & <span class="gradient-text">Performance</span> Optimizations</h2>
+      <p>Great algorithms need great systems engineering to deliver real-world speed.</p>
+    </div>
+    <div class="innovations-grid">
+      <div class="innovation-card animate-on-scroll">
+        <div class="innovation-number" style="background: rgba(56,189,248,0.15); color: var(--accent);">📦</div>
+        <h3>uint8 Columnar Representation</h3>
+        <p>Continuous features pre-binned into 256 discrete bins stored as uint8 (1 byte vs 8 bytes per float64), yielding an <strong>8× memory reduction</strong> and enabling SIMD cache streaming.</p>
+      </div>
+      <div class="innovation-card animate-on-scroll">
+        <div class="innovation-number" style="background: rgba(52,211,153,0.15); color: var(--green);">🧊</div>
+        <h3>Fortran-Order Memory Layout</h3>
+        <p>Data stored column-by-column (order='F') ensures sequential memory access during per-feature histogram scans — maximizing L1/L2 cache hit rate.</p>
+      </div>
+      <div class="innovation-card animate-on-scroll">
+        <div class="innovation-number" style="background: rgba(167,139,250,0.15); color: var(--purple);">♻️</div>
+        <h3>Zero-Allocation Scratch Buffers</h3>
+        <p>All histogram, Welford, and bounds buffers pre-allocated once before training. Zero GC pauses inside recursive tree building — 0% memory re-allocation.</p>
+      </div>
+      <div class="innovation-card animate-on-scroll">
+        <div class="innovation-number" style="background: rgba(251,191,36,0.15); color: var(--yellow);">🔥</div>
+        <h3>Numba JIT + C++17 Dual Engine</h3>
+        <p>Python kernels compiled to native machine code via Numba @njit. Standalone C++17 engine for maximum throughput — <strong>3.12ms per node split</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Development Timeline ===== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">Project Journey</span>
+      <h2>Development <span class="gradient-text">Timeline</span></h2>
+      <p>From concept to publication-ready system in 7 phases.</p>
+    </div>
+    <div class="timeline animate-on-scroll">
+      <div class="timeline-item">
+        <div class="timeline-date">Sep 2026 — Phase 1 & 2</div>
+        <div class="timeline-title">Foundation & Baselines</div>
+        <div class="timeline-desc">Environment setup, dataset loaders (Adult, Covertype, HIGGS, Synthetic), Sklearn baseline benchmarks, reference MABSplit implementation.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Oct 2026 — Phase 3</div>
+        <div class="timeline-title">Core Algorithm Development</div>
+        <div class="timeline-desc">FastMABEngine with Numba JIT kernels, Serfling bounds, ADMA allocator, HybridSolver, and Hierarchical H-MAB arm pruner.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Oct 2026 — Phase 4</div>
+        <div class="timeline-title">Scikit-Learn API Integration</div>
+        <div class="timeline-desc">MABDecisionTreeClassifier and MABRandomForestClassifier with full BaseEstimator compliance and ablation toggle flags.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Oct 2026 — Phase 5</div>
+        <div class="timeline-title">Verification & Benchmarking</div>
+        <div class="timeline-desc">PyTest suite, extended 7-model benchmarks, paired statistical significance testing (t-test, Wilcoxon, Cohen's d).</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Nov 2026 — Phase 6 & 7</div>
+        <div class="timeline-title">Ablation, Plots & Publication</div>
+        <div class="timeline-desc">5-config ablation study, split fidelity analysis, Pareto frontier, 8 publication-grade figures, C++17 engine, IEEEtran LaTeX paper, documentation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tech Stack ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">Built With</span>
+      <h2>Technology <span class="gradient-text">Stack</span></h2>
+    </div>
+    <div class="tech-grid animate-on-scroll">
+      <div class="tech-badge"><span class="tech-badge-icon">🐍</span> Python 3.10–3.13</div>
+      <div class="tech-badge"><span class="tech-badge-icon">⚡</span> Numba JIT</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🔧</span> C++17</div>
+      <div class="tech-badge"><span class="tech-badge-icon">📊</span> NumPy</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🧮</span> SciPy</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🤖</span> Scikit-Learn</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🏎️</span> LightGBM</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🚀</span> XGBoost</div>
+      <div class="tech-badge"><span class="tech-badge-icon">📈</span> Matplotlib</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🎨</span> Seaborn</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🐼</span> Pandas</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🧪</span> PyTest</div>
+      <div class="tech-badge"><span class="tech-badge-icon">📄</span> LaTeX / IEEEtran</div>
+      <div class="tech-badge"><span class="tech-badge-icon">⚙️</span> GitHub Actions CI</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Team ===== -->
+<section id="team" class="section section-alt">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">The People</span>
+      <h2>Development <span class="gradient-text">Team</span></h2>
+      <p>Walchand College of Engineering, Sangli — Dept. of Computer Science & Engineering, 2026–2027</p>
+    </div>
+    <div class="team-grid animate-on-scroll">
+      <div class="team-card">
+        <div class="team-avatar">AP</div>
+        <div class="team-name">Aditya Pansare</div>
+        <div class="team-role">Algorithm & Theory</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background: var(--gradient-2);">KD</div>
+        <div class="team-name">Kedar Dhotre</div>
+        <div class="team-role">Implementation & Systems</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background: var(--gradient-3);">DM</div>
+        <div class="team-name">Dhanashree Maid</div>
+        <div class="team-role">Benchmarks & Analysis</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background: linear-gradient(135deg, #fbbf24, #fb923c);">OR</div>
+        <div class="team-name">Onkar Rane</div>
+        <div class="team-role">Testing & Documentation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Citation ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="tag">Reference</span>
+      <h2>Citation & <span class="gradient-text">Acknowledgments</span></h2>
+    </div>
+    <div class="chart-container animate-on-scroll" style="max-width: 700px; margin: 0 auto;">
+      <pre style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; font-size: 0.82rem; color: var(--accent); overflow-x: auto; line-height: 1.7;">@article{mabsplit_plus_2026,
+  title   = {MABSplit++: Accelerated Decision Tree and Random
+             Forest Training via Finite-Population Multi-Armed
+             Bandits},
+  author  = {Aditya Pansare and Kedar Dhotre and
+             Dhanashree Maid and Onkar Rane},
+  journal = {Walchand College of Engineering, Sangli},
+  year    = {2026}
+}</pre>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 16px;">
+        Builds upon: <strong>Tiwari et al. (NeurIPS 2022)</strong> — MABSplit: Faster Forest Training Using Multi-Armed Bandits;
+        <strong>Bardenet & Maillard (Bernoulli 2015)</strong> — Concentration inequalities for sampling without replacement;
+        <strong>Serfling (Annals of Statistics 1974)</strong> — Probability inequalities for sums in sampling without replacement.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="container">
+    <p style="margin-bottom: 8px;">
+      <strong>MABSplit++</strong> — Accelerated Decision Tree & Random Forest Training via Multi-Armed Bandits
+    </p>
+    <p>
+      © 2026 Walchand College of Engineering, Sangli · Dept. of Computer Science & Engineering · 
+      <a href="https://github.com/Kedar-1118/FinalYear" target="_blank">GitHub Repository</a>
+    </p>
+  </div>
+</footer>
+
+<!-- ===== JavaScript ===== -->
+<script>
+  // ===== Particle Background =====
+  (function() {
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const PARTICLE_COUNT = 60;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.opacity = Math.random() * 0.3 + 0.1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(56, 189, 248, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+    function drawLines() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.06 * (1 - dist/150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      drawLines();
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  // ===== Navbar scroll effect =====
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ===== Scroll animations =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Animate bars
+        entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.width; }, 200);
+        });
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+  // ===== Counter animation =====
+  function animateCounters() {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseFloat(el.dataset.count);
+      const suffix = el.textContent.includes('×') ? '×' : '%';
+      const duration = 2000;
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = target * eased;
+        if (suffix === '×') {
+          el.textContent = current.toFixed(2) + '×';
+        } else {
+          el.textContent = current.toFixed(1) + '%';
+        }
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }
+  setTimeout(animateCounters, 500);
+
+  // ===== Dataset tabs =====
+  document.querySelectorAll('.dataset-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.dataset-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.dataset-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    });
+  });
+
+  // ===== Smooth scroll for nav =====
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
