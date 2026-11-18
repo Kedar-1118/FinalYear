@@ -1,0 +1,749 @@
+{
+  "benchmark_metadata": {
+    "title": "MABSplit++ Sample Size Scaling and Speedup Analysis",
+    "generation_timestamp": "2026-11-18T20:33:31.709678",
+    "algorithm_version": "1.0.0",
+    "framework": "MABSplit++ (NeurIPS 2022 Extension)",
+    "institution": "Walchand College of Engineering, Sangli",
+    "authors": [
+      "Aditya Pansare",
+      "Kedar Dhotre",
+      "Dhanashree Maid",
+      "Onkar Rane"
+    ]
+  },
+  "system_environment": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "python_version": "3.13.9",
+    "numpy_version": "2.3.5",
+    "pandas_version": "2.3.3"
+  },
+  "hyperparameters": {
+    "max_depth": 10,
+    "n_bins": 128,
+    "n_thresh_hybrid": 500,
+    "delta_pac": 0.05,
+    "m0_initial_batch": 100,
+    "m_min_floor": 15,
+    "alpha_decay": 1.0,
+    "n_trees_forest": 5,
+    "n_features": 20,
+    "n_classes": 2
+  },
+  "scaling_analysis": {
+    "sample_sizes_tested": [
+      1000,
+      2500,
+      5000,
+      10000,
+      25000,
+      50000,
+      75000,
+      100000,
+      150000,
+      200000
+    ],
+    "crossover_point_n": 1000,
+    "crossover_description": "MABSplit++ achieves computational superiority at N >= 1,000 samples.",
+    "peak_speedup": {
+      "speedup_ratio": 3.63,
+      "achieved_at_sample_size": 200000
+    },
+    "mean_speedup_large_scale": 3.2449999999999997,
+    "mean_accuracy_difference": 0.009729999999999999,
+    "accuracy_parity_maintained": true,
+    "empirical_time_scaling_exponent": {
+      "cart_scaling_order": "O(N^1.04)",
+      "mab_scaling_order": "O(N^0.92)",
+      "sublinearity_verification": true,
+      "slope_reduction_pct": 11.88
+    },
+    "sample_efficiency": {
+      "max_sample_reduction_pct": 98.4,
+      "mean_sample_reduction_pct": 93.508
+    }
+  },
+  "detailed_results_by_sample_size": [
+    {
+      "sample_size": 1000,
+      "train_samples": 800,
+      "test_samples": 200,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 1.54,
+        "random_forest_speedup_vs_sklearn_rf": 0.03,
+        "speedup_vs_vanilla_mab": 1.24,
+        "cart_train_time_sec": 0.0101,
+        "mab_dt_train_time_sec": 0.0065,
+        "vanilla_mab_train_time_sec": 0.0081,
+        "sklearn_rf_train_time_sec": 0.0274,
+        "mab_rf_train_time_sec": 0.8609,
+        "hist_gbt_train_time_sec": 2.2623,
+        "dt_sample_reduction_pct": 77.25,
+        "rf_sample_reduction_pct": 38.49
+      },
+      "exact_cart_details": {
+        "train_time_sec": 0.0101,
+        "predict_time_sec": 0.0002,
+        "accuracy": 0.805,
+        "f1_score": 0.805,
+        "node_count": 141,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.0065,
+        "predict_time_sec": 0.0002,
+        "accuracy": 0.83,
+        "f1_score": 0.83,
+        "accuracy_difference_vs_cart": 0.025,
+        "node_count": 55,
+        "max_depth": 10,
+        "samples_evaluated": 4915,
+        "splits_by_mode": {
+          "exact": 34,
+          "mab": 2
+        },
+        "mab_split_ratio": 0.056
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.0081,
+        "accuracy": 0.785,
+        "samples_evaluated": 5924
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.0274,
+        "predict_time_sec": 0.0125,
+        "accuracy": 0.865,
+        "f1_score": 0.8649
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.8609,
+        "predict_time_sec": 0.0009,
+        "accuracy": 0.87,
+        "f1_score": 0.87,
+        "accuracy_difference_vs_exact_rf": 0.005,
+        "samples_evaluated": 24603
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 2.2623,
+        "accuracy": 0.875
+      }
+    },
+    {
+      "sample_size": 2500,
+      "train_samples": 2000,
+      "test_samples": 500,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 2.06,
+        "random_forest_speedup_vs_sklearn_rf": 0.85,
+        "speedup_vs_vanilla_mab": 1.33,
+        "cart_train_time_sec": 0.0279,
+        "mab_dt_train_time_sec": 0.0136,
+        "vanilla_mab_train_time_sec": 0.0181,
+        "sklearn_rf_train_time_sec": 0.0371,
+        "mab_rf_train_time_sec": 0.0434,
+        "hist_gbt_train_time_sec": 0.0575,
+        "dt_sample_reduction_pct": 86.52,
+        "rf_sample_reduction_pct": 29.96
+      },
+      "exact_cart_details": {
+        "train_time_sec": 0.0279,
+        "predict_time_sec": 0.0001,
+        "accuracy": 0.84,
+        "f1_score": 0.84,
+        "node_count": 271,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.0136,
+        "predict_time_sec": 0.0005,
+        "accuracy": 0.896,
+        "f1_score": 0.896,
+        "accuracy_difference_vs_cart": 0.056,
+        "node_count": 105,
+        "max_depth": 9,
+        "samples_evaluated": 14015,
+        "splits_by_mode": {
+          "exact": 71,
+          "mab": 10
+        },
+        "mab_split_ratio": 0.123
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.0181,
+        "accuracy": 0.872,
+        "samples_evaluated": 16220
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.0371,
+        "predict_time_sec": 0.0127,
+        "accuracy": 0.91,
+        "f1_score": 0.91
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.0434,
+        "predict_time_sec": 0.0022,
+        "accuracy": 0.894,
+        "f1_score": 0.8939,
+        "accuracy_difference_vs_exact_rf": -0.016,
+        "samples_evaluated": 70037
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.0575,
+        "accuracy": 0.9
+      }
+    },
+    {
+      "sample_size": 5000,
+      "train_samples": 4000,
+      "test_samples": 1000,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 3.02,
+        "random_forest_speedup_vs_sklearn_rf": 0.5,
+        "speedup_vs_vanilla_mab": 1.01,
+        "cart_train_time_sec": 0.0825,
+        "mab_dt_train_time_sec": 0.0273,
+        "vanilla_mab_train_time_sec": 0.0276,
+        "sklearn_rf_train_time_sec": 0.0293,
+        "mab_rf_train_time_sec": 0.0585,
+        "hist_gbt_train_time_sec": 0.0574,
+        "dt_sample_reduction_pct": 90.89,
+        "rf_sample_reduction_pct": 18.62
+      },
+      "exact_cart_details": {
+        "train_time_sec": 0.0825,
+        "predict_time_sec": 0.0004,
+        "accuracy": 0.889,
+        "f1_score": 0.889,
+        "node_count": 347,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.0273,
+        "predict_time_sec": 0.001,
+        "accuracy": 0.873,
+        "f1_score": 0.873,
+        "accuracy_difference_vs_cart": -0.016,
+        "node_count": 183,
+        "max_depth": 10,
+        "samples_evaluated": 33147,
+        "splits_by_mode": {
+          "exact": 116,
+          "mab": 23
+        },
+        "mab_split_ratio": 0.165
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.0276,
+        "accuracy": 0.878,
+        "samples_evaluated": 35642
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.0293,
+        "predict_time_sec": 0.0131,
+        "accuracy": 0.91,
+        "f1_score": 0.91
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.0585,
+        "predict_time_sec": 0.005,
+        "accuracy": 0.897,
+        "f1_score": 0.897,
+        "accuracy_difference_vs_exact_rf": -0.013,
+        "samples_evaluated": 162762
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.0574,
+        "accuracy": 0.914
+      }
+    },
+    {
+      "sample_size": 10000,
+      "train_samples": 8000,
+      "test_samples": 2000,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 2.84,
+        "random_forest_speedup_vs_sklearn_rf": 0.36,
+        "speedup_vs_vanilla_mab": 1.22,
+        "cart_train_time_sec": 0.138,
+        "mab_dt_train_time_sec": 0.0485,
+        "vanilla_mab_train_time_sec": 0.0593,
+        "sklearn_rf_train_time_sec": 0.039,
+        "mab_rf_train_time_sec": 0.107,
+        "hist_gbt_train_time_sec": 0.051,
+        "dt_sample_reduction_pct": 94.77,
+        "rf_sample_reduction_pct": 11.42
+      },
+      "exact_cart_details": {
+        "train_time_sec": 0.138,
+        "predict_time_sec": 0.0003,
+        "accuracy": 0.865,
+        "f1_score": 0.865,
+        "node_count": 617,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.0485,
+        "predict_time_sec": 0.0023,
+        "accuracy": 0.874,
+        "f1_score": 0.874,
+        "accuracy_difference_vs_cart": 0.009,
+        "node_count": 341,
+        "max_depth": 10,
+        "samples_evaluated": 71146,
+        "splits_by_mode": {
+          "exact": 215,
+          "mab": 31
+        },
+        "mab_split_ratio": 0.126
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.0593,
+        "accuracy": 0.875,
+        "samples_evaluated": 74259
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.039,
+        "predict_time_sec": 0.0128,
+        "accuracy": 0.8905,
+        "f1_score": 0.8905
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.107,
+        "predict_time_sec": 0.0109,
+        "accuracy": 0.896,
+        "f1_score": 0.896,
+        "accuracy_difference_vs_exact_rf": 0.0055,
+        "samples_evaluated": 354332
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.051,
+        "accuracy": 0.8995
+      }
+    },
+    {
+      "sample_size": 25000,
+      "train_samples": 20000,
+      "test_samples": 5000,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 3.14,
+        "random_forest_speedup_vs_sklearn_rf": 0.53,
+        "speedup_vs_vanilla_mab": 1.15,
+        "cart_train_time_sec": 0.3263,
+        "mab_dt_train_time_sec": 0.104,
+        "vanilla_mab_train_time_sec": 0.1192,
+        "sklearn_rf_train_time_sec": 0.0924,
+        "mab_rf_train_time_sec": 0.1738,
+        "hist_gbt_train_time_sec": 0.0751,
+        "dt_sample_reduction_pct": 95.41,
+        "rf_sample_reduction_pct": 6.6
+      },
+      "exact_cart_details": {
+        "train_time_sec": 0.3263,
+        "predict_time_sec": 0.0004,
+        "accuracy": 0.9288,
+        "f1_score": 0.9288,
+        "node_count": 627,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.104,
+        "predict_time_sec": 0.0056,
+        "accuracy": 0.9362,
+        "f1_score": 0.9362,
+        "accuracy_difference_vs_cart": 0.0074,
+        "node_count": 407,
+        "max_depth": 10,
+        "samples_evaluated": 186364,
+        "splits_by_mode": {
+          "exact": 224,
+          "mab": 58
+        },
+        "mab_split_ratio": 0.206
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.1192,
+        "accuracy": 0.9276,
+        "samples_evaluated": 192796
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.0924,
+        "predict_time_sec": 0.0127,
+        "accuracy": 0.9458,
+        "f1_score": 0.9458
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.1738,
+        "predict_time_sec": 0.0285,
+        "accuracy": 0.9464,
+        "f1_score": 0.9464,
+        "accuracy_difference_vs_exact_rf": 0.0006,
+        "samples_evaluated": 934015
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.0751,
+        "accuracy": 0.9372
+      }
+    },
+    {
+      "sample_size": 50000,
+      "train_samples": 40000,
+      "test_samples": 10000,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 3.01,
+        "random_forest_speedup_vs_sklearn_rf": 0.38,
+        "speedup_vs_vanilla_mab": 1.14,
+        "cart_train_time_sec": 0.651,
+        "mab_dt_train_time_sec": 0.2161,
+        "vanilla_mab_train_time_sec": 0.2457,
+        "sklearn_rf_train_time_sec": 0.116,
+        "mab_rf_train_time_sec": 0.3064,
+        "hist_gbt_train_time_sec": 0.0841,
+        "dt_sample_reduction_pct": 97.58,
+        "rf_sample_reduction_pct": 3.69
+      },
+      "exact_cart_details": {
+        "train_time_sec": 0.651,
+        "predict_time_sec": 0.0008,
+        "accuracy": 0.8953,
+        "f1_score": 0.8953,
+        "node_count": 1021,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.2161,
+        "predict_time_sec": 0.0117,
+        "accuracy": 0.8922,
+        "f1_score": 0.8922,
+        "accuracy_difference_vs_cart": -0.0031,
+        "node_count": 799,
+        "max_depth": 10,
+        "samples_evaluated": 385811,
+        "splits_by_mode": {
+          "exact": 399,
+          "mab": 116
+        },
+        "mab_split_ratio": 0.225
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.2457,
+        "accuracy": 0.8959,
+        "samples_evaluated": 392688
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.116,
+        "predict_time_sec": 0.0131,
+        "accuracy": 0.9131,
+        "f1_score": 0.9131
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.3064,
+        "predict_time_sec": 0.0596,
+        "accuracy": 0.9178,
+        "f1_score": 0.9178,
+        "accuracy_difference_vs_exact_rf": 0.0047,
+        "samples_evaluated": 1926176
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.0841,
+        "accuracy": 0.8994
+      }
+    },
+    {
+      "sample_size": 75000,
+      "train_samples": 60000,
+      "test_samples": 15000,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 3.03,
+        "random_forest_speedup_vs_sklearn_rf": 0.44,
+        "speedup_vs_vanilla_mab": 1.15,
+        "cart_train_time_sec": 0.9905,
+        "mab_dt_train_time_sec": 0.3273,
+        "vanilla_mab_train_time_sec": 0.3775,
+        "sklearn_rf_train_time_sec": 0.1674,
+        "mab_rf_train_time_sec": 0.3784,
+        "hist_gbt_train_time_sec": 0.0986,
+        "dt_sample_reduction_pct": 97.64,
+        "rf_sample_reduction_pct": 2.92
+      },
+      "exact_cart_details": {
+        "train_time_sec": 0.9905,
+        "predict_time_sec": 0.0014,
+        "accuracy": 0.9142,
+        "f1_score": 0.9142,
+        "node_count": 1067,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.3273,
+        "predict_time_sec": 0.0198,
+        "accuracy": 0.9181,
+        "f1_score": 0.9181,
+        "accuracy_difference_vs_cart": 0.0039,
+        "node_count": 809,
+        "max_depth": 10,
+        "samples_evaluated": 571421,
+        "splits_by_mode": {
+          "exact": 382,
+          "mab": 148
+        },
+        "mab_split_ratio": 0.279
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.3775,
+        "accuracy": 0.9121,
+        "samples_evaluated": 590705
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.1674,
+        "predict_time_sec": 0.0133,
+        "accuracy": 0.9242,
+        "f1_score": 0.9242
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.3784,
+        "predict_time_sec": 0.0884,
+        "accuracy": 0.9291,
+        "f1_score": 0.9291,
+        "accuracy_difference_vs_exact_rf": 0.0049,
+        "samples_evaluated": 2912471
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.0986,
+        "accuracy": 0.9197
+      }
+    },
+    {
+      "sample_size": 100000,
+      "train_samples": 80000,
+      "test_samples": 20000,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 3.19,
+        "random_forest_speedup_vs_sklearn_rf": 0.44,
+        "speedup_vs_vanilla_mab": 1.09,
+        "cart_train_time_sec": 1.33,
+        "mab_dt_train_time_sec": 0.417,
+        "vanilla_mab_train_time_sec": 0.4551,
+        "sklearn_rf_train_time_sec": 0.2088,
+        "mab_rf_train_time_sec": 0.4695,
+        "hist_gbt_train_time_sec": 0.1216,
+        "dt_sample_reduction_pct": 98.23,
+        "rf_sample_reduction_pct": 2.38
+      },
+      "exact_cart_details": {
+        "train_time_sec": 1.33,
+        "predict_time_sec": 0.0015,
+        "accuracy": 0.9412,
+        "f1_score": 0.9411,
+        "node_count": 1355,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.417,
+        "predict_time_sec": 0.0239,
+        "accuracy": 0.9467,
+        "f1_score": 0.9467,
+        "accuracy_difference_vs_cart": 0.0055,
+        "node_count": 1107,
+        "max_depth": 10,
+        "samples_evaluated": 784538,
+        "splits_by_mode": {
+          "exact": 506,
+          "mab": 189
+        },
+        "mab_split_ratio": 0.272
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.4551,
+        "accuracy": 0.9407,
+        "samples_evaluated": 792291
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.2088,
+        "predict_time_sec": 0.013,
+        "accuracy": 0.9542,
+        "f1_score": 0.9541
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.4695,
+        "predict_time_sec": 0.1225,
+        "accuracy": 0.9512,
+        "f1_score": 0.9512,
+        "accuracy_difference_vs_exact_rf": -0.003,
+        "samples_evaluated": 3904747
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.1216,
+        "accuracy": 0.9396
+      }
+    },
+    {
+      "sample_size": 150000,
+      "train_samples": 120000,
+      "test_samples": 30000,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 3.47,
+        "random_forest_speedup_vs_sklearn_rf": 0.51,
+        "speedup_vs_vanilla_mab": 1.09,
+        "cart_train_time_sec": 2.0214,
+        "mab_dt_train_time_sec": 0.5819,
+        "vanilla_mab_train_time_sec": 0.6337,
+        "sklearn_rf_train_time_sec": 0.33,
+        "mab_rf_train_time_sec": 0.6435,
+        "hist_gbt_train_time_sec": 0.1446,
+        "dt_sample_reduction_pct": 98.39,
+        "rf_sample_reduction_pct": 2.02
+      },
+      "exact_cart_details": {
+        "train_time_sec": 2.0214,
+        "predict_time_sec": 0.002,
+        "accuracy": 0.9069,
+        "f1_score": 0.9069,
+        "node_count": 1299,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.5819,
+        "predict_time_sec": 0.0381,
+        "accuracy": 0.9133,
+        "f1_score": 0.9133,
+        "accuracy_difference_vs_cart": 0.0064,
+        "node_count": 1225,
+        "max_depth": 10,
+        "samples_evaluated": 1181476,
+        "splits_by_mode": {
+          "exact": 513,
+          "mab": 225
+        },
+        "mab_split_ratio": 0.305
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.6337,
+        "accuracy": 0.9073,
+        "samples_evaluated": 1192747
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.33,
+        "predict_time_sec": 0.0132,
+        "accuracy": 0.9307,
+        "f1_score": 0.9307
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.6435,
+        "predict_time_sec": 0.175,
+        "accuracy": 0.9407,
+        "f1_score": 0.9407,
+        "accuracy_difference_vs_exact_rf": 0.01,
+        "samples_evaluated": 5878549
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.1446,
+        "accuracy": 0.9091
+      }
+    },
+    {
+      "sample_size": 200000,
+      "train_samples": 160000,
+      "test_samples": 40000,
+      "n_features": 20,
+      "n_classes": 2,
+      "speedup_summary": {
+        "decision_tree_speedup_vs_cart": 3.63,
+        "random_forest_speedup_vs_sklearn_rf": 0.55,
+        "speedup_vs_vanilla_mab": 1.07,
+        "cart_train_time_sec": 3.0342,
+        "mab_dt_train_time_sec": 0.8369,
+        "vanilla_mab_train_time_sec": 0.8964,
+        "sklearn_rf_train_time_sec": 0.4653,
+        "mab_rf_train_time_sec": 0.842,
+        "hist_gbt_train_time_sec": 0.1994,
+        "dt_sample_reduction_pct": 98.4,
+        "rf_sample_reduction_pct": 2.85
+      },
+      "exact_cart_details": {
+        "train_time_sec": 3.0342,
+        "predict_time_sec": 0.0027,
+        "accuracy": 0.9233,
+        "f1_score": 0.9233,
+        "node_count": 1407,
+        "max_depth": 10
+      },
+      "mab_dt_details": {
+        "train_time_sec": 0.8369,
+        "predict_time_sec": 0.0526,
+        "accuracy": 0.9265,
+        "f1_score": 0.9265,
+        "accuracy_difference_vs_cart": 0.0032,
+        "node_count": 1235,
+        "max_depth": 10,
+        "samples_evaluated": 1577633,
+        "splits_by_mode": {
+          "exact": 464,
+          "mab": 282
+        },
+        "mab_split_ratio": 0.378
+      },
+      "vanilla_mab_details": {
+        "train_time_sec": 0.8964,
+        "accuracy": 0.9219,
+        "samples_evaluated": 1593043
+      },
+      "exact_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.4653,
+        "predict_time_sec": 0.0137,
+        "accuracy": 0.9347,
+        "f1_score": 0.9347
+      },
+      "mab_rf_details": {
+        "n_estimators": 5,
+        "train_time_sec": 0.842,
+        "predict_time_sec": 0.2559,
+        "accuracy": 0.9423,
+        "f1_score": 0.9423,
+        "accuracy_difference_vs_exact_rf": 0.0076,
+        "samples_evaluated": 7772054
+      },
+      "hist_gbt_details": {
+        "train_time_sec": 0.1994,
+        "accuracy": 0.9175
+      }
+    }
+  ]
+}
