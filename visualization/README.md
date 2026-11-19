@@ -30,12 +30,18 @@ visualization/
 ├── data.js            # Pre-bundled dataset analysis data (Adult, Covertype, HIGGS, Synthetic)
 ├── serve.py           # One-click local HTTP server launcher
 ├── export_data.py     # Script to regenerate data.js and data/*.json from dataset analysis
-└── data/              # Standalone JSON analysis files
-    ├── adult_analysis.json
-    ├── covertype_analysis.json
-    ├── higgs_analysis.json
-    ├── synthetic_analysis.json
-    └── benchmark_summary.json
+├── trees/             # Standalone high-resolution SVG tree diagrams
+│   ├── adult_tree.svg
+│   ├── covertype_tree.svg
+│   ├── higgs_tree.svg
+│   ├── synthetic_tree.svg
+│   └── benchmark_summary.svg
+└── data/              # Standalone JSON analysis files & matching SVG tree splits
+    ├── adult_analysis.json        -> adult_analysis.svg
+    ├── covertype_analysis.json    -> covertype_analysis.svg
+    ├── higgs_analysis.json        -> higgs_analysis.svg
+    ├── synthetic_analysis.json    -> synthetic_analysis.svg
+    └── benchmark_summary.json     -> benchmark_summary.svg
 ```
 
 ---

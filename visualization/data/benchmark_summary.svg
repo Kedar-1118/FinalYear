@@ -1,0 +1,377 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 980" width="100%" height="100%" style="background-color: #0b0f19;">
+  <defs>
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Header Banner -->
+  <g transform="translate(40, 24)">
+    <text x="0" y="36" font-family="system-ui, sans-serif" font-size="28px" font-weight="800" fill="#f8fafc">
+      MABSplit++ Benchmark Suite <tspan fill="#38bdf8">— Multi-Dataset Tree Architectures</tspan>
+    </text>
+    <text x="0" y="64" font-family="system-ui, sans-serif" font-size="14px" fill="#94a3b8">
+      Executive Tree Split Comparison &amp; Sample Efficiency across 4 Benchmark Tabular Datasets
+    </text>
+  </g>
+
+  <!-- 4 Dataset Summary Cards -->
+  
+        <g transform="translate(40, 130)">
+          <!-- Card Background -->
+          <rect width="740" height="390" rx="16" fill="#131b2e" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.4" filter="url(#cardShadow)"/>
+          
+          <!-- Card Header -->
+          <rect width="740" height="56" rx="16" fill="rgba(255,255,255,0.02)"/>
+          <text x="24" y="36" font-family="system-ui, sans-serif" font-size="18px" font-weight="bold" fill="#f8fafc">
+            Adult Census Income
+          </text>
+          
+          <!-- Metadata Pill -->
+          <g transform="translate(520, 16)">
+            <rect width="200" height="24" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"/>
+            <text x="100" y="16" font-family="system-ui, sans-serif" font-size="11px" fill="#94a3b8" text-anchor="middle">
+              15,000 Rows · 14 Feat · 2 Classes
+            </text>
+          </g>
+          
+          <!-- KPI Metrics Row -->
+          <g transform="translate(24, 76)">
+            <!-- Speedup -->
+            <rect width="150" height="64" rx="8" fill="#1e293b" stroke="rgba(56,189,248,0.2)"/>
+            <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Query Reduction</text>
+            <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#34d399">87.3%</text>
+            
+            <!-- Nodes -->
+            <g transform="translate(165, 0)">
+              <rect width="150" height="64" rx="8" fill="#1e293b" stroke="rgba(168,85,247,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Tree Depth / Nodes</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#a78bfa">D5 · 57 Nodes</text>
+            </g>
+            
+            <!-- Splits -->
+            <g transform="translate(330, 0)">
+              <rect width="180" height="64" rx="8" fill="#1e293b" stroke="rgba(245,158,11,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Splits (MAB / Exact)</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#fbbf24">15 MAB / 15 Exact</text>
+            </g>
+            
+            <!-- Evaluated Samples -->
+            <g transform="translate(525, 0)">
+              <rect width="165" height="64" rx="8" fill="#1e293b" stroke="rgba(52,211,153,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Samples Inspected</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="17px" font-weight="bold" fill="#38bdf8">53,428</text>
+            </g>
+          </g>
+          
+          <!-- Root Split Diagram Mockup -->
+          <g transform="translate(24, 160)">
+            <text x="0" y="0" font-family="system-ui, sans-serif" font-size="12px" font-weight="bold" fill="#94a3b8">ROOT NODE SPLIT ARCHITECTURE:</text>
+            
+            <!-- Root Box -->
+            <g transform="translate(240, 20)">
+              <rect width="210" height="70" rx="8" fill="#1e1b4b" stroke="#a855f7" stroke-width="1.8"/>
+              <text x="12" y="20" font-family="system-ui, sans-serif" font-size="10px" fill="#c084fc" font-weight="bold">⚡ ROOT NODE #0</text>
+              <text x="12" y="42" font-family="monospace" font-size="12px" font-weight="bold" fill="#f8fafc">relationship ≤ 0.50</text>
+              <text x="12" y="58" font-family="system-ui, sans-serif" font-size="10px" fill="#94a3b8">Gini: 0.3658 · Gain: +0.0565</text>
+            </g>
+            
+            <!-- Left Branch Line -->
+            <path d="M 290 90 L 140 130" stroke="#06b6d4" stroke-width="2" fill="none"/>
+            <text x="180" y="105" font-family="monospace" font-size="9px" fill="#06b6d4" font-weight="bold">YES (≤)</text>
+            
+            <!-- Left Child -->
+            <g transform="translate(40, 130)">
+              <rect width="190" height="50" rx="6" fill="#082f49" stroke="#06b6d4" stroke-width="1.2"/>
+              <text x="10" y="20" font-family="system-ui, sans-serif" font-size="9.5px" fill="#22d3ee">LEFT BRANCH SUBTREE</text>
+              <text x="10" y="38" font-family="monospace" font-size="11px" fill="#f8fafc">6,052 samples (&lt;=50K)</text>
+            </g>
+            
+            <!-- Right Branch Line -->
+            <path d="M 400 90 L 550 130" stroke="#a855f7" stroke-width="2" fill="none"/>
+            <text x="470" y="105" font-family="monospace" font-size="9px" fill="#a855f7" font-weight="bold">NO (&gt;)</text>
+            
+            <!-- Right Child -->
+            <g transform="translate(460, 130)">
+              <rect width="190" height="50" rx="6" fill="#2e1065" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="10" y="20" font-family="system-ui, sans-serif" font-size="9.5px" fill="#c084fc">RIGHT BRANCH SUBTREE</text>
+              <text x="10" y="38" font-family="monospace" font-size="11px" fill="#f8fafc">8,948 samples (&lt;=50K)</text>
+            </g>
+          </g>
+          
+          <!-- Top Features Footer -->
+          <g transform="translate(24, 360)">
+            <text x="0" y="0" font-family="system-ui, sans-serif" font-size="11px" fill="#64748b" font-weight="bold">DOMINANT FEATURES:</text>
+            <text x="130" y="0" font-family="monospace" font-size="11px" fill="#38bdf8" font-weight="bold">capital.gain, education.num, relationship, age, hours.per.week</text>
+          </g>
+        </g>
+        
+        <g transform="translate(820, 130)">
+          <!-- Card Background -->
+          <rect width="740" height="390" rx="16" fill="#131b2e" stroke="#34d399" stroke-width="1.5" stroke-opacity="0.4" filter="url(#cardShadow)"/>
+          
+          <!-- Card Header -->
+          <rect width="740" height="56" rx="16" fill="rgba(255,255,255,0.02)"/>
+          <text x="24" y="36" font-family="system-ui, sans-serif" font-size="18px" font-weight="bold" fill="#f8fafc">
+            Forest Covertype
+          </text>
+          
+          <!-- Metadata Pill -->
+          <g transform="translate(520, 16)">
+            <rect width="200" height="24" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"/>
+            <text x="100" y="16" font-family="system-ui, sans-serif" font-size="11px" fill="#94a3b8" text-anchor="middle">
+              20,000 Rows · 54 Feat · 7 Classes
+            </text>
+          </g>
+          
+          <!-- KPI Metrics Row -->
+          <g transform="translate(24, 76)">
+            <!-- Speedup -->
+            <rect width="150" height="64" rx="8" fill="#1e293b" stroke="rgba(56,189,248,0.2)"/>
+            <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Query Reduction</text>
+            <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#34d399">82.2%</text>
+            
+            <!-- Nodes -->
+            <g transform="translate(165, 0)">
+              <rect width="150" height="64" rx="8" fill="#1e293b" stroke="rgba(168,85,247,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Tree Depth / Nodes</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#a78bfa">D5 · 57 Nodes</text>
+            </g>
+            
+            <!-- Splits -->
+            <g transform="translate(330, 0)">
+              <rect width="180" height="64" rx="8" fill="#1e293b" stroke="rgba(245,158,11,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Splits (MAB / Exact)</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#fbbf24">23 MAB / 7 Exact</text>
+            </g>
+            
+            <!-- Evaluated Samples -->
+            <g transform="translate(525, 0)">
+              <rect width="165" height="64" rx="8" fill="#1e293b" stroke="rgba(52,211,153,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Samples Inspected</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="17px" font-weight="bold" fill="#38bdf8">99,456</text>
+            </g>
+          </g>
+          
+          <!-- Root Split Diagram Mockup -->
+          <g transform="translate(24, 160)">
+            <text x="0" y="0" font-family="system-ui, sans-serif" font-size="12px" font-weight="bold" fill="#94a3b8">ROOT NODE SPLIT ARCHITECTURE:</text>
+            
+            <!-- Root Box -->
+            <g transform="translate(240, 20)">
+              <rect width="210" height="70" rx="8" fill="#1e1b4b" stroke="#a855f7" stroke-width="1.8"/>
+              <text x="12" y="20" font-family="system-ui, sans-serif" font-size="10px" fill="#c084fc" font-weight="bold">⚡ ROOT NODE #0</text>
+              <text x="12" y="42" font-family="monospace" font-size="12px" font-weight="bold" fill="#f8fafc">Horizontal_Distance_To_Fire_Points ≤ 2573.20</text>
+              <text x="12" y="58" font-family="system-ui, sans-serif" font-size="10px" fill="#94a3b8">Gini: 0.6615 · Gain: +0.1199</text>
+            </g>
+            
+            <!-- Left Branch Line -->
+            <path d="M 290 90 L 140 130" stroke="#06b6d4" stroke-width="2" fill="none"/>
+            <text x="180" y="105" font-family="monospace" font-size="9px" fill="#06b6d4" font-weight="bold">YES (≤)</text>
+            
+            <!-- Left Child -->
+            <g transform="translate(40, 130)">
+              <rect width="190" height="50" rx="6" fill="#082f49" stroke="#06b6d4" stroke-width="1.2"/>
+              <text x="10" y="20" font-family="system-ui, sans-serif" font-size="9.5px" fill="#22d3ee">LEFT BRANCH SUBTREE</text>
+              <text x="10" y="38" font-family="monospace" font-size="11px" fill="#f8fafc">8,516 samples (Spruce/Fir)</text>
+            </g>
+            
+            <!-- Right Branch Line -->
+            <path d="M 400 90 L 550 130" stroke="#a855f7" stroke-width="2" fill="none"/>
+            <text x="470" y="105" font-family="monospace" font-size="9px" fill="#a855f7" font-weight="bold">NO (&gt;)</text>
+            
+            <!-- Right Child -->
+            <g transform="translate(460, 130)">
+              <rect width="190" height="50" rx="6" fill="#2e1065" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="10" y="20" font-family="system-ui, sans-serif" font-size="9.5px" fill="#c084fc">RIGHT BRANCH SUBTREE</text>
+              <text x="10" y="38" font-family="monospace" font-size="11px" fill="#f8fafc">11,484 samples (Lodgepole Pine)</text>
+            </g>
+          </g>
+          
+          <!-- Top Features Footer -->
+          <g transform="translate(24, 360)">
+            <text x="0" y="0" font-family="system-ui, sans-serif" font-size="11px" fill="#64748b" font-weight="bold">DOMINANT FEATURES:</text>
+            <text x="130" y="0" font-family="monospace" font-size="11px" fill="#34d399" font-weight="bold">Elevation, Horizontal_Distance_To_Fire_Points, Horizontal_Distance_To_Roadways, Hillshade_9am, Wilderness_Area_1</text>
+          </g>
+        </g>
+        
+        <g transform="translate(40, 550)">
+          <!-- Card Background -->
+          <rect width="740" height="390" rx="16" fill="#131b2e" stroke="#a78bfa" stroke-width="1.5" stroke-opacity="0.4" filter="url(#cardShadow)"/>
+          
+          <!-- Card Header -->
+          <rect width="740" height="56" rx="16" fill="rgba(255,255,255,0.02)"/>
+          <text x="24" y="36" font-family="system-ui, sans-serif" font-size="18px" font-weight="bold" fill="#f8fafc">
+            HIGGS Boson Kinematics
+          </text>
+          
+          <!-- Metadata Pill -->
+          <g transform="translate(520, 16)">
+            <rect width="200" height="24" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"/>
+            <text x="100" y="16" font-family="system-ui, sans-serif" font-size="11px" fill="#94a3b8" text-anchor="middle">
+              20,000 Rows · 28 Feat · 2 Classes
+            </text>
+          </g>
+          
+          <!-- KPI Metrics Row -->
+          <g transform="translate(24, 76)">
+            <!-- Speedup -->
+            <rect width="150" height="64" rx="8" fill="#1e293b" stroke="rgba(56,189,248,0.2)"/>
+            <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Query Reduction</text>
+            <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#34d399">84.1%</text>
+            
+            <!-- Nodes -->
+            <g transform="translate(165, 0)">
+              <rect width="150" height="64" rx="8" fill="#1e293b" stroke="rgba(168,85,247,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Tree Depth / Nodes</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#a78bfa">D5 · 63 Nodes</text>
+            </g>
+            
+            <!-- Splits -->
+            <g transform="translate(330, 0)">
+              <rect width="180" height="64" rx="8" fill="#1e293b" stroke="rgba(245,158,11,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Splits (MAB / Exact)</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#fbbf24">26 MAB / 5 Exact</text>
+            </g>
+            
+            <!-- Evaluated Samples -->
+            <g transform="translate(525, 0)">
+              <rect width="165" height="64" rx="8" fill="#1e293b" stroke="rgba(52,211,153,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Samples Inspected</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="17px" font-weight="bold" fill="#38bdf8">98,847</text>
+            </g>
+          </g>
+          
+          <!-- Root Split Diagram Mockup -->
+          <g transform="translate(24, 160)">
+            <text x="0" y="0" font-family="system-ui, sans-serif" font-size="12px" font-weight="bold" fill="#94a3b8">ROOT NODE SPLIT ARCHITECTURE:</text>
+            
+            <!-- Root Box -->
+            <g transform="translate(240, 20)">
+              <rect width="210" height="70" rx="8" fill="#1e1b4b" stroke="#a855f7" stroke-width="1.8"/>
+              <text x="12" y="20" font-family="system-ui, sans-serif" font-size="10px" fill="#c084fc" font-weight="bold">⚡ ROOT NODE #0</text>
+              <text x="12" y="42" font-family="monospace" font-size="12px" font-weight="bold" fill="#f8fafc">m_bb ≤ 1.06</text>
+              <text x="12" y="58" font-family="system-ui, sans-serif" font-size="10px" fill="#94a3b8">Gini: 0.4985 · Gain: +0.0215</text>
+            </g>
+            
+            <!-- Left Branch Line -->
+            <path d="M 290 90 L 140 130" stroke="#06b6d4" stroke-width="2" fill="none"/>
+            <text x="180" y="105" font-family="monospace" font-size="9px" fill="#06b6d4" font-weight="bold">YES (≤)</text>
+            
+            <!-- Left Child -->
+            <g transform="translate(40, 130)">
+              <rect width="190" height="50" rx="6" fill="#082f49" stroke="#06b6d4" stroke-width="1.2"/>
+              <text x="10" y="20" font-family="system-ui, sans-serif" font-size="9.5px" fill="#22d3ee">LEFT BRANCH SUBTREE</text>
+              <text x="10" y="38" font-family="monospace" font-size="11px" fill="#f8fafc">14,062 samples (Signal (1))</text>
+            </g>
+            
+            <!-- Right Branch Line -->
+            <path d="M 400 90 L 550 130" stroke="#a855f7" stroke-width="2" fill="none"/>
+            <text x="470" y="105" font-family="monospace" font-size="9px" fill="#a855f7" font-weight="bold">NO (&gt;)</text>
+            
+            <!-- Right Child -->
+            <g transform="translate(460, 130)">
+              <rect width="190" height="50" rx="6" fill="#2e1065" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="10" y="20" font-family="system-ui, sans-serif" font-size="9.5px" fill="#c084fc">RIGHT BRANCH SUBTREE</text>
+              <text x="10" y="38" font-family="monospace" font-size="11px" fill="#f8fafc">5,938 samples (Background (0))</text>
+            </g>
+          </g>
+          
+          <!-- Top Features Footer -->
+          <g transform="translate(24, 360)">
+            <text x="0" y="0" font-family="system-ui, sans-serif" font-size="11px" fill="#64748b" font-weight="bold">DOMINANT FEATURES:</text>
+            <text x="130" y="0" font-family="monospace" font-size="11px" fill="#a78bfa" font-weight="bold">m_bb, m_wwbb, m_jjj, jet_1_pt, m_jlv</text>
+          </g>
+        </g>
+        
+        <g transform="translate(820, 550)">
+          <!-- Card Background -->
+          <rect width="740" height="390" rx="16" fill="#131b2e" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.4" filter="url(#cardShadow)"/>
+          
+          <!-- Card Header -->
+          <rect width="740" height="56" rx="16" fill="rgba(255,255,255,0.02)"/>
+          <text x="24" y="36" font-family="system-ui, sans-serif" font-size="18px" font-weight="bold" fill="#f8fafc">
+            Synthetic Tabular Benchmark
+          </text>
+          
+          <!-- Metadata Pill -->
+          <g transform="translate(520, 16)">
+            <rect width="200" height="24" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"/>
+            <text x="100" y="16" font-family="system-ui, sans-serif" font-size="11px" fill="#94a3b8" text-anchor="middle">
+              15,000 Rows · 20 Feat · 2 Classes
+            </text>
+          </g>
+          
+          <!-- KPI Metrics Row -->
+          <g transform="translate(24, 76)">
+            <!-- Speedup -->
+            <rect width="150" height="64" rx="8" fill="#1e293b" stroke="rgba(56,189,248,0.2)"/>
+            <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Query Reduction</text>
+            <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#34d399">83.9%</text>
+            
+            <!-- Nodes -->
+            <g transform="translate(165, 0)">
+              <rect width="150" height="64" rx="8" fill="#1e293b" stroke="rgba(168,85,247,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Tree Depth / Nodes</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#a78bfa">D5 · 63 Nodes</text>
+            </g>
+            
+            <!-- Splits -->
+            <g transform="translate(330, 0)">
+              <rect width="180" height="64" rx="8" fill="#1e293b" stroke="rgba(245,158,11,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Splits (MAB / Exact)</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="20px" font-weight="bold" fill="#fbbf24">23 MAB / 8 Exact</text>
+            </g>
+            
+            <!-- Evaluated Samples -->
+            <g transform="translate(525, 0)">
+              <rect width="165" height="64" rx="8" fill="#1e293b" stroke="rgba(52,211,153,0.2)"/>
+              <text x="14" y="24" font-family="system-ui, sans-serif" font-size="10.5px" fill="#64748b" font-weight="600" text-transform="uppercase">Samples Inspected</text>
+              <text x="14" y="50" font-family="system-ui, sans-serif" font-size="17px" font-weight="bold" fill="#38bdf8">74,645</text>
+            </g>
+          </g>
+          
+          <!-- Root Split Diagram Mockup -->
+          <g transform="translate(24, 160)">
+            <text x="0" y="0" font-family="system-ui, sans-serif" font-size="12px" font-weight="bold" fill="#94a3b8">ROOT NODE SPLIT ARCHITECTURE:</text>
+            
+            <!-- Root Box -->
+            <g transform="translate(240, 20)">
+              <rect width="210" height="70" rx="8" fill="#1e1b4b" stroke="#a855f7" stroke-width="1.8"/>
+              <text x="12" y="20" font-family="system-ui, sans-serif" font-size="10px" fill="#c084fc" font-weight="bold">⚡ ROOT NODE #0</text>
+              <text x="12" y="42" font-family="monospace" font-size="12px" font-weight="bold" fill="#f8fafc">Feature_14 ≤ -0.17</text>
+              <text x="12" y="58" font-family="system-ui, sans-serif" font-size="10px" fill="#94a3b8">Gini: 0.5000 · Gain: +0.0993</text>
+            </g>
+            
+            <!-- Left Branch Line -->
+            <path d="M 290 90 L 140 130" stroke="#06b6d4" stroke-width="2" fill="none"/>
+            <text x="180" y="105" font-family="monospace" font-size="9px" fill="#06b6d4" font-weight="bold">YES (≤)</text>
+            
+            <!-- Left Child -->
+            <g transform="translate(40, 130)">
+              <rect width="190" height="50" rx="6" fill="#082f49" stroke="#06b6d4" stroke-width="1.2"/>
+              <text x="10" y="20" font-family="system-ui, sans-serif" font-size="9.5px" fill="#22d3ee">LEFT BRANCH SUBTREE</text>
+              <text x="10" y="38" font-family="monospace" font-size="11px" fill="#f8fafc">6,914 samples (Class 1)</text>
+            </g>
+            
+            <!-- Right Branch Line -->
+            <path d="M 400 90 L 550 130" stroke="#a855f7" stroke-width="2" fill="none"/>
+            <text x="470" y="105" font-family="monospace" font-size="9px" fill="#a855f7" font-weight="bold">NO (&gt;)</text>
+            
+            <!-- Right Child -->
+            <g transform="translate(460, 130)">
+              <rect width="190" height="50" rx="6" fill="#2e1065" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="10" y="20" font-family="system-ui, sans-serif" font-size="9.5px" fill="#c084fc">RIGHT BRANCH SUBTREE</text>
+              <text x="10" y="38" font-family="monospace" font-size="11px" fill="#f8fafc">8,086 samples (Class 0)</text>
+            </g>
+          </g>
+          
+          <!-- Top Features Footer -->
+          <g transform="translate(24, 360)">
+            <text x="0" y="0" font-family="system-ui, sans-serif" font-size="11px" fill="#64748b" font-weight="bold">DOMINANT FEATURES:</text>
+            <text x="130" y="0" font-family="monospace" font-size="11px" fill="#f59e0b" font-weight="bold">Feature_14, Feature_16, Feature_19, Feature_02, Feature_11</text>
+          </g>
+        </g>
+        
+
+</svg>
